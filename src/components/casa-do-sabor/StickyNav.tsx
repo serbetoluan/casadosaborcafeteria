@@ -84,7 +84,7 @@ export function StickyNav({ items }: { items: NavItem[] }) {
         </nav>
       </header>
 
-      {/* Mobile-only Menu Header (without navigation bar) */}
+      {/* Mobile-only Menu Header with navigation bar */}
       <header className="sticky top-0 z-40 border-b border-blush-deep/60 bg-cream/90 backdrop-blur-md md:hidden">
         <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
           <img
@@ -100,7 +100,29 @@ export function StickyNav({ items }: { items: NavItem[] }) {
               unidade Summer Fit
             </p>
           </div>
+          <CupIcon className="ml-auto h-5 w-5 text-terracotta" />
         </div>
+        <nav
+          ref={scrollerRef}
+          className="scrollbar-none flex gap-2 overflow-x-auto px-4 pb-3"
+        >
+          {items.map((c) => (
+            <a
+              key={c.id}
+              href={`#${c.id}`}
+              data-chip={c.id}
+              onClick={(e) => handleClick(e, c.id)}
+              className={cn(
+                "whitespace-nowrap rounded-full border px-3 py-1 text-[13px] font-medium transition-all duration-300",
+                active === c.id
+                  ? "border-terracotta bg-terracotta text-white shadow-sm"
+                  : "border-blush-deep/70 bg-white/70 text-ink/70 hover:text-ink",
+              )}
+            >
+              {c.title}
+            </a>
+          ))}
+        </nav>
       </header>
     </>
   );
