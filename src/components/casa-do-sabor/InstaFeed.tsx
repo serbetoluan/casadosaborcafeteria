@@ -54,13 +54,13 @@ export function InstaFeed() {
             No nosso Instagram
           </h3>
           <a
-            href="https://www.instagram.com/casadosaborjatai/"
+            href="https://www.instagram.com/casadosaborjti/"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-xs font-semibold text-terracotta hover:underline"
           >
             <Instagram className="h-3.5 w-3.5" />
-            @casadosabor
+            @casadosaborjti
           </a>
         </div>
 
