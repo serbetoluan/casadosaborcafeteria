@@ -17,7 +17,7 @@ const INSTA_POSTS = [
     id: "post-1",
     type: "image",
     url: post1Asset.url,
-    link: "https://www.instagram.com/casadosaborjatai/",
+    link: "https://www.instagram.com/casadosaborjti/",
     caption: "Momentos especiais na Casa do Sabor. 🧺💖",
   },
   {
