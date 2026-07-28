@@ -30,20 +30,25 @@ export function Hero() {
           Do café da manhã ao happy hour! 🧺
         </p>
 
-        <a
-          href="#quitandinhas"
-          onClick={(e) => {
-            e.preventDefault();
-            const el = document.getElementById("quitandinhas");
-            if (!el) return;
-            const y = el.getBoundingClientRect().top + window.scrollY - 120;
-            window.scrollTo({ top: y, behavior: "smooth" });
-          }}
-          className="mt-6 inline-flex items-center gap-2 rounded-full bg-terracotta px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-terracotta/30 transition-all hover:shadow-xl hover:shadow-terracotta/40 active:scale-95"
-        >
-          Ver Cardápio
-          <CupIcon className="h-4 w-4" />
-        </a>
+        <div className="mt-6 flex flex-col items-center gap-4">
+          <p className="max-w-xs text-xs italic leading-relaxed text-ink/50 sm:text-sm">
+            "O Propósito da Casa está em transformar o seu cafezinho..."
+          </p>
+          <a
+            href="#quitandinhas"
+            onClick={(e) => {
+              e.preventDefault();
+              const el = document.getElementById("quitandinhas");
+              if (!el) return;
+              const y = el.getBoundingClientRect().top + window.scrollY - 120;
+              window.scrollTo({ top: y, behavior: "smooth" });
+            }}
+            className="inline-flex items-center gap-2 rounded-full bg-terracotta px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-terracotta/30 transition-all hover:shadow-xl hover:shadow-terracotta/40 active:scale-95"
+          >
+            Ver Cardápio
+            <CupIcon className="h-4 w-4" />
+          </a>
+        </div>
 
         <div className="relative mt-8 w-full overflow-hidden rounded-3xl ring-1 ring-blush-deep/60 shadow-xl shadow-terracotta/10">
           <img
