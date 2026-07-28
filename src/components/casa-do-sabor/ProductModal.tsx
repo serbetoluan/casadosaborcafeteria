@@ -195,8 +195,8 @@ export function ProductModal() {
           </div>
         </div>
 
-        <div className="flex shrink-0 items-center gap-3 border-t border-blush-deep/40 bg-white px-4 py-3">
-          <div className="flex items-center gap-1 rounded-full bg-blush/60 p-1">
+        <div className="flex shrink-0 flex-col gap-3 border-t border-blush-deep/40 bg-white px-4 py-4 sm:flex-row sm:items-center sm:py-3">
+          <div className="flex items-center justify-center gap-1 self-center rounded-full bg-blush/60 p-1 sm:self-auto">
             <button
               onClick={() => setQuantity((q) => Math.max(1, q - 1))}
               className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-ink shadow-sm hover:bg-cream active:scale-95"
@@ -204,7 +204,7 @@ export function ProductModal() {
             >
               <Minus className="h-4 w-4" />
             </button>
-            <span className="w-6 text-center font-display font-semibold text-ink">{quantity}</span>
+            <span className="w-8 text-center font-display font-semibold text-ink">{quantity}</span>
             <button
               onClick={() => setQuantity((q) => q + 1)}
               className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-ink shadow-sm hover:bg-cream active:scale-95"
@@ -213,22 +213,22 @@ export function ProductModal() {
               <Plus className="h-4 w-4" />
             </button>
           </div>
-          <div className="flex flex-1 flex-col gap-2">
+          
+          <div className="flex flex-1 gap-2">
             <button
               onClick={handleAddAndGoToCart}
-              className="flex w-full items-center justify-between gap-2 rounded-full bg-terracotta px-5 py-3 font-display text-sm font-semibold text-white shadow-lg shadow-terracotta/30 transition-all hover:bg-terracotta-dark active:scale-[0.98]"
+              className="flex flex-1 items-center justify-center gap-2 rounded-full bg-terracotta px-4 py-3 font-display text-sm font-semibold text-white shadow-lg shadow-terracotta/30 transition-all hover:bg-terracotta-dark active:scale-[0.98]"
             >
-              <span className="flex items-center gap-2">
-                <ShoppingBag className="h-4 w-4" />
-                Finalizar pedido
-              </span>
-              <span>{formatBRL(lineTotal)}</span>
+              <ShoppingBag className="h-4 w-4" />
+              <span className="truncate">Finalizar</span>
+              <span className="hidden xs:inline">•</span>
+              <span className="truncate">{formatBRL(lineTotal)}</span>
             </button>
             <button
               onClick={handleAdd}
-              className="flex w-full items-center justify-center gap-2 rounded-full border-2 border-terracotta/20 bg-white px-5 py-2 font-display text-[13px] font-semibold text-terracotta transition-all hover:bg-terracotta/5 active:scale-[0.98]"
+              className="flex flex-1 items-center justify-center rounded-full border-2 border-terracotta/20 bg-white px-4 py-3 font-display text-sm font-semibold text-terracotta transition-all hover:bg-terracotta/5 active:scale-[0.98]"
             >
-              Continuar pedindo
+              Continuar
             </button>
           </div>
         </div>
