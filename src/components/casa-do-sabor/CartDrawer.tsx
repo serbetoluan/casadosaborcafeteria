@@ -181,13 +181,13 @@ export function CartDrawer() {
         </div>
 
         {lines.length > 0 && (
-          <div className="border-t border-blush-deep/40 bg-white px-5 py-4 overflow-y-auto max-h-[60vh]">
-            <div className="space-y-4 mb-6">
+          <div className="border-t border-blush-deep/40 bg-white px-5 py-4">
+            <div className="space-y-4 mb-4">
               <h4 className="font-display font-semibold text-ink flex items-center gap-2">
                 <User className="h-4 w-4 text-terracotta" />
                 Seus Dados
               </h4>
-              <div className="space-y-3">
+              <div className="grid grid-cols-1 gap-3">
                 <div>
                   <input
                     type="text"
