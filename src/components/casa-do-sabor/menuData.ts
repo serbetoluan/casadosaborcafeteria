@@ -1,3 +1,9 @@
+import paoQueijoAsset from "@/assets/pao_de_queijo.png.asset.json";
+import saladaFrutasAsset from "@/assets/salada_de_frutas.png.asset.json";
+import omeleteAsset from "@/assets/omelete_simples.png.asset.json";
+import waffleAsset from "@/assets/waffle.png.asset.json";
+import enroladinhoAsset from "@/assets/enroladinho_de_queijo.png.asset.json";
+
 export type MenuOptionGroup = {
   label: string;
   required?: boolean;
@@ -13,6 +19,7 @@ export type MenuItem = {
   priceValue: number;
   fit?: boolean;
   options?: MenuOptionGroup[];
+  image?: string;
 };
 
 export type MenuCategory = {
@@ -28,11 +35,11 @@ export const categories: MenuCategory[] = [
     title: "Quitandinhas",
     tagline: "Do forno, quentinhos",
     items: [
-      { slug: "pao-queijo", name: "Pão de queijo", description: "1 uni", price: "R$ 1,50", priceValue: 1.5 },
+      { slug: "pao-queijo", name: "Pão de queijo", description: "1 uni", price: "R$ 1,50", priceValue: 1.5, image: paoQueijoAsset.url },
       { slug: "pao-queijo-multi", name: "Pão de queijo multigrãos", description: "1 uni", price: "R$ 2,50", priceValue: 2.5 },
       { slug: "biscoito-parmesao", name: "Biscoito Parmesão", description: "1 uni", price: "R$ 2,50", priceValue: 2.5 },
       { slug: "chipa-mussarela", name: "Chipa Mussarela", description: "1 uni", price: "R$ 1,50", priceValue: 1.5 },
-      { slug: "enroladao-queijo", name: "Enroladão de queijo", description: "100g · 1 uni", price: "R$ 3,00", priceValue: 3 },
+      { slug: "enroladao-queijo", name: "Enroladão de queijo", description: "100g · 1 uni", price: "R$ 3,00", priceValue: 3, image: enroladinhoAsset.url },
       {
         slug: "croissant-folheado",
         name: "Croissant massa folheada",
@@ -85,7 +92,7 @@ export const categories: MenuCategory[] = [
       },
       { slug: "toast-caprese", name: "Toast Caprese", description: "Pão baguete artesanal, creme de ricota, pesto de manjericão e tomate confit.", price: "R$ 25,00", priceValue: 25 },
       { slug: "sanduiche-natural", name: "Sanduíche Natural de frango", description: "Sanduíche leve, prático e saboroso.", price: "R$ 18,00", priceValue: 18, fit: true },
-      { slug: "saladinha-frutas", name: "Saladinha de frutas", description: "Mix fresquinho de frutas da estação.", price: "R$ 14,00", priceValue: 14, fit: true },
+      { slug: "saladinha-frutas", name: "Saladinha de frutas", description: "Mix fresquinho de frutas da estação.", price: "R$ 14,00", priceValue: 14, fit: true, image: saladaFrutasAsset.url },
     ],
   },
   {
