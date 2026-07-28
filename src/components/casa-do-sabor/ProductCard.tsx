@@ -36,7 +36,7 @@ export function FeaturedProductCard({ item, index }: { item: MenuItem; index: nu
       onClick={() => openProduct(item)}
       style={{ transitionDelay: `${(index % 6) * 60}ms` }}
       className={cn(
-        "group relative flex w-64 shrink-0 flex-col overflow-hidden rounded-2xl bg-white text-left shadow-[0_8px_24px_-16px_rgba(201,123,132,0.35)] ring-1 ring-blush-deep/50 transition-all duration-500 ease-out sm:w-72",
+        "group relative flex w-72 shrink-0 flex-col overflow-hidden rounded-2xl bg-white text-left shadow-[0_8px_24px_-16px_rgba(201,123,132,0.35)] ring-1 ring-blush-deep/50 transition-all duration-500 ease-out sm:w-80",
         "hover:-translate-y-1 hover:shadow-[0_20px_40px_-18px_rgba(201,123,132,0.5)] active:scale-[0.98]",
         visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0",
       )}
@@ -120,21 +120,21 @@ export function CompactProductItem({ item, index }: { item: MenuItem; index: num
         visible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
       )}
     >
-      <div className="flex items-baseline justify-between gap-4">
+      <div className="flex items-center justify-between gap-4">
         <div className="flex min-w-0 flex-1 items-center gap-2">
           <CupIcon className="h-3 w-3 shrink-0 text-terracotta/30 transition-colors group-hover:text-terracotta/60" />
           <h3 className="truncate font-display text-[15px] font-medium text-ink">
             {item.name}
-            {item.fit && <span className="ml-2 text-[10px] text-terracotta">🌿</span>}
           </h3>
+          {item.fit && <span className="text-[10px] text-terracotta">🌿</span>}
+          <div className="ml-1 h-px min-w-[10px] flex-1 border-t border-dotted border-ink/20" />
         </div>
         
-        <div className="flex shrink-0 items-center gap-3">
-          <div className="hidden h-px min-w-[20px] flex-1 border-t border-dotted border-ink/10 sm:block" />
+        <div className="flex shrink-0 items-center gap-2">
           <span className="font-sans text-sm font-semibold text-terracotta-deep">
             {item.price}
           </span>
-          <Plus className="h-3 w-3 text-terracotta opacity-0 transition-opacity group-hover:opacity-100" />
+          <Plus className="h-3 w-3 text-terracotta opacity-40 transition-opacity group-hover:opacity-100" />
         </div>
       </div>
 
