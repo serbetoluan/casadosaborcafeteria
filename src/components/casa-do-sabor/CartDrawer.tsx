@@ -180,7 +180,7 @@ export function CartDrawer() {
         </div>
 
         {lines.length > 0 && (
-          <div className="border-t border-blush-deep/40 bg-white px-5 py-4">
+          <div className="border-t border-blush-deep/40 bg-white px-5 pt-4 pb-8 sm:pb-5">
             <div className="space-y-4 mb-4">
               <h4 className="font-display font-semibold text-ink flex items-center gap-2 border-b border-blush-deep/20 pb-2">
                 <User className="h-4 w-4 text-terracotta" />
