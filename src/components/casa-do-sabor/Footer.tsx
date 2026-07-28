@@ -19,7 +19,16 @@ export function Footer() {
           <span className="h-px w-10 bg-blush/20" />
         </div>
 
-        <p className="mt-6 text-[11px] font-medium uppercase tracking-[0.2em] text-blush/40">
+        <a
+          href="https://www.instagram.com/casadosaborjti/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-6 flex items-center gap-2 text-blush/40 hover:text-blush transition-colors"
+        >
+          <Instagram className="h-5 w-5" />
+          <span className="font-medium">@casadosaborjti</span>
+        </a>
+        <p className="mt-4 text-[11px] font-medium uppercase tracking-[0.2em] text-blush/40">
           Casa do Sabor © 2026
         </p>
       </div>

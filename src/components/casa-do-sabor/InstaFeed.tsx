@@ -10,21 +10,21 @@ const INSTA_POSTS = [
     id: "video-1",
     type: "video",
     url: videoAsset.url,
-    link: "https://www.instagram.com/casadosaborjatai/",
+    link: "https://www.instagram.com/casadosaborjti/",
     caption: "Energia e sabor para o seu dia! ☕✨",
   },
   {
     id: "post-1",
     type: "image",
     url: post1Asset.url,
-    link: "https://www.instagram.com/casadosaborjatai/",
+    link: "https://www.instagram.com/casadosaborjti/",
     caption: "Momentos especiais na Casa do Sabor. 🧺💖",
   },
   {
     id: "post-2",
     type: "image",
     url: post2Asset.url,
-    link: "https://www.instagram.com/casadosaborjatai/",
+    link: "https://www.instagram.com/casadosaborjti/",
     caption: "Celebrando a doçura e a força de cada mulher! 🌸",
   },
 ];
@@ -54,13 +54,13 @@ export function InstaFeed() {
             No nosso Instagram
           </h3>
           <a
-            href="https://www.instagram.com/casadosaborjatai/"
+            href="https://www.instagram.com/casadosaborjti/"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-xs font-semibold text-terracotta hover:underline"
           >
             <Instagram className="h-3.5 w-3.5" />
-            @casadosabor
+            @casadosaborjti
           </a>
         </div>
 
