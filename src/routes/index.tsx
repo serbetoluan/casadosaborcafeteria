@@ -1,24 +1,43 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { StickyNav } from "@/components/casa-do-sabor/StickyNav";
+import { Hero } from "@/components/casa-do-sabor/Hero";
+import { CategorySection } from "@/components/casa-do-sabor/CategorySection";
+import { Footer } from "@/components/casa-do-sabor/Footer";
+import { WhatsAppButton } from "@/components/casa-do-sabor/WhatsAppButton";
+import { categories } from "@/components/casa-do-sabor/menuData";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Casa do Sabor · Summer Fit — Cardápio Digital" },
+      {
+        name: "description",
+        content:
+          "Cardápio digital da Casa do Sabor na Summer Fit: cafés, shakes proteicos, lanches fit e doces feitos com amor dentro da academia.",
+      },
+      { property: "og:title", content: "Casa do Sabor · Summer Fit" },
+      {
+        property: "og:description",
+        content:
+          "Cafés, shakes proteicos e lanches fit dentro da academia Summer Fit.",
+      },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="mx-auto min-h-screen max-w-lg bg-cream">
+      <StickyNav categories={categories} />
+      <main>
+        <Hero />
+        {categories.map((c) => (
+          <CategorySection key={c.id} category={c} />
+        ))}
+      </main>
+      <Footer />
+      <WhatsAppButton />
     </div>
   );
 }
