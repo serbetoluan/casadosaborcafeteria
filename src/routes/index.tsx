@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { StickyNav } from "@/components/casa-do-sabor/StickyNav";
 import { Hero } from "@/components/casa-do-sabor/Hero";
+import { InstaFeed } from "@/components/casa-do-sabor/InstaFeed";
 import { CategorySection } from "@/components/casa-do-sabor/CategorySection";
 import { SobreNos } from "@/components/casa-do-sabor/SobreNos";
 import { Contato } from "@/components/casa-do-sabor/Contato";
@@ -39,6 +40,7 @@ function Index() {
         <StickyNav items={navSections} />
         <main className="mx-auto max-w-6xl">
           <Hero />
+          <InstaFeed />
           {categories.map((c) => (
             <CategorySection key={c.id} category={c} />
           ))}
