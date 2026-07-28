@@ -10,7 +10,7 @@ const INSTA_POSTS = [
     id: "video-1",
     type: "video",
     url: videoAsset.url,
-    link: "https://www.instagram.com/casadosaborjatai/",
+    link: "https://www.instagram.com/casadosaborjti/",
     caption: "Energia e sabor para o seu dia! ☕✨",
   },
   {
