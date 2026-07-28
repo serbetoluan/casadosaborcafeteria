@@ -9,7 +9,7 @@ const ADDON_PRICES: Record<string, number> = {
 };
 
 export function ProductModal() {
-  const { activeItem, closeProduct, addLine, openCart, setIsOpen } = useCart();
+  const { activeItem, closeProduct, addLine, openCart } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [selections, setSelections] = useState<Record<string, string[]>>({});
   const [note, setNote] = useState("");
@@ -59,7 +59,7 @@ export function ProductModal() {
     });
   };
 
-  const handleAdd = (shouldOpenCart: boolean = false) => {
+  const handleAdd = () => {
     const missing = (activeItem.options ?? [])
       .filter((g) => g.required && !(selections[g.label]?.length))
       .map((g) => g.label);
@@ -69,9 +69,7 @@ export function ProductModal() {
     }
     addLine({ item: activeItem, quantity, selections, note: note.trim() || undefined, unitPrice });
     closeProduct();
-    if (shouldOpenCart) {
-      openCart();
-    }
+    openCart();
   };
 
   return (
@@ -176,56 +174,34 @@ export function ProductModal() {
           </div>
         </div>
 
-        <div className="flex shrink-0 flex-col gap-4 border-t border-blush-deep/40 bg-white px-5 pt-5 pb-8 sm:pb-5 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center justify-between sm:gap-4">
-            <div className="flex items-center gap-1 rounded-full bg-blush/60 p-1">
-              <button
-                onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-ink shadow-sm hover:bg-cream active:scale-95"
-                aria-label="Diminuir quantidade"
-              >
-                <Minus className="h-4 w-4" />
-              </button>
-              <span className="w-8 text-center font-display font-semibold text-ink">{quantity}</span>
-              <button
-                onClick={() => setQuantity((q) => q + 1)}
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-ink shadow-sm hover:bg-cream active:scale-95"
-                aria-label="Aumentar quantidade"
-              >
-                <Plus className="h-4 w-4" />
-              </button>
-            </div>
-            
-            <div className="text-right sm:hidden">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-ink/40">Total</p>
-              <p className="font-sans text-lg font-bold text-terracotta-deep leading-none">
-                {formatBRL(lineTotal)}
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-3 border-t border-blush-deep/40 bg-white px-4 py-3">
+          <div className="flex items-center gap-1 rounded-full bg-blush/60 p-1">
             <button
-              onClick={() => {
-                handleAdd(false);
-              }}
-              className="flex-1 flex h-12 items-center justify-center rounded-full border border-terracotta bg-white px-4 font-display text-[11px] font-semibold text-terracotta transition-all hover:bg-blush/20 active:scale-[0.98] sm:flex-none sm:text-sm"
+              onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-ink shadow-sm hover:bg-cream active:scale-95"
+              aria-label="Diminuir quantidade"
             >
-              Continuar pedindo
+              <Minus className="h-4 w-4" />
             </button>
+            <span className="w-6 text-center font-display font-semibold text-ink">{quantity}</span>
             <button
-              onClick={() => {
-                handleAdd(true);
-              }}
-              className="flex-[1.5] flex h-12 items-center justify-between gap-2 rounded-full bg-terracotta px-5 font-display text-[11px] font-semibold text-white shadow-lg shadow-terracotta/30 transition-all hover:bg-terracotta-dark active:scale-[0.98] sm:flex-none sm:text-sm"
+              onClick={() => setQuantity((q) => q + 1)}
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-ink shadow-sm hover:bg-cream active:scale-95"
+              aria-label="Aumentar quantidade"
             >
-              <span className="flex items-center gap-1 whitespace-nowrap sm:gap-2">
-                <ShoppingBag className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                Finalizar
-              </span>
-              <span className="hidden sm:inline">{formatBRL(lineTotal)}</span>
+              <Plus className="h-4 w-4" />
             </button>
           </div>
+          <button
+            onClick={handleAdd}
+            className="flex flex-1 items-center justify-between gap-2 rounded-full bg-terracotta px-5 py-3 font-display text-sm font-semibold text-white shadow-lg shadow-terracotta/30 transition-all hover:bg-terracotta-dark active:scale-[0.98]"
+          >
+            <span className="flex items-center gap-2">
+              <ShoppingBag className="h-4 w-4" />
+              Adicionar
+            </span>
+            <span>{formatBRL(lineTotal)}</span>
+          </button>
         </div>
       </div>
     </div>

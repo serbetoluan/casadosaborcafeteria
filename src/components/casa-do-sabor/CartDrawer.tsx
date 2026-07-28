@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
-import { X, Minus, Plus, Trash2, ShoppingBag, MessageCircle, MapPin, User, Home } from "lucide-react";
+import { useEffect } from "react";
+import { X, Minus, Plus, Trash2, ShoppingBag, MessageCircle } from "lucide-react";
 import { useCart, formatBRL } from "./CartContext";
-import { cn } from "@/lib/utils";
 import { WHATSAPP_NUMBER } from "./menuData";
 import { CupIcon } from "./CupIcon";
 
@@ -9,11 +8,6 @@ const DELIVERY_FEE = 12;
 
 export function CartDrawer() {
   const { isOpen, closeCart, lines, updateQty, removeLine, total, clear } = useCart();
-  const [customerName, setCustomerName] = useState("");
-  const [orderType, setOrderType] = useState<"delivery" | "local">("local");
-  const [address, setAddress] = useState("");
-  const [paymentMethod, setPaymentMethod] = useState("");
-  const [errors, setErrors] = useState<string[]>([]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -47,30 +41,16 @@ export function CartDrawer() {
       lineTxt,
       "",
       `Subtotal: ${formatBRL(total)}`,
-      orderType === "delivery" ? `Entrega: ${formatBRL(DELIVERY_FEE)}` : "",
-      `*Total final: ${formatBRL(total + (orderType === "delivery" ? DELIVERY_FEE : 0))}*`,
-      "",
-      "👤 *Dados do Cliente:*",
-      `Nome: ${customerName}`,
-      `Tipo: ${orderType === "delivery" ? "🚀 Entrega" : "🏠 Consumo no Local"}`,
-      orderType === "delivery" ? `Endereço: ${address}` : "",
-      `Forma de Pagamento: ${paymentMethod}`,
+      `Entrega: ${formatBRL(DELIVERY_FEE)} (opcional)`,
+      `*Total com entrega: ${formatBRL(total + DELIVERY_FEE)}*`,
       "",
       "Combinamos os detalhes por aqui? 💕",
-    ].filter(Boolean).join("\n");
+    ].join("\n");
     return encodeURIComponent(msg);
   };
 
   const handleCheckout = () => {
-    const newErrors = [];
-    if (!customerName.trim()) newErrors.push("nome");
-    if (orderType === "delivery" && !address.trim()) newErrors.push("endereco");
-    if (!paymentMethod) newErrors.push("pagamento");
-
-    if (newErrors.length > 0) {
-      setErrors(newErrors);
-      return;
-    }
+    if (!lines.length) return;
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${buildMessage()}`, "_blank");
   };
 
@@ -103,7 +83,21 @@ export function CartDrawer() {
         </header>
 
         <div className="flex-1 overflow-y-auto px-5 py-4">
-          {lines.length > 0 ? (
+          {lines.length === 0 ? (
+            <div className="flex h-full flex-col items-center justify-center text-center">
+              <CupIcon className="h-20 w-20 text-terracotta/30" />
+              <p className="mt-4 font-script text-xl text-terracotta">Seu cestinho está vazio</p>
+              <p className="mt-2 max-w-xs text-sm text-ink/60">
+                Escolha seus quitutes favoritos e prepare um cafezinho pra acompanhar ☕
+              </p>
+              <button
+                onClick={closeCart}
+                className="mt-6 rounded-full bg-terracotta px-6 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-terracotta-dark"
+              >
+                Ver cardápio
+              </button>
+            </div>
+          ) : (
             <ul className="flex flex-col gap-3">
               {lines.map((line) => (
                 <li
@@ -162,129 +156,33 @@ export function CartDrawer() {
                 </li>
               ))}
             </ul>
-          ) : (
-            <div className="flex h-full flex-col items-center justify-center text-center">
-              <CupIcon className="h-20 w-20 text-terracotta/30" />
-              <p className="mt-4 font-script text-xl text-terracotta">Seu cestinho está vazio</p>
-              <p className="mt-2 max-w-xs text-sm text-ink/60">
-                Escolha seus quitutes favoritos e prepare um cafezinho pra acompanhar ☕
-              </p>
-              <button
-                onClick={closeCart}
-                className="mt-6 rounded-full bg-terracotta px-6 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-terracotta-dark"
-              >
-                Ver cardápio
-              </button>
-            </div>
           )}
         </div>
 
         {lines.length > 0 && (
-          <div className="border-t border-blush-deep/40 bg-white px-5 pt-4 pb-8 sm:pb-5">
-            <div className="space-y-4 mb-4">
-              <h4 className="font-display font-semibold text-ink flex items-center gap-2 border-b border-blush-deep/20 pb-2">
-                <User className="h-4 w-4 text-terracotta" />
-                Dados para o Pedido
-              </h4>
-              <div className="grid grid-cols-1 gap-3">
-                <input
-                  type="text"
-                  placeholder="Seu nome"
-                  value={customerName}
-                  onChange={(e) => setCustomerName(e.target.value)}
-                  className={cn(
-                    "w-full rounded-xl border px-4 py-2.5 text-sm outline-none transition-all",
-                    errors.includes("nome") ? "border-terracotta bg-terracotta/5" : "border-blush-deep/60 focus:border-terracotta"
-                  )}
-                />
-
-                <div className="flex gap-2 p-1 bg-blush/30 rounded-xl">
-                  <button
-                    onClick={() => setOrderType("local")}
-                    className={cn(
-                      "flex-1 flex items-center justify-center gap-2 py-2 text-xs font-semibold rounded-lg transition-all",
-                      orderType === "local" ? "bg-white text-terracotta shadow-sm" : "text-ink/60"
-                    )}
-                  >
-                    <Home className="h-3.5 w-3.5" />
-                    No Local
-                  </button>
-                  <button
-                    onClick={() => setOrderType("delivery")}
-                    className={cn(
-                      "flex-1 flex items-center justify-center gap-2 py-2 text-xs font-semibold rounded-lg transition-all",
-                      orderType === "delivery" ? "bg-white text-terracotta shadow-sm" : "text-ink/60"
-                    )}
-                  >
-                    <MapPin className="h-3.5 w-3.5" />
-                    Entrega
-                  </button>
-                </div>
-
-                {orderType === "delivery" && (
-                  <textarea
-                    placeholder="Endereço de entrega completo"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    rows={2}
-                    className={cn(
-                      "w-full rounded-xl border px-4 py-2.5 text-sm outline-none transition-all resize-none",
-                      errors.includes("endereco") ? "border-terracotta bg-terracotta/5" : "border-blush-deep/60 focus:border-terracotta"
-                    )}
-                  />
-                )}
-
-                <select
-                  value={paymentMethod}
-                  onChange={(e) => setPaymentMethod(e.target.value)}
-                  className={cn(
-                    "w-full rounded-xl border px-4 py-2.5 text-sm outline-none transition-all appearance-none bg-white",
-                    errors.includes("pagamento") ? "border-terracotta bg-terracotta/5" : "border-blush-deep/60 focus:border-terracotta"
-                  )}
-                >
-                  <option value="">Forma de pagamento</option>
-                  <option value="Pix">Pix</option>
-                  <option value="Cartão de Crédito">Cartão de Crédito</option>
-                  <option value="Cartão de Débito">Cartão de Débito</option>
-                  <option value="Dinheiro">Dinheiro</option>
-                </select>
-              </div>
+          <div className="border-t border-blush-deep/40 bg-white px-5 py-4">
+            <div className="flex items-center justify-between text-sm text-ink/70">
+              <span>Subtotal</span>
+              <span className="font-medium text-ink">{formatBRL(total)}</span>
+            </div>
+            <div className="flex items-center justify-between text-xs text-ink/50">
+              <span>Entrega (opcional)</span>
+              <span>{formatBRL(DELIVERY_FEE)}</span>
+            </div>
+            <div className="mt-2 flex items-center justify-between border-t border-dashed border-blush-deep/60 pt-2">
+              <span className="font-display font-semibold text-ink">Total</span>
+              <span className="font-display text-lg font-semibold text-terracotta-deep">
+                {formatBRL(total)}
+              </span>
             </div>
 
-            <div className="space-y-1.5 border-t border-blush-deep/20 pt-4">
-              <div className="flex items-center justify-between text-sm text-ink/70">
-                <span>Subtotal</span>
-                <span className="font-medium text-ink">{formatBRL(total)}</span>
-              </div>
-              {orderType === "delivery" && (
-                <div className="flex items-center justify-between text-xs text-ink/50">
-                  <span>Entrega</span>
-                  <span>{formatBRL(DELIVERY_FEE)}</span>
-                </div>
-              )}
-              <div className="flex items-center justify-between pt-1">
-                <span className="font-display font-semibold text-ink">Total</span>
-                <span className="font-display text-lg font-semibold text-terracotta-deep">
-                  {formatBRL(total + (orderType === "delivery" ? DELIVERY_FEE : 0))}
-                </span>
-              </div>
-            </div>
-
-            <div className="flex gap-2 mt-4">
-              <button
-                onClick={closeCart}
-                className="flex-[0.8] flex items-center justify-center rounded-full border border-terracotta bg-white px-3 py-3.5 font-display text-[11px] font-semibold text-terracotta transition-all hover:bg-blush/20 active:scale-[0.98]"
-              >
-                Continuar
-              </button>
-              <button
-                onClick={handleCheckout}
-                className="flex-[1.5] flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 py-3.5 font-display text-[11px] font-semibold text-white shadow-lg shadow-[#25D366]/25 transition-all hover:brightness-105 active:scale-[0.98]"
-              >
-                <MessageCircle className="h-4 w-4" />
-                <span className="whitespace-nowrap">Enviar WhatsApp</span>
-              </button>
-            </div>
+            <button
+              onClick={handleCheckout}
+              className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3.5 font-display font-semibold text-white shadow-lg shadow-[#25D366]/25 transition-all hover:brightness-105 active:scale-[0.98]"
+            >
+              <MessageCircle className="h-5 w-5" />
+              Enviar pedido pelo WhatsApp
+            </button>
             <button
               onClick={clear}
               className="mt-2 w-full text-xs text-ink/40 hover:text-terracotta"

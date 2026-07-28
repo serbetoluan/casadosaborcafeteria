@@ -20,8 +20,7 @@ type CartCtx = {
   count: number;
   openCart: () => void;
   closeCart: () => void;
-   isOpen: boolean;
-   setIsOpen: (open: boolean) => void;
+  isOpen: boolean;
   openProduct: (item: MenuItem) => void;
   closeProduct: () => void;
   activeItem: MenuItem | null;
@@ -41,8 +40,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       lines,
       total,
       count,
-       isOpen,
-       setIsOpen,
+      isOpen,
       activeItem,
       addLine: (line) => {
         setLines((prev) => [
