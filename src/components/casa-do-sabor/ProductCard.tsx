@@ -32,31 +32,24 @@ export function ProductCard({ item, index }: { item: MenuItem; index: number }) 
       onClick={() => openProduct(item)}
       style={{ transitionDelay: `${(index % 6) * 60}ms` }}
       className={cn(
-        "group relative flex w-full items-start gap-4 rounded-2xl bg-white p-4 text-left shadow-[0_8px_24px_-16px_rgba(201,123,132,0.35)] ring-1 ring-blush-deep/50 transition-all duration-500 ease-out",
-        "hover:-translate-y-0.5 hover:shadow-[0_16px_32px_-18px_rgba(201,123,132,0.5)] hover:scale-[1.01] active:scale-[0.99]",
+        "group relative flex w-full items-start gap-4 p-4 text-left transition-all duration-500 ease-out border-b border-blush/30",
+        item.image && "rounded-2xl bg-white shadow-[0_8px_24px_-16px_rgba(201,123,132,0.35)] ring-1 ring-blush-deep/50 border-none my-2 hover:-translate-y-0.5 hover:shadow-[0_16px_32px_-18px_rgba(201,123,132,0.5)] hover:scale-[1.01]",
+        !item.image && "hover:bg-blush/10 active:bg-blush/20",
         visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0",
       )}
     >
-      <div
-        className="relative flex h-24 w-24 shrink-0 flex-col items-center justify-center gap-1 overflow-hidden rounded-xl bg-gradient-to-br from-blush to-blush-deep text-terracotta/70"
-      >
-        {item.image ? (
+      {item.image && (
+        <div
+          className="relative flex h-24 w-24 shrink-0 flex-col items-center justify-center gap-1 overflow-hidden rounded-xl bg-gradient-to-br from-blush to-blush-deep text-terracotta/70"
+        >
           <img 
             src={item.image} 
             alt={item.name}
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
             loading="lazy"
           />
-        ) : (
-          <>
-            <div className="absolute inset-0 animate-pulse bg-blush/40" aria-hidden />
-            <ImageIcon className="relative h-5 w-5" strokeWidth={1.4} />
-            <span className="relative px-1 text-center text-[9px] leading-tight text-ink/50">
-              imagem em breve
-            </span>
-          </>
-        )}
-      </div>
+        </div>
+      )}
 
       <div className="flex min-w-0 flex-1 flex-col">
         <div className="flex items-start justify-between gap-2">
