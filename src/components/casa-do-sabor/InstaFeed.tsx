@@ -24,7 +24,7 @@ const INSTA_POSTS = [
     id: "post-2",
     type: "image",
     url: post2Asset.url,
-    link: "https://www.instagram.com/casadosaborjatai/",
+    link: "https://www.instagram.com/casadosaborjti/",
     caption: "Celebrando a doçura e a força de cada mulher! 🌸",
   },
 ];
