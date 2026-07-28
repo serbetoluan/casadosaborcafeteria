@@ -157,8 +157,42 @@
     border-color: var(--color-border);
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
   }
 }
+
+@utility font-display {
+  font-family: var(--font-display);
+}
+@utility font-script {
+  font-family: var(--font-script);
+}
+
+@keyframes cds-breathe {
+  0%, 100% { transform: scale(1); box-shadow: 0 8px 24px -6px color-mix(in oklab, var(--terracotta) 55%, transparent); }
+  50% { transform: scale(1.06); box-shadow: 0 12px 32px -6px color-mix(in oklab, var(--terracotta) 70%, transparent); }
+}
+@utility animate-breathe {
+  animation: cds-breathe 2.4s ease-in-out infinite;
+}
+
+@keyframes cds-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@utility animate-rise {
+  animation: cds-rise 0.6s ease-out both;
+}
+
