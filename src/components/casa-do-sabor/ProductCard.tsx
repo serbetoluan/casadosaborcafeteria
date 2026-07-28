@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import { ImageIcon, Leaf } from "lucide-react";
+import { ImageIcon, Leaf, Plus } from "lucide-react";
 import type { MenuItem } from "./menuData";
+import { useCart } from "./CartContext";
 import { cn } from "@/lib/utils";
 
 export function ProductCard({ item, index }: { item: MenuItem; index: number }) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLButtonElement>(null);
   const [visible, setVisible] = useState(false);
+  const { openProduct } = useCart();
 
   useEffect(() => {
     const el = ref.current;
@@ -24,11 +26,13 @@ export function ProductCard({ item, index }: { item: MenuItem; index: number }) 
   }, []);
 
   return (
-    <article
+    <button
       ref={ref}
+      type="button"
+      onClick={() => openProduct(item)}
       style={{ transitionDelay: `${(index % 6) * 60}ms` }}
       className={cn(
-        "group flex items-start gap-4 rounded-2xl bg-white p-4 shadow-[0_8px_24px_-16px_rgba(201,123,132,0.35)] ring-1 ring-blush-deep/50 transition-all duration-500 ease-out",
+        "group relative flex w-full items-start gap-4 rounded-2xl bg-white p-4 text-left shadow-[0_8px_24px_-16px_rgba(201,123,132,0.35)] ring-1 ring-blush-deep/50 transition-all duration-500 ease-out",
         "hover:-translate-y-0.5 hover:shadow-[0_16px_32px_-18px_rgba(201,123,132,0.5)] hover:scale-[1.01] active:scale-[0.99]",
         visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0",
       )}
@@ -58,17 +62,20 @@ export function ProductCard({ item, index }: { item: MenuItem; index: number }) 
         </div>
 
         {item.description && (
-          <p className="mt-1.5 text-xs leading-relaxed text-ink/60">
+          <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-ink/60">
             {item.description}
           </p>
         )}
 
-        <div className="mt-2">
+        <div className="mt-2 flex items-center justify-between gap-2">
           <span className="font-sans text-sm font-semibold text-terracotta-deep">
             {item.price}
           </span>
+          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-terracotta text-white shadow-md shadow-terracotta/30 transition-transform group-hover:scale-110 group-active:scale-95">
+            <Plus className="h-4 w-4" strokeWidth={2.5} />
+          </span>
         </div>
       </div>
-    </article>
+    </button>
   );
 }

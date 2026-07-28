@@ -6,6 +6,10 @@ import { SobreNos } from "@/components/casa-do-sabor/SobreNos";
 import { Contato } from "@/components/casa-do-sabor/Contato";
 import { Footer } from "@/components/casa-do-sabor/Footer";
 import { WhatsAppButton } from "@/components/casa-do-sabor/WhatsAppButton";
+import { CartProvider } from "@/components/casa-do-sabor/CartContext";
+import { ProductModal } from "@/components/casa-do-sabor/ProductModal";
+import { CartDrawer } from "@/components/casa-do-sabor/CartDrawer";
+import { CartFab } from "@/components/casa-do-sabor/CartFab";
 import { categories, navSections } from "@/components/casa-do-sabor/menuData";
 
 export const Route = createFileRoute("/")({
@@ -30,18 +34,23 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <div className="min-h-screen bg-cream">
-      <StickyNav items={navSections} />
-      <main className="mx-auto max-w-6xl">
-        <Hero />
-        {categories.map((c) => (
-          <CategorySection key={c.id} category={c} />
-        ))}
-        <SobreNos />
-        <Contato />
-      </main>
-      <Footer />
-      <WhatsAppButton />
-    </div>
+    <CartProvider>
+      <div className="min-h-screen bg-cream">
+        <StickyNav items={navSections} />
+        <main className="mx-auto max-w-6xl">
+          <Hero />
+          {categories.map((c) => (
+            <CategorySection key={c.id} category={c} />
+          ))}
+          <SobreNos />
+          <Contato />
+        </main>
+        <Footer />
+        <CartFab />
+        <WhatsAppButton />
+        <ProductModal />
+        <CartDrawer />
+      </div>
+    </CartProvider>
   );
 }

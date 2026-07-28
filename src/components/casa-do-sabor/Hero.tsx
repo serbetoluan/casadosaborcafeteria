@@ -54,7 +54,7 @@ export function Hero() {
           <img
             src={banner.url}
             alt="Ambiente da Casa do Sabor dentro da Summer Fit"
-            className="aspect-[16/9] w-full object-cover"
+            className="aspect-[4/5] w-full object-cover object-center sm:aspect-[16/10]"
             loading="eager"
           />
         </div>

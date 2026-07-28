@@ -1,7 +1,17 @@
+import { WHATSAPP_NUMBER } from "./menuData";
+
+const THEMED_MESSAGE = `☕ Olá, Casa do Sabor!
+
+Vim pelo cardápio digital da *Unidade Summer Fit* e queria bater um papo pra montar meu pedido — do café da manhã ao happy hour! 🧺💕
+
+Podem me ajudar?`;
+
 export function WhatsAppButton() {
+  const href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(THEMED_MESSAGE)}`;
+
   return (
     <a
-      href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Vim%20pelo%20card%C3%A1pio%20da%20Casa%20do%20Sabor%20Summer%20Fit."
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Falar no WhatsApp"
