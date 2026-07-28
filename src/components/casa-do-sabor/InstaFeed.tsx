@@ -1,26 +1,31 @@
-import { Instagram } from "lucide-react";
+import { Instagram, Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import videoAsset from "@/assets/instagram_video.mp4.asset.json";
+import post1Asset from "@/assets/instagram_post_1.png.asset.json";
+import post2Asset from "@/assets/instagram_post_2.png.asset.json";
 
-// Mock data representing the last 3 Instagram posts
 const INSTA_POSTS = [
   {
-    id: "1",
-    imageUrl: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&q=80",
-    link: "https://www.instagram.com/",
-    caption: "O café perfeito para o seu pós-treino! ☕💪",
+    id: "video-1",
+    type: "video",
+    url: videoAsset.url,
+    link: "https://www.instagram.com/casadosaborjatai/",
+    caption: "Energia e sabor para o seu dia! ☕✨",
   },
   {
-    id: "2",
-    imageUrl: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80",
-    link: "https://www.instagram.com/",
-    caption: "Energia pura com nossos snacks saudáveis. 🍏✨",
+    id: "post-1",
+    type: "image",
+    url: post1Asset.url,
+    link: "https://www.instagram.com/casadosaborjatai/",
+    caption: "Momentos especiais na Casa do Sabor. 🧺💖",
   },
   {
-    id: "3",
-    imageUrl: "https://images.unsplash.com/photo-1559496417-e7f25cb247f3?w=800&q=80",
-    link: "https://www.instagram.com/",
-    caption: "Ambiente acolhedor esperando por você. 🧺💖",
+    id: "post-2",
+    type: "image",
+    url: post2Asset.url,
+    link: "https://www.instagram.com/casadosaborjatai/",
+    caption: "Celebrando a doçura e a força de cada mulher! 🌸",
   },
 ];
 
@@ -49,7 +54,7 @@ export function InstaFeed() {
             No nosso Instagram
           </h3>
           <a
-            href="https://www.instagram.com/"
+            href="https://www.instagram.com/casadosaborjatai/"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-xs font-semibold text-terracotta hover:underline"
@@ -72,11 +77,30 @@ export function InstaFeed() {
                 rel="noopener noreferrer"
                 className="group relative aspect-square w-[75%] flex-shrink-0 snap-center overflow-hidden rounded-2xl bg-blush-deep sm:w-[45%]"
               >
-                <img
-                  src={post.imageUrl}
-                  alt={post.caption}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
+                {post.type === "video" ? (
+                  <div className="relative h-full w-full">
+                    <video
+                      src={post.url}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      muted
+                      playsInline
+                      autoPlay
+                      loop
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-transparent transition-colors">
+                      <div className="rounded-full bg-white/20 p-3 backdrop-blur-md">
+                        <Play className="h-6 w-6 text-white fill-white" />
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <img
+                    src={post.url}
+                    alt={post.caption}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                )}
+                
                 <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 <div className="absolute bottom-0 left-0 right-0 p-3 opacity-0 transition-all duration-300 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0">
                   <p className="text-[10px] text-white line-clamp-2 leading-tight">
