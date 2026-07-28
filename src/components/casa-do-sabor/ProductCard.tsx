@@ -28,7 +28,7 @@ export function ProductCard({ item, index }: { item: MenuItem; index: number }) 
       ref={ref}
       style={{ transitionDelay: `${(index % 6) * 50}ms` }}
       className={cn(
-        "group relative flex items-center gap-4 py-4 border-b border-blush/30 transition-all duration-500 ease-out",
+        "group relative flex items-center gap-4 py-4 border-b border-blush/30 last:border-0 transition-all duration-500 ease-out",
         visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0",
       )}
     >
