@@ -102,20 +102,28 @@ export function ProductModal() {
           <X className="h-5 w-5" />
         </button>
 
-        <div className="relative flex h-44 shrink-0 items-center justify-center bg-gradient-to-br from-blush to-blush-deep text-terracotta/70">
-          <div className="flex flex-col items-center gap-1.5">
-            <ImageIcon className="h-8 w-8" strokeWidth={1.4} />
-            <span className="text-[11px] font-medium uppercase tracking-wider text-ink/50">
-              imagem em breve
-            </span>
+        {activeItem.image ? (
+          <div className="relative h-56 shrink-0 overflow-hidden bg-cream">
+            <img
+              src={activeItem.image}
+              alt={activeItem.name}
+              className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+            />
+            {activeItem.fit && (
+              <span className="absolute left-4 top-4 inline-flex items-center gap-1 rounded-full bg-white/90 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-terracotta ring-1 ring-terracotta/40 backdrop-blur-sm">
+                <Leaf className="h-3 w-3" strokeWidth={2} />
+                Fit
+              </span>
+            )}
           </div>
-          {activeItem.fit && (
-            <span className="absolute left-4 top-4 inline-flex items-center gap-1 rounded-full bg-white px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-terracotta ring-1 ring-terracotta/40">
+        ) : activeItem.fit ? (
+          <div className="flex h-12 shrink-0 items-center px-5 pt-4">
+            <span className="inline-flex items-center gap-1 rounded-full bg-white px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-terracotta ring-1 ring-terracotta/40">
               <Leaf className="h-3 w-3" strokeWidth={2} />
               Fit
             </span>
-          )}
-        </div>
+          </div>
+        ) : null}
 
         <div className="flex-1 overflow-y-auto px-5 py-5">
           <h3 className="font-display text-2xl font-semibold leading-tight text-ink">
