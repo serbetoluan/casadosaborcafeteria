@@ -3,6 +3,11 @@ import saladaFrutasAsset from "@/assets/salada_de_frutas.png.asset.json";
 import omeleteAsset from "@/assets/omelete_simples.png.asset.json";
 import waffleAsset from "@/assets/waffle.png.asset.json";
 import enroladinhoAsset from "@/assets/enroladinho_de_queijo.png.asset.json";
+import disquinhoFrangoAsset from "@/assets/disquinho_frango.png.asset.json";
+import tortaFrangoAsset from "@/assets/torta_frango_catupiry.png.asset.json";
+import esfihaCarneAsset from "@/assets/esfiha_carne.png.asset.json";
+import disquinhoCarneAsset from "@/assets/disquinho_carne.png.asset.json";
+import sanduicheNaturalAsset from "@/assets/sanduiche_natural.png.asset.json";
 
 export type MenuOptionGroup = {
   label: string;
@@ -92,7 +97,7 @@ export const categories: MenuCategory[] = [
         options: [{ label: "Escolha o acompanhamento", required: true, choices: ["Mel", "Requeijão", "Mussarela"] }],
       },
       { slug: "toast-caprese", name: "Toast Caprese", description: "Pão baguete artesanal, creme de ricota, pesto de manjericão e tomate confit.", price: "R$ 25,00", priceValue: 25 },
-      { slug: "sanduiche-natural", name: "Sanduíche Natural de frango", description: "Sanduíche leve, prático e saboroso.", price: "R$ 18,00", priceValue: 18, fit: true },
+      { slug: "sanduiche-natural", name: "Sanduíche Natural de frango", description: "Sanduíche leve, prático e saboroso.", price: "R$ 18,00", priceValue: 18, fit: true, image: sanduicheNaturalAsset.url },
       { slug: "saladinha-frutas", name: "Saladinha de frutas", description: "Mix fresquinho de frutas da estação.", price: "R$ 14,00", priceValue: 14, fit: true, image: saladaFrutasAsset.url },
     ],
   },
@@ -101,13 +106,13 @@ export const categories: MenuCategory[] = [
     title: "Salgados",
     tagline: "Pra matar aquela fominha",
     items: [
-      { slug: "disco-carne", name: "Disco de carne", price: "R$ 10,00", priceValue: 10 },
+      { slug: "disco-carne", name: "Disco de carne", price: "R$ 10,00", priceValue: 10, image: disquinhoCarneAsset.url },
       { slug: "americano-pq", name: "Americano de Presunto e Queijo", price: "R$ 10,00", priceValue: 10 },
-      { slug: "esfirra-carne", name: "Esfirra de Carne", price: "R$ 10,00", priceValue: 10 },
-      { slug: "disco-frango-queijo", name: "Disco de Frango com Queijo", price: "R$ 12,50", priceValue: 12.5 },
+      { slug: "esfirra-carne", name: "Esfirra de Carne", price: "R$ 10,00", priceValue: 10, image: esfihaCarneAsset.url },
+      { slug: "disco-frango-queijo", name: "Disco de Frango com Queijo", price: "R$ 12,50", priceValue: 12.5, image: disquinhoFrangoAsset.url },
       { slug: "quiche-lorraine", name: "Quiche Lorraine", description: "Bacon e creme de queijo.", price: "R$ 18,00", priceValue: 18 },
       { slug: "quiche-alho-poro", name: "Quiche de Alho Poró", price: "R$ 18,00", priceValue: 18 },
-      { slug: "torta-frango-catupiry", name: "Torta de Frango com Catupiry", price: "R$ 20,00", priceValue: 20 },
+      { slug: "torta-frango-catupiry", name: "Torta de Frango com Catupiry", price: "R$ 20,00", priceValue: 20, image: tortaFrangoAsset.url },
     ],
   },
   {
