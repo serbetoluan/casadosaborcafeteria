@@ -1,6 +1,5 @@
-import { useEffect } from "react";
-import { useState } from "react";
-import { X, Minus, Plus, Trash2, ShoppingBag, MessageCircle, MapPin, User, CreditCard, Home } from "lucide-react";
+import { useEffect, useState } from "react";
+import { X, Minus, Plus, Trash2, ShoppingBag, MessageCircle, MapPin, User, Home } from "lucide-react";
 import { useCart, formatBRL } from "./CartContext";
 import { cn } from "@/lib/utils";
 import { WHATSAPP_NUMBER } from "./menuData";
@@ -48,8 +47,8 @@ export function CartDrawer() {
       lineTxt,
       "",
       `Subtotal: ${formatBRL(total)}`,
-      `Entrega: ${formatBRL(DELIVERY_FEE)} (opcional)`,
-      `*Total com entrega: ${formatBRL(total + (orderType === "delivery" ? DELIVERY_FEE : 0))}*`,
+      orderType === "delivery" ? `Entrega: ${formatBRL(DELIVERY_FEE)}` : "",
+      `*Total final: ${formatBRL(total + (orderType === "delivery" ? DELIVERY_FEE : 0))}*`,
       "",
       "👤 *Dados do Cliente:*",
       `Nome: ${customerName}`,
@@ -104,21 +103,7 @@ export function CartDrawer() {
         </header>
 
         <div className="flex-1 overflow-y-auto px-5 py-4">
-          {lines.length === 0 ? (
-            <div className="flex h-full flex-col items-center justify-center text-center">
-              <CupIcon className="h-20 w-20 text-terracotta/30" />
-              <p className="mt-4 font-script text-xl text-terracotta">Seu cestinho está vazio</p>
-              <p className="mt-2 max-w-xs text-sm text-ink/60">
-                Escolha seus quitutes favoritos e prepare um cafezinho pra acompanhar ☕
-              </p>
-              <button
-                onClick={closeCart}
-                className="mt-6 rounded-full bg-terracotta px-6 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-terracotta-dark"
-              >
-                Ver cardápio
-              </button>
-            </div>
-          ) : (
+          {lines.length > 0 ? (
             <ul className="flex flex-col gap-3">
               {lines.map((line) => (
                 <li
@@ -177,29 +162,41 @@ export function CartDrawer() {
                 </li>
               ))}
             </ul>
+          ) : (
+            <div className="flex h-full flex-col items-center justify-center text-center">
+              <CupIcon className="h-20 w-20 text-terracotta/30" />
+              <p className="mt-4 font-script text-xl text-terracotta">Seu cestinho está vazio</p>
+              <p className="mt-2 max-w-xs text-sm text-ink/60">
+                Escolha seus quitutes favoritos e prepare um cafezinho pra acompanhar ☕
+              </p>
+              <button
+                onClick={closeCart}
+                className="mt-6 rounded-full bg-terracotta px-6 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-terracotta-dark"
+              >
+                Ver cardápio
+              </button>
+            </div>
           )}
         </div>
 
         {lines.length > 0 && (
-          <div className="border-t border-blush-deep/40 bg-white px-5 py-4 overflow-y-auto max-h-[60vh]">
-            <div className="space-y-4 mb-6">
-              <h4 className="font-display font-semibold text-ink flex items-center gap-2">
+          <div className="border-t border-blush-deep/40 bg-white px-5 py-4">
+            <div className="space-y-4 mb-4">
+              <h4 className="font-display font-semibold text-ink flex items-center gap-2 border-b border-blush-deep/20 pb-2">
                 <User className="h-4 w-4 text-terracotta" />
-                Seus Dados
+                Dados para o Pedido
               </h4>
-              <div className="space-y-3">
-                <div>
-                  <input
-                    type="text"
-                    placeholder="Seu nome"
-                    value={customerName}
-                    onChange={(e) => setCustomerName(e.target.value)}
-                    className={cn(
-                      "w-full rounded-xl border px-4 py-2.5 text-sm outline-none transition-all",
-                      errors.includes("nome") ? "border-terracotta bg-terracotta/5" : "border-blush-deep/60 focus:border-terracotta"
-                    )}
-                  />
-                </div>
+              <div className="grid grid-cols-1 gap-3">
+                <input
+                  type="text"
+                  placeholder="Seu nome"
+                  value={customerName}
+                  onChange={(e) => setCustomerName(e.target.value)}
+                  className={cn(
+                    "w-full rounded-xl border px-4 py-2.5 text-sm outline-none transition-all",
+                    errors.includes("nome") ? "border-terracotta bg-terracotta/5" : "border-blush-deep/60 focus:border-terracotta"
+                  )}
+                />
 
                 <div className="flex gap-2 p-1 bg-blush/30 rounded-xl">
                   <button
@@ -226,7 +223,7 @@ export function CartDrawer() {
 
                 {orderType === "delivery" && (
                   <textarea
-                    placeholder="Endereço de entrega"
+                    placeholder="Endereço de entrega completo"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                     rows={2}
@@ -237,38 +234,40 @@ export function CartDrawer() {
                   />
                 )}
 
-                <div>
-                  <select
-                    value={paymentMethod}
-                    onChange={(e) => setPaymentMethod(e.target.value)}
-                    className={cn(
-                      "w-full rounded-xl border px-4 py-2.5 text-sm outline-none transition-all appearance-none bg-white",
-                      errors.includes("pagamento") ? "border-terracotta bg-terracotta/5" : "border-blush-deep/60 focus:border-terracotta"
-                    )}
-                  >
-                    <option value="">Forma de pagamento</option>
-                    <option value="Pix">Pix</option>
-                    <option value="Cartão de Crédito">Cartão de Crédito</option>
-                    <option value="Cartão de Débito">Cartão de Débito</option>
-                    <option value="Dinheiro">Dinheiro</option>
-                  </select>
-                </div>
+                <select
+                  value={paymentMethod}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                  className={cn(
+                    "w-full rounded-xl border px-4 py-2.5 text-sm outline-none transition-all appearance-none bg-white",
+                    errors.includes("pagamento") ? "border-terracotta bg-terracotta/5" : "border-blush-deep/60 focus:border-terracotta"
+                  )}
+                >
+                  <option value="">Forma de pagamento</option>
+                  <option value="Pix">Pix</option>
+                  <option value="Cartão de Crédito">Cartão de Crédito</option>
+                  <option value="Cartão de Débito">Cartão de Débito</option>
+                  <option value="Dinheiro">Dinheiro</option>
+                </select>
               </div>
             </div>
 
-            <div className="flex items-center justify-between text-sm text-ink/70">
-              <span>Subtotal</span>
-              <span className="font-medium text-ink">{formatBRL(total)}</span>
-            </div>
-            <div className="flex items-center justify-between text-xs text-ink/50">
-              <span>Entrega (opcional)</span>
-              <span>{formatBRL(DELIVERY_FEE)}</span>
-            </div>
-            <div className="mt-2 flex items-center justify-between border-t border-dashed border-blush-deep/60 pt-2">
-              <span className="font-display font-semibold text-ink">Total</span>
-              <span className="font-display text-lg font-semibold text-terracotta-deep">
-                {formatBRL(total + (orderType === "delivery" ? DELIVERY_FEE : 0))}
-              </span>
+            <div className="space-y-1.5 border-t border-blush-deep/20 pt-4">
+              <div className="flex items-center justify-between text-sm text-ink/70">
+                <span>Subtotal</span>
+                <span className="font-medium text-ink">{formatBRL(total)}</span>
+              </div>
+              {orderType === "delivery" && (
+                <div className="flex items-center justify-between text-xs text-ink/50">
+                  <span>Entrega</span>
+                  <span>{formatBRL(DELIVERY_FEE)}</span>
+                </div>
+              )}
+              <div className="flex items-center justify-between pt-1">
+                <span className="font-display font-semibold text-ink">Total</span>
+                <span className="font-display text-lg font-semibold text-terracotta-deep">
+                  {formatBRL(total + (orderType === "delivery" ? DELIVERY_FEE : 0))}
+                </span>
+              </div>
             </div>
 
             <button
