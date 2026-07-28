@@ -8,6 +8,8 @@ import tortaFrangoAsset from "@/assets/torta_frango_catupiry.png.asset.json";
 import esfihaCarneAsset from "@/assets/esfiha_carne.png.asset.json";
 import disquinhoCarneAsset from "@/assets/disquinho_carne.png.asset.json";
 import sanduicheNaturalAsset from "@/assets/sanduiche_natural.png.asset.json";
+import cappuccinoGeladoAsset from "@/assets/cappuccino_gelado.png.asset.json";
+import cappuccinoItalianoAsset from "@/assets/cappuccino_italiano.png.asset.json";
 
 export type MenuOptionGroup = {
   label: string;
@@ -195,7 +197,7 @@ export const categories: MenuCategory[] = [
         options: [{ label: "Escolha o sabor", required: true, choices: ["Morango", "Maçã verde"] }],
       },
       { slug: "vienense", name: "Vienense", description: "400ml — Café expresso, sorvete de creme, calda de chocolate e chantilly.", price: "R$ 24,00", priceValue: 24 },
-      { slug: "cappuccino-gelado", name: "Cappuccino Gelado", description: "400ml — Café expresso, cappuccino, sorvete de creme, calda de chocolate e chantilly.", price: "R$ 24,00", priceValue: 24 },
+      { slug: "cappuccino-gelado", name: "Cappuccino Gelado", description: "400ml — Café expresso, cappuccino, sorvete de creme, calda de chocolate e chantilly.", price: "R$ 24,00", priceValue: 24, image: cappuccinoGeladoAsset.url },
       { slug: "nutella-frozen", name: "Nutella® Frozen", description: "400ml — Taça de gelato de leite Ninho® batido com uma dose de espresso e muita Nutella®, acompanha chantilly.", price: "R$ 26,00", priceValue: 26 },
     ],
   },
@@ -232,7 +234,7 @@ export const categories: MenuCategory[] = [
       },
       { slug: "cappuccino-br", name: "Cappuccino Brasileiro", description: "240ml — Leite semi desnatado, pó de cappuccino e nuvem de leite vaporizado.", price: "R$ 16,00", priceValue: 16 },
       { slug: "cappuccino-br-light", name: "Cappuccino Brasileiro light", description: "240ml — versão mais leve, sem abrir mão do sabor.", price: "R$ 18,00", priceValue: 18, fit: true },
-      { slug: "cappuccino-italiano", name: "Cappuccino Italiano", description: "240ml — Café, leite semi desnatado, calda de chocolate, crema e canela.", price: "R$ 16,00", priceValue: 16 },
+      { slug: "cappuccino-italiano", name: "Cappuccino Italiano", description: "240ml — Café, leite semi desnatado, calda de chocolate, crema e canela.", price: "R$ 16,00", priceValue: 16, image: cappuccinoItalianoAsset.url },
       { slug: "maltine", name: "Maltine Quentinho", description: "240ml — Caneca com leite quentinho, ovomaltine crocante e nuvem de leite vaporizado.", price: "R$ 16,00", priceValue: 16 },
       { slug: "chocolate-quente", name: "Chocolate Quente", description: "240ml — cremoso e aconchegante.", price: "R$ 20,00", priceValue: 20 },
       {
