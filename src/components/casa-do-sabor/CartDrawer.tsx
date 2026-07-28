@@ -180,7 +180,7 @@ export function CartDrawer() {
         </div>
 
         {lines.length > 0 && (
-          <div className="border-t border-blush-deep/40 bg-white px-5 py-4">
+          <div className="border-t border-blush-deep/40 bg-white px-5 pt-4 pb-8 sm:pb-5">
             <div className="space-y-4 mb-4">
               <h4 className="font-display font-semibold text-ink flex items-center gap-2 border-b border-blush-deep/20 pb-2">
                 <User className="h-4 w-4 text-terracotta" />
@@ -270,13 +270,21 @@ export function CartDrawer() {
               </div>
             </div>
 
-            <button
-              onClick={handleCheckout}
-              className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3.5 font-display font-semibold text-white shadow-lg shadow-[#25D366]/25 transition-all hover:brightness-105 active:scale-[0.98]"
-            >
-              <MessageCircle className="h-5 w-5" />
-              Enviar pedido pelo WhatsApp
-            </button>
+            <div className="flex gap-2 mt-4">
+              <button
+                onClick={closeCart}
+                className="flex-[0.8] flex items-center justify-center rounded-full border border-terracotta bg-white px-3 py-3.5 font-display text-[11px] font-semibold text-terracotta transition-all hover:bg-blush/20 active:scale-[0.98]"
+              >
+                Continuar
+              </button>
+              <button
+                onClick={handleCheckout}
+                className="flex-[1.5] flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 py-3.5 font-display text-[11px] font-semibold text-white shadow-lg shadow-[#25D366]/25 transition-all hover:brightness-105 active:scale-[0.98]"
+              >
+                <MessageCircle className="h-4 w-4" />
+                <span className="whitespace-nowrap">Enviar WhatsApp</span>
+              </button>
+            </div>
             <button
               onClick={clear}
               className="mt-2 w-full text-xs text-ink/40 hover:text-terracotta"
