@@ -32,8 +32,9 @@ export function ProductCard({ item, index }: { item: MenuItem; index: number }) 
       onClick={() => openProduct(item)}
       style={{ transitionDelay: `${(index % 6) * 60}ms` }}
       className={cn(
-        "group relative flex w-full items-start gap-4 rounded-2xl bg-white p-4 text-left shadow-[0_8px_24px_-16px_rgba(201,123,132,0.35)] ring-1 ring-blush-deep/50 transition-all duration-500 ease-out",
-        "hover:-translate-y-0.5 hover:shadow-[0_16px_32px_-18px_rgba(201,123,132,0.5)] hover:scale-[1.01] active:scale-[0.99]",
+        "group relative flex w-full items-start gap-4 p-4 text-left transition-all duration-500 ease-out border-b border-blush/30",
+        item.image && "rounded-2xl bg-white shadow-[0_8px_24px_-16px_rgba(201,123,132,0.35)] ring-1 ring-blush-deep/50 border-none my-2 hover:-translate-y-0.5 hover:shadow-[0_16px_32px_-18px_rgba(201,123,132,0.5)] hover:scale-[1.01]",
+        !item.image && "hover:bg-blush/10 active:bg-blush/20",
         visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0",
       )}
     >
