@@ -9,7 +9,7 @@ const ADDON_PRICES: Record<string, number> = {
 };
 
 export function ProductModal() {
-  const { activeItem, closeProduct, addLine, openCart } = useCart();
+  const { activeItem, closeProduct, addLine, openCart, setIsOpen } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [selections, setSelections] = useState<Record<string, string[]>>({});
   const [note, setNote] = useState("");
@@ -193,12 +193,25 @@ export function ProductModal() {
             </button>
           </div>
           <button
-            onClick={handleAdd}
+            onClick={() => {
+              handleAdd();
+              closeProduct();
+            }}
+            className="flex h-12 items-center justify-center rounded-full border border-terracotta bg-white px-4 font-display text-sm font-semibold text-terracotta transition-all hover:bg-blush/20 active:scale-[0.98]"
+          >
+            Continuar pedindo
+          </button>
+          <button
+            onClick={() => {
+              handleAdd();
+              closeProduct();
+              openCart();
+            }}
             className="flex flex-1 items-center justify-between gap-2 rounded-full bg-terracotta px-5 py-3 font-display text-sm font-semibold text-white shadow-lg shadow-terracotta/30 transition-all hover:bg-terracotta-dark active:scale-[0.98]"
           >
             <span className="flex items-center gap-2">
               <ShoppingBag className="h-4 w-4" />
-              Adicionar
+              Finalizar
             </span>
             <span>{formatBRL(lineTotal)}</span>
           </button>

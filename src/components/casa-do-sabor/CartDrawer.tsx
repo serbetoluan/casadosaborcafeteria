@@ -1,6 +1,8 @@
 import { useEffect } from "react";
-import { X, Minus, Plus, Trash2, ShoppingBag, MessageCircle } from "lucide-react";
+import { useState } from "react";
+import { X, Minus, Plus, Trash2, ShoppingBag, MessageCircle, MapPin, User, CreditCard, Home } from "lucide-react";
 import { useCart, formatBRL } from "./CartContext";
+import { cn } from "@/lib/utils";
 import { WHATSAPP_NUMBER } from "./menuData";
 import { CupIcon } from "./CupIcon";
 
@@ -8,6 +10,11 @@ const DELIVERY_FEE = 12;
 
 export function CartDrawer() {
   const { isOpen, closeCart, lines, updateQty, removeLine, total, clear } = useCart();
+  const [customerName, setCustomerName] = useState("");
+  const [orderType, setOrderType] = useState<"delivery" | "local">("local");
+  const [address, setAddress] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("");
+  const [errors, setErrors] = useState<string[]>([]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -42,15 +49,29 @@ export function CartDrawer() {
       "",
       `Subtotal: ${formatBRL(total)}`,
       `Entrega: ${formatBRL(DELIVERY_FEE)} (opcional)`,
-      `*Total com entrega: ${formatBRL(total + DELIVERY_FEE)}*`,
+      `*Total com entrega: ${formatBRL(total + (orderType === "delivery" ? DELIVERY_FEE : 0))}*`,
+      "",
+      "👤 *Dados do Cliente:*",
+      `Nome: ${customerName}`,
+      `Tipo: ${orderType === "delivery" ? "🚀 Entrega" : "🏠 Consumo no Local"}`,
+      orderType === "delivery" ? `Endereço: ${address}` : "",
+      `Forma de Pagamento: ${paymentMethod}`,
       "",
       "Combinamos os detalhes por aqui? 💕",
-    ].join("\n");
+    ].filter(Boolean).join("\n");
     return encodeURIComponent(msg);
   };
 
   const handleCheckout = () => {
-    if (!lines.length) return;
+    const newErrors = [];
+    if (!customerName.trim()) newErrors.push("nome");
+    if (orderType === "delivery" && !address.trim()) newErrors.push("endereco");
+    if (!paymentMethod) newErrors.push("pagamento");
+
+    if (newErrors.length > 0) {
+      setErrors(newErrors);
+      return;
+    }
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${buildMessage()}`, "_blank");
   };
 
@@ -160,7 +181,81 @@ export function CartDrawer() {
         </div>
 
         {lines.length > 0 && (
-          <div className="border-t border-blush-deep/40 bg-white px-5 py-4">
+          <div className="border-t border-blush-deep/40 bg-white px-5 py-4 overflow-y-auto max-h-[60vh]">
+            <div className="space-y-4 mb-6">
+              <h4 className="font-display font-semibold text-ink flex items-center gap-2">
+                <User className="h-4 w-4 text-terracotta" />
+                Seus Dados
+              </h4>
+              <div className="space-y-3">
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Seu nome"
+                    value={customerName}
+                    onChange={(e) => setCustomerName(e.target.value)}
+                    className={cn(
+                      "w-full rounded-xl border px-4 py-2.5 text-sm outline-none transition-all",
+                      errors.includes("nome") ? "border-terracotta bg-terracotta/5" : "border-blush-deep/60 focus:border-terracotta"
+                    )}
+                  />
+                </div>
+
+                <div className="flex gap-2 p-1 bg-blush/30 rounded-xl">
+                  <button
+                    onClick={() => setOrderType("local")}
+                    className={cn(
+                      "flex-1 flex items-center justify-center gap-2 py-2 text-xs font-semibold rounded-lg transition-all",
+                      orderType === "local" ? "bg-white text-terracotta shadow-sm" : "text-ink/60"
+                    )}
+                  >
+                    <Home className="h-3.5 w-3.5" />
+                    No Local
+                  </button>
+                  <button
+                    onClick={() => setOrderType("delivery")}
+                    className={cn(
+                      "flex-1 flex items-center justify-center gap-2 py-2 text-xs font-semibold rounded-lg transition-all",
+                      orderType === "delivery" ? "bg-white text-terracotta shadow-sm" : "text-ink/60"
+                    )}
+                  >
+                    <MapPin className="h-3.5 w-3.5" />
+                    Entrega
+                  </button>
+                </div>
+
+                {orderType === "delivery" && (
+                  <textarea
+                    placeholder="Endereço de entrega"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    rows={2}
+                    className={cn(
+                      "w-full rounded-xl border px-4 py-2.5 text-sm outline-none transition-all resize-none",
+                      errors.includes("endereco") ? "border-terracotta bg-terracotta/5" : "border-blush-deep/60 focus:border-terracotta"
+                    )}
+                  />
+                )}
+
+                <div>
+                  <select
+                    value={paymentMethod}
+                    onChange={(e) => setPaymentMethod(e.target.value)}
+                    className={cn(
+                      "w-full rounded-xl border px-4 py-2.5 text-sm outline-none transition-all appearance-none bg-white",
+                      errors.includes("pagamento") ? "border-terracotta bg-terracotta/5" : "border-blush-deep/60 focus:border-terracotta"
+                    )}
+                  >
+                    <option value="">Forma de pagamento</option>
+                    <option value="Pix">Pix</option>
+                    <option value="Cartão de Crédito">Cartão de Crédito</option>
+                    <option value="Cartão de Débito">Cartão de Débito</option>
+                    <option value="Dinheiro">Dinheiro</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
             <div className="flex items-center justify-between text-sm text-ink/70">
               <span>Subtotal</span>
               <span className="font-medium text-ink">{formatBRL(total)}</span>
@@ -172,7 +267,7 @@ export function CartDrawer() {
             <div className="mt-2 flex items-center justify-between border-t border-dashed border-blush-deep/60 pt-2">
               <span className="font-display font-semibold text-ink">Total</span>
               <span className="font-display text-lg font-semibold text-terracotta-deep">
-                {formatBRL(total)}
+                {formatBRL(total + (orderType === "delivery" ? DELIVERY_FEE : 0))}
               </span>
             </div>
 

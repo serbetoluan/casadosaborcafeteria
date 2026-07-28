@@ -1,6 +1,7 @@
 import { CupIcon } from "./CupIcon";
 import logo from "@/assets/logo.png.asset.json";
 import banner from "@/assets/banner.png.asset.json";
+import bannerNew from "@/assets/banner_new.png.asset.json";
 
 export function Hero() {
   return (
@@ -10,11 +11,17 @@ export function Hero() {
 
       <div className="relative mx-auto flex max-w-3xl flex-col items-center animate-rise">
         {/* Banner as the base layer */}
-        <div className="relative w-full overflow-hidden rounded-3xl ring-1 ring-blush-deep/60 shadow-xl shadow-terracotta/10">
+        <div className="relative w-full overflow-hidden rounded-3xl ring-1 ring-blush-deep/60 shadow-xl shadow-terracotta/10 sm:aspect-[4/2]">
+          <img
+            src={bannerNew.url}
+            alt="Ambiente da Casa do Sabor dentro da Summer Fit"
+            className="block w-full object-cover object-center sm:hidden"
+            loading="eager"
+          />
           <img
             src={banner.url}
             alt="Ambiente da Casa do Sabor dentro da Summer Fit"
-            className="aspect-[4/2] w-full object-cover object-center"
+            className="hidden w-full object-cover object-center sm:block sm:aspect-[4/2]"
             loading="eager"
           />
         </div>
