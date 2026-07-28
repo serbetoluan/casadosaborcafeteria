@@ -59,7 +59,7 @@ export function ProductModal() {
     });
   };
 
-  const handleAdd = () => {
+  const handleAdd = (shouldOpenCart: boolean = false) => {
     const missing = (activeItem.options ?? [])
       .filter((g) => g.required && !(selections[g.label]?.length))
       .map((g) => g.label);
@@ -69,7 +69,9 @@ export function ProductModal() {
     }
     addLine({ item: activeItem, quantity, selections, note: note.trim() || undefined, unitPrice });
     closeProduct();
-    openCart();
+    if (shouldOpenCart) {
+      openCart();
+    }
   };
 
   return (
@@ -205,8 +207,7 @@ export function ProductModal() {
           <div className="flex items-center gap-2">
             <button
               onClick={() => {
-                handleAdd();
-                closeProduct();
+                handleAdd(false);
               }}
               className="flex-1 flex h-12 items-center justify-center rounded-full border border-terracotta bg-white px-4 font-display text-[11px] font-semibold text-terracotta transition-all hover:bg-blush/20 active:scale-[0.98] sm:flex-none sm:text-sm"
             >
@@ -214,9 +215,7 @@ export function ProductModal() {
             </button>
             <button
               onClick={() => {
-                handleAdd();
-                closeProduct();
-                openCart();
+                handleAdd(true);
               }}
               className="flex-[1.5] flex h-12 items-center justify-between gap-2 rounded-full bg-terracotta px-5 font-display text-[11px] font-semibold text-white shadow-lg shadow-terracotta/30 transition-all hover:bg-terracotta-dark active:scale-[0.98] sm:flex-none sm:text-sm"
             >
