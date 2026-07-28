@@ -1,14 +1,11 @@
 import { CupIcon } from "./CupIcon";
-import { FeaturedProductCard, CompactProductItem } from "./ProductCard";
+import { ProductCard } from "./ProductCard";
 import type { MenuCategory } from "./menuData";
 
 export function CategorySection({ category }: { category: MenuCategory }) {
-  const itemsWithImage = category.items.filter((item) => item.image);
-  const itemsWithoutImage = category.items.filter((item) => !item.image);
-
   return (
-    <section id={category.id} className="scroll-mt-32 px-5 py-12">
-      <div className="mb-10 flex flex-col items-center text-center">
+    <section id={category.id} className="scroll-mt-32 px-5 py-10">
+      <div className="mb-6 flex flex-col items-center text-center">
         <div className="flex items-center gap-3 text-terracotta/60">
           <span className="h-px w-10 bg-terracotta/40" />
           <CupIcon className="h-5 w-5" />
@@ -21,49 +18,11 @@ export function CategorySection({ category }: { category: MenuCategory }) {
           {category.title}
         </h2>
       </div>
-
-      {/* Featured Section (Items with image) */}
-      {itemsWithImage.length > 0 && (
-        <div className="mb-8">
-          {itemsWithImage.length >= 3 ? (
-            <div className="relative -mx-5 overflow-hidden">
-              <div 
-                className="flex gap-4 overflow-x-auto px-5 pb-6 scrollbar-hide snap-x snap-mandatory"
-                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-              >
-                {itemsWithImage.map((item, i) => (
-                  <div key={item.slug} className="snap-center">
-                    <FeaturedProductCard item={item} index={i} />
-                  </div>
-                ))}
-              </div>
-              {/* Sutil indicação de scroll */}
-              <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-background/40 to-transparent" />
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 gap-4 xs:grid-cols-2">
-              {itemsWithImage.map((item, i) => (
-                <FeaturedProductCard key={item.slug} item={item} index={i} />
-              ))}
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* Compact List Section (Items without image) */}
-      {itemsWithoutImage.length > 0 && (
-        <div className={itemsWithImage.length > 0 ? "mt-4" : ""}>
-          <div className="flex flex-col">
-            {itemsWithoutImage.map((item, i) => (
-              <CompactProductItem 
-                key={item.slug} 
-                item={item} 
-                index={i + (itemsWithImage.length)} 
-              />
-            ))}
-          </div>
-        </div>
-      )}
+      <div className="grid grid-cols-1 gap-1 md:grid-cols-2 md:gap-x-12">
+        {category.items.map((item, i) => (
+          <ProductCard key={item.slug} item={item} index={i} />
+        ))}
+      </div>
     </section>
   );
 }
