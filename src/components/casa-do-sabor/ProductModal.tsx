@@ -9,7 +9,7 @@ const ADDON_PRICES: Record<string, number> = {
 };
 
 export function ProductModal() {
-  const { activeItem, closeProduct, addLine, openCart } = useCart();
+  const { activeItem, closeProduct, addLine, openCart, closeCart } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [selections, setSelections] = useState<Record<string, string[]>>({});
   const [note, setNote] = useState("");
@@ -60,6 +60,19 @@ export function ProductModal() {
   };
 
   const handleAdd = () => {
+    const missing = (activeItem.options ?? [])
+      .filter((g) => g.required && !(selections[g.label]?.length))
+      .map((g) => g.label);
+    if (missing.length) {
+      setErrors(missing);
+      return;
+    }
+    addLine({ item: activeItem, quantity, selections, note: note.trim() || undefined, unitPrice });
+    closeProduct();
+    // Instead of automatically opening cart, we'll let the user choose
+  };
+
+  const handleAddAndGoToCart = () => {
     const missing = (activeItem.options ?? [])
       .filter((g) => g.required && !(selections[g.label]?.length))
       .map((g) => g.label);
@@ -192,16 +205,24 @@ export function ProductModal() {
               <Plus className="h-4 w-4" />
             </button>
           </div>
-          <button
-            onClick={handleAdd}
-            className="flex flex-1 items-center justify-between gap-2 rounded-full bg-terracotta px-5 py-3 font-display text-sm font-semibold text-white shadow-lg shadow-terracotta/30 transition-all hover:bg-terracotta-dark active:scale-[0.98]"
-          >
-            <span className="flex items-center gap-2">
-              <ShoppingBag className="h-4 w-4" />
-              Adicionar
-            </span>
-            <span>{formatBRL(lineTotal)}</span>
-          </button>
+          <div className="flex flex-1 flex-col gap-2">
+            <button
+              onClick={handleAddAndGoToCart}
+              className="flex w-full items-center justify-between gap-2 rounded-full bg-terracotta px-5 py-3 font-display text-sm font-semibold text-white shadow-lg shadow-terracotta/30 transition-all hover:bg-terracotta-dark active:scale-[0.98]"
+            >
+              <span className="flex items-center gap-2">
+                <ShoppingBag className="h-4 w-4" />
+                Finalizar pedido
+              </span>
+              <span>{formatBRL(lineTotal)}</span>
+            </button>
+            <button
+              onClick={handleAdd}
+              className="flex w-full items-center justify-center gap-2 rounded-full border-2 border-terracotta/20 bg-white px-5 py-2 font-display text-[13px] font-semibold text-terracotta transition-all hover:bg-terracotta/5 active:scale-[0.98]"
+            >
+              Continuar pedindo
+            </button>
+          </div>
         </div>
       </div>
     </div>

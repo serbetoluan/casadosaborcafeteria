@@ -1,6 +1,13 @@
 import { createContext, useContext, useMemo, useState, type ReactNode } from "react";
 import type { MenuItem } from "./menuData";
 
+export type OrderDetails = {
+  name: string;
+  type: "local" | "delivery";
+  address?: string;
+  paymentMethod: string;
+};
+
 export type CartLine = {
   id: string;
   item: MenuItem;
@@ -24,6 +31,8 @@ type CartCtx = {
   openProduct: (item: MenuItem) => void;
   closeProduct: () => void;
   activeItem: MenuItem | null;
+  orderDetails: OrderDetails;
+  updateOrderDetails: (details: Partial<OrderDetails>) => void;
 };
 
 const Ctx = createContext<CartCtx | null>(null);
@@ -32,6 +41,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [lines, setLines] = useState<CartLine[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [activeItem, setActiveItem] = useState<MenuItem | null>(null);
+  const [orderDetails, setOrderDetails] = useState<OrderDetails>({
+    name: "",
+    type: "local",
+    paymentMethod: "Pix",
+  });
 
   const value = useMemo<CartCtx>(() => {
     const total = lines.reduce((acc, l) => acc + l.unitPrice * l.quantity, 0);
@@ -42,6 +56,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
       count,
       isOpen,
       activeItem,
+      orderDetails,
+      updateOrderDetails: (details) => setOrderDetails((prev) => ({ ...prev, ...details })),
       addLine: (line) => {
         setLines((prev) => [
           ...prev,
@@ -61,7 +77,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       openProduct: (item) => setActiveItem(item),
       closeProduct: () => setActiveItem(null),
     };
-  }, [lines, isOpen, activeItem]);
+  }, [lines, isOpen, activeItem, orderDetails]);
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }
