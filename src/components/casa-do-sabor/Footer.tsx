@@ -10,35 +10,17 @@ export function Footer() {
         <img
           src={logo.url}
           alt="Casa do Sabor"
-          className="h-20 w-20 rounded-full bg-blush object-contain p-1.5 ring-2 ring-blush/20"
+          className="h-24 w-24 rounded-full bg-blush object-contain p-2 shadow-lg ring-4 ring-blush/10"
         />
-
-        <p className="mt-4 font-script text-2xl text-blush">Casa do Sabor</p>
-        <p className="text-xs uppercase tracking-[0.2em] text-blush/60">
-          unidade Summer Fit
-        </p>
-
-        <p className="mt-4 max-w-xs font-script text-lg text-blush/80">
-          Energia · Foco · Sabor — do café da manhã ao happy hour
-        </p>
-
-        <a
-          href="https://instagram.com/casadosabor"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-6 flex items-center gap-2 text-blush hover:text-white"
-        >
-          <Instagram className="h-4 w-4" /> @casadosabor
-        </a>
 
         <div className="mt-8 flex items-center gap-3 text-blush/40">
           <span className="h-px w-10 bg-blush/20" />
-          <CupIcon className="h-5 w-5" />
+          <CupIcon className="h-6 w-6" />
           <span className="h-px w-10 bg-blush/20" />
         </div>
 
-        <p className="mt-4 text-[11px] text-blush/40">
-          © {new Date().getFullYear()} Casa do Sabor · Feito com carinho
+        <p className="mt-6 text-[11px] font-medium uppercase tracking-[0.2em] text-blush/40">
+          Casa do Sabor © 2026
         </p>
       </div>
     </footer>
