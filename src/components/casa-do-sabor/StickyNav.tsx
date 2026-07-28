@@ -42,44 +42,66 @@ export function StickyNav({ items }: { items: NavItem[] }) {
   };
 
   return (
-    <header className="sticky top-0 z-40 border-b border-blush-deep/60 bg-cream/90 backdrop-blur-md">
-      <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
-        <img
-          src={logo.url}
-          alt="Casa do Sabor"
-          className="h-11 w-11 shrink-0 rounded-full bg-blush object-contain p-0.5 ring-1 ring-blush-deep/70"
-        />
-        <div className="min-w-0 leading-tight">
-          <p className="truncate font-display text-base font-semibold text-ink">
-            Casa do Sabor
-          </p>
-          <p className="truncate font-script text-xs text-terracotta">
-            unidade Summer Fit
-          </p>
+    <>
+      {/* Desktop Navigation */}
+      <header className="sticky top-0 z-40 hidden border-b border-blush-deep/60 bg-cream/90 backdrop-blur-md md:block">
+        <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
+          <img
+            src={logo.url}
+            alt="Casa do Sabor"
+            className="h-11 w-11 shrink-0 rounded-full bg-blush object-contain p-0.5 ring-1 ring-blush-deep/70"
+          />
+          <div className="min-w-0 leading-tight">
+            <p className="truncate font-display text-base font-semibold text-ink">
+              Casa do Sabor
+            </p>
+            <p className="truncate font-script text-xs text-terracotta">
+              unidade Summer Fit
+            </p>
+          </div>
+          <CupIcon className="ml-auto h-6 w-6 text-terracotta" />
         </div>
-        <CupIcon className="ml-auto hidden h-6 w-6 text-terracotta sm:block" />
-      </div>
-      <nav
-        ref={scrollerRef}
-        className="scrollbar-none mx-auto flex max-w-6xl gap-2 overflow-x-auto px-4 pb-3"
-      >
-        {items.map((c) => (
-          <a
-            key={c.id}
-            href={`#${c.id}`}
-            data-chip={c.id}
-            onClick={(e) => handleClick(e, c.id)}
-            className={cn(
-              "whitespace-nowrap rounded-full border px-4 py-1.5 text-sm font-medium transition-all duration-300",
-              active === c.id
-                ? "border-terracotta bg-terracotta text-white shadow-sm"
-                : "border-blush-deep/70 bg-white/70 text-ink/70 hover:text-ink",
-            )}
-          >
-            {c.title}
-          </a>
-        ))}
-      </nav>
-    </header>
+        <nav
+          ref={scrollerRef}
+          className="scrollbar-none mx-auto flex max-w-6xl gap-2 overflow-x-auto px-4 pb-3"
+        >
+          {items.map((c) => (
+            <a
+              key={c.id}
+              href={`#${c.id}`}
+              data-chip={c.id}
+              onClick={(e) => handleClick(e, c.id)}
+              className={cn(
+                "whitespace-nowrap rounded-full border px-4 py-1.5 text-sm font-medium transition-all duration-300",
+                active === c.id
+                  ? "border-terracotta bg-terracotta text-white shadow-sm"
+                  : "border-blush-deep/70 bg-white/70 text-ink/70 hover:text-ink",
+              )}
+            >
+              {c.title}
+            </a>
+          ))}
+        </nav>
+      </header>
+
+      {/* Mobile-only Menu Header (without navigation bar) */}
+      <header className="sticky top-0 z-40 border-b border-blush-deep/60 bg-cream/90 backdrop-blur-md md:hidden">
+        <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
+          <img
+            src={logo.url}
+            alt="Casa do Sabor"
+            className="h-10 w-10 shrink-0 rounded-full bg-blush object-contain p-0.5 ring-1 ring-blush-deep/70"
+          />
+          <div className="min-w-0 leading-tight">
+            <p className="truncate font-display text-base font-semibold text-ink">
+              Casa do Sabor
+            </p>
+            <p className="truncate font-script text-xs text-terracotta">
+              unidade Summer Fit
+            </p>
+          </div>
+        </div>
+      </header>
+    </>
   );
 }
