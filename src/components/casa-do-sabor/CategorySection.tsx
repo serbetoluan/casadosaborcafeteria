@@ -37,14 +37,13 @@ export function CategorySection({ category }: { category: MenuCategory }) {
                   </div>
                 ))}
               </div>
+              {/* Sutil indicação de scroll */}
               <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-background/40 to-transparent" />
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 xs:grid-cols-2">
               {itemsWithImage.map((item, i) => (
-                <div key={item.slug} className="w-full">
-                  <FeaturedProductCard item={item} index={i} />
-                </div>
+                <FeaturedProductCard key={item.slug} item={item} index={i} />
               ))}
             </div>
           )}
