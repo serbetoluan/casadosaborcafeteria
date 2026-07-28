@@ -104,81 +104,81 @@ export function CartDrawer() {
         </header>
 
         <div className="flex-1 overflow-y-auto px-5 py-4">
-          {lines.length > 0 && (
-            <div className="space-y-4 mb-6 pb-6 border-b border-blush-deep/20">
-              <h4 className="font-display font-semibold text-ink flex items-center gap-2">
-                <User className="h-4 w-4 text-terracotta" />
-                Seus Dados
-              </h4>
-              <div className="space-y-3">
-                <div>
-                  <input
-                    type="text"
-                    placeholder="Seu nome"
-                    value={customerName}
-                    onChange={(e) => setCustomerName(e.target.value)}
-                    className={cn(
-                      "w-full rounded-xl border px-4 py-2.5 text-sm outline-none transition-all",
-                      errors.includes("nome") ? "border-terracotta bg-terracotta/5" : "border-blush-deep/60 focus:border-terracotta"
-                    )}
-                  />
-                </div>
+          {lines.length > 0 ? (
+            <ul className="flex flex-col gap-3">
+              {lines.map((line) => (
+                <li
+                  key={line.id}
+                  className="rounded-2xl bg-white p-4 ring-1 ring-blush-deep/40 shadow-sm"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0 flex-1">
+                      <p className="font-display text-sm font-semibold leading-snug text-ink">
+                        {line.item.name}
+                      </p>
+                      {Object.entries(line.selections).map(([label, values]) =>
+                        values.length ? (
+                          <p key={label} className="mt-1 text-[11px] text-ink/60">
+                            <span className="text-ink/40">{label}:</span> {values.join(", ")}
+                          </p>
+                        ) : null,
+                      )}
+                      {line.note && (
+                        <p className="mt-1 text-[11px] italic text-ink/50">✎ {line.note}</p>
+                      )}
+                    </div>
+                    <button
+                      onClick={() => removeLine(line.id)}
+                      aria-label="Remover item"
+                      className="text-ink/30 hover:text-terracotta"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </button>
+                  </div>
 
-                <div className="flex gap-2 p-1 bg-blush/30 rounded-xl">
-                  <button
-                    onClick={() => setOrderType("local")}
-                    className={cn(
-                      "flex-1 flex items-center justify-center gap-2 py-2 text-xs font-semibold rounded-lg transition-all",
-                      orderType === "local" ? "bg-white text-terracotta shadow-sm" : "text-ink/60"
-                    )}
-                  >
-                    <Home className="h-3.5 w-3.5" />
-                    No Local
-                  </button>
-                  <button
-                    onClick={() => setOrderType("delivery")}
-                    className={cn(
-                      "flex-1 flex items-center justify-center gap-2 py-2 text-xs font-semibold rounded-lg transition-all",
-                      orderType === "delivery" ? "bg-white text-terracotta shadow-sm" : "text-ink/60"
-                    )}
-                  >
-                    <MapPin className="h-3.5 w-3.5" />
-                    Entrega
-                  </button>
-                </div>
-
-                {orderType === "delivery" && (
-                  <textarea
-                    placeholder="Endereço de entrega"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    rows={2}
-                    className={cn(
-                      "w-full rounded-xl border px-4 py-2.5 text-sm outline-none transition-all resize-none",
-                      errors.includes("endereco") ? "border-terracotta bg-terracotta/5" : "border-blush-deep/60 focus:border-terracotta"
-                    )}
-                  />
-                )}
-
-                <div>
-                  <select
-                    value={paymentMethod}
-                    onChange={(e) => setPaymentMethod(e.target.value)}
-                    className={cn(
-                      "w-full rounded-xl border px-4 py-2.5 text-sm outline-none transition-all appearance-none bg-white",
-                      errors.includes("pagamento") ? "border-terracotta bg-terracotta/5" : "border-blush-deep/60 focus:border-terracotta"
-                    )}
-                  >
-                    <option value="">Forma de pagamento</option>
-                    <option value="Pix">Pix</option>
-                    <option value="Cartão de Crédito">Cartão de Crédito</option>
-                    <option value="Cartão de Débito">Cartão de Débito</option>
-                    <option value="Dinheiro">Dinheiro</option>
-                  </select>
-                </div>
-              </div>
+                  <div className="mt-3 flex items-center justify-between">
+                    <div className="flex items-center gap-1 rounded-full bg-blush/60 p-0.5">
+                      <button
+                        onClick={() => updateQty(line.id, -1)}
+                        className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-ink shadow-sm hover:bg-cream"
+                        aria-label="Diminuir"
+                      >
+                        <Minus className="h-3.5 w-3.5" />
+                      </button>
+                      <span className="w-6 text-center text-sm font-semibold text-ink">
+                        {line.quantity}
+                      </span>
+                      <button
+                        onClick={() => updateQty(line.id, 1)}
+                        className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-ink shadow-sm hover:bg-cream"
+                        aria-label="Aumentar"
+                      >
+                        <Plus className="h-3.5 w-3.5" />
+                      </button>
+                    </div>
+                    <span className="font-sans text-sm font-semibold text-terracotta-deep">
+                      {formatBRL(line.unitPrice * line.quantity)}
+                    </span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div className="flex h-full flex-col items-center justify-center text-center">
+              <CupIcon className="h-20 w-20 text-terracotta/30" />
+              <p className="mt-4 font-script text-xl text-terracotta">Seu cestinho está vazio</p>
+              <p className="mt-2 max-w-xs text-sm text-ink/60">
+                Escolha seus quitutes favoritos e prepare um cafezinho pra acompanhar ☕
+              </p>
+              <button
+                onClick={closeCart}
+                className="mt-6 rounded-full bg-terracotta px-6 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-terracotta-dark"
+              >
+                Ver cardápio
+              </button>
             </div>
           )}
+        </div>
 
           {lines.length === 0 ? (
             <div className="flex h-full flex-col items-center justify-center text-center">
