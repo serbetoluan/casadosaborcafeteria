@@ -24,49 +24,51 @@ export function ProductCard({ item, index }: { item: MenuItem; index: number }) 
   }, []);
 
   return (
-    <div
+    <article
       ref={ref}
-      style={{ transitionDelay: `${(index % 6) * 50}ms` }}
+      style={{ transitionDelay: `${(index % 6) * 60}ms` }}
       className={cn(
-        "group relative flex items-center gap-4 py-4 border-b border-blush/30 last:border-0 transition-all duration-500 ease-out",
+        "group flex items-start gap-4 rounded-2xl bg-white p-4 shadow-[0_8px_24px_-16px_rgba(201,123,132,0.35)] ring-1 ring-blush-deep/50 transition-all duration-500 ease-out",
+        "hover:-translate-y-0.5 hover:shadow-[0_16px_32px_-18px_rgba(201,123,132,0.5)] hover:scale-[1.01] active:scale-[0.99]",
         visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0",
       )}
     >
       <div
         data-image-slot={item.slug}
-        className="relative flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-blush to-blush-deep text-terracotta/70"
+        className="relative flex h-24 w-24 shrink-0 flex-col items-center justify-center gap-1 overflow-hidden rounded-xl bg-gradient-to-br from-blush to-blush-deep text-terracotta/70"
       >
         <div className="absolute inset-0 animate-pulse bg-blush/40" aria-hidden />
         <ImageIcon className="relative h-5 w-5" strokeWidth={1.4} />
-        <span className="absolute bottom-1 px-1 text-center text-[8px] leading-tight text-ink/40">
-          em breve
+        <span className="relative px-1 text-center text-[9px] leading-tight text-ink/50">
+          imagem em breve
         </span>
       </div>
 
       <div className="flex min-w-0 flex-1 flex-col">
         <div className="flex items-start justify-between gap-2">
-          <div className="flex flex-col gap-0.5">
-            <h3 className="font-display text-[15px] font-semibold leading-tight text-ink">
-              {item.name}
-            </h3>
-            {item.fit && (
-              <span className="inline-flex w-fit items-center gap-1 rounded-full bg-blush/80 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-terracotta ring-1 ring-terracotta/20">
-                <Leaf className="h-2.5 w-2.5" strokeWidth={2.5} />
-                Fit 🌿
-              </span>
-            )}
-          </div>
-          <span className="font-sans text-sm font-bold text-terracotta-deep whitespace-nowrap">
-            {item.price}
-          </span>
+          <h3 className="font-display text-[15px] font-semibold leading-snug text-ink">
+            {item.name}
+          </h3>
+          {item.fit && (
+            <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-blush px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-terracotta ring-1 ring-terracotta/40">
+              <Leaf className="h-3 w-3" strokeWidth={2} />
+              Fit
+            </span>
+          )}
         </div>
 
         {item.description && (
-          <p className="mt-1 text-xs leading-relaxed text-ink/60 line-clamp-2">
+          <p className="mt-1.5 text-xs leading-relaxed text-ink/60">
             {item.description}
           </p>
         )}
+
+        <div className="mt-2">
+          <span className="font-sans text-sm font-semibold text-terracotta-deep">
+            {item.price}
+          </span>
+        </div>
       </div>
-    </div>
+    </article>
   );
 }
