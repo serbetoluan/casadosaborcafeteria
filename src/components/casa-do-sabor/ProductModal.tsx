@@ -219,7 +219,7 @@ export function ProductModal() {
           </div>
         </div>
 
-        <div className="flex shrink-0 flex-row items-center gap-2 border-t border-blush-deep/40 bg-white px-3 py-3 sm:gap-3 sm:px-4">
+        <div className="flex shrink-0 flex-row items-center gap-2 border-t border-blush-deep/40 bg-white px-3 pb-8 pt-3 sm:gap-3 sm:px-4 sm:pb-4">
           <button
             onClick={handleAddAndGoToCart}
             className="flex min-w-0 flex-1 items-center justify-center gap-1.5 rounded-full bg-terracotta px-3 py-2.5 font-display text-[13px] font-semibold text-white shadow-lg shadow-terracotta/30 transition-all hover:bg-terracotta-dark active:scale-[0.98] sm:gap-2 sm:px-4 sm:py-3 sm:text-sm"
