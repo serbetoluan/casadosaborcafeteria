@@ -174,7 +174,7 @@ export function ProductModal() {
           </div>
         </div>
 
-        <div className="flex shrink-0 flex-col gap-4 border-t border-blush-deep/40 bg-white px-5 py-5 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex shrink-0 flex-col gap-4 border-t border-blush-deep/40 bg-white px-5 pt-5 pb-8 sm:pb-5 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center justify-between sm:gap-4">
             <div className="flex items-center gap-1 rounded-full bg-blush/60 p-1">
               <button
