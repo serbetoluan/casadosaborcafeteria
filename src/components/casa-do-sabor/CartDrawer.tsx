@@ -1,13 +1,14 @@
 import { useEffect } from "react";
-import { X, Minus, Plus, Trash2, ShoppingBag, MessageCircle } from "lucide-react";
+import { X, Minus, Plus, Trash2, ShoppingBag, MessageCircle, MapPin, CreditCard, User } from "lucide-react";
 import { useCart, formatBRL } from "./CartContext";
 import { WHATSAPP_NUMBER } from "./menuData";
 import { CupIcon } from "./CupIcon";
+import { cn } from "@/lib/utils";
 
 const DELIVERY_FEE = 12;
 
 export function CartDrawer() {
-  const { isOpen, closeCart, lines, updateQty, removeLine, total, clear } = useCart();
+  const { isOpen, closeCart, lines, updateQty, removeLine, total, clear, orderDetails, updateOrderDetails } = useCart();
 
   useEffect(() => {
     if (!isOpen) return;
@@ -33,24 +34,40 @@ export function CartDrawer() {
       })
       .join("\n\n");
 
+    const deliveryTxt = orderDetails.type === "delivery" 
+      ? `🛵 *Entrega:*\n   Endereço: ${orderDetails.address || "Não informado"}\n   Taxa: ${formatBRL(DELIVERY_FEE)}` 
+      : "🏢 *Retirada no local*";
+
     const msg = [
       "☕ *Casa do Sabor · Unidade Summer Fit*",
       "Olá! Vim pelo cardápio digital e gostaria de fazer o seguinte pedido:",
+      "",
+      `👤 *Cliente:* ${orderDetails.name || "Não informado"}`,
+      deliveryTxt,
+      `💳 *Forma de Pagamento:* ${orderDetails.paymentMethod}`,
       "",
       "🧺 *Meu pedido:*",
       lineTxt,
       "",
       `Subtotal: ${formatBRL(total)}`,
-      `Entrega: ${formatBRL(DELIVERY_FEE)} (opcional)`,
-      `*Total com entrega: ${formatBRL(total + DELIVERY_FEE)}*`,
+      orderDetails.type === "delivery" ? `Entrega: ${formatBRL(DELIVERY_FEE)}` : "",
+      `*Total: ${formatBRL(orderDetails.type === "delivery" ? total + DELIVERY_FEE : total)}*`,
       "",
       "Combinamos os detalhes por aqui? 💕",
-    ].join("\n");
+    ].filter(Boolean).join("\n");
     return encodeURIComponent(msg);
   };
 
   const handleCheckout = () => {
     if (!lines.length) return;
+    if (!orderDetails.name.trim()) {
+      alert("Por favor, preencha seu nome para continuar.");
+      return;
+    }
+    if (orderDetails.type === "delivery" && !orderDetails.address?.trim()) {
+      alert("Por favor, preencha o endereço de entrega.");
+      return;
+    }
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${buildMessage()}`, "_blank");
   };
 
@@ -156,6 +173,85 @@ export function CartDrawer() {
                 </li>
               ))}
             </ul>
+
+            <div className="mt-8 space-y-6">
+              <div className="space-y-3">
+                <h4 className="flex items-center gap-2 font-display text-sm font-semibold text-ink">
+                  <User className="h-4 w-4 text-terracotta" />
+                  Seus dados
+                </h4>
+                <input
+                  type="text"
+                  placeholder="Seu nome"
+                  value={orderDetails.name}
+                  onChange={(e) => updateOrderDetails({ name: e.target.value })}
+                  className="w-full rounded-xl border border-blush-deep/60 bg-white px-4 py-2.5 text-sm text-ink placeholder:text-ink/30 focus:border-terracotta focus:outline-none focus:ring-2 focus:ring-terracotta/20"
+                />
+              </div>
+
+              <div className="space-y-3">
+                <h4 className="flex items-center gap-2 font-display text-sm font-semibold text-ink">
+                  <MapPin className="h-4 w-4 text-terracotta" />
+                  Como deseja receber?
+                </h4>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => updateOrderDetails({ type: "local" })}
+                    className={cn(
+                      "flex-1 rounded-xl border py-2.5 text-xs font-medium transition-all",
+                      orderDetails.type === "local"
+                        ? "border-terracotta bg-terracotta/5 text-terracotta shadow-sm"
+                        : "border-blush-deep/60 bg-white text-ink/60",
+                    )}
+                  >
+                    Retirada no local
+                  </button>
+                  <button
+                    onClick={() => updateOrderDetails({ type: "delivery" })}
+                    className={cn(
+                      "flex-1 rounded-xl border py-2.5 text-xs font-medium transition-all",
+                      orderDetails.type === "delivery"
+                        ? "border-terracotta bg-terracotta/5 text-terracotta shadow-sm"
+                        : "border-blush-deep/60 bg-white text-ink/60",
+                    )}
+                  >
+                    Entrega (Delivery)
+                  </button>
+                </div>
+                {orderDetails.type === "delivery" && (
+                  <textarea
+                    placeholder="Endereço completo (Rua, número, bairro, apto...)"
+                    value={orderDetails.address}
+                    onChange={(e) => updateOrderDetails({ address: e.target.value })}
+                    rows={2}
+                    className="w-full resize-none rounded-xl border border-blush-deep/60 bg-white px-4 py-2.5 text-sm text-ink placeholder:text-ink/30 focus:border-terracotta focus:outline-none focus:ring-2 focus:ring-terracotta/20 animate-in slide-in-from-top-2 duration-200"
+                  />
+                )}
+              </div>
+
+              <div className="space-y-3 pb-4">
+                <h4 className="flex items-center gap-2 font-display text-sm font-semibold text-ink">
+                  <CreditCard className="h-4 w-4 text-terracotta" />
+                  Forma de pagamento
+                </h4>
+                <div className="grid grid-cols-2 gap-2">
+                  {["Pix", "Cartão", "Dinheiro"].map((method) => (
+                    <button
+                      key={method}
+                      onClick={() => updateOrderDetails({ paymentMethod: method })}
+                      className={cn(
+                        "rounded-xl border py-2.5 text-xs font-medium transition-all",
+                        orderDetails.paymentMethod === method
+                          ? "border-terracotta bg-terracotta/5 text-terracotta shadow-sm"
+                          : "border-blush-deep/60 bg-white text-ink/60",
+                      )}
+                    >
+                      {method}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
           )}
         </div>
 
@@ -165,14 +261,16 @@ export function CartDrawer() {
               <span>Subtotal</span>
               <span className="font-medium text-ink">{formatBRL(total)}</span>
             </div>
-            <div className="flex items-center justify-between text-xs text-ink/50">
-              <span>Entrega (opcional)</span>
-              <span>{formatBRL(DELIVERY_FEE)}</span>
-            </div>
+            {orderDetails.type === "delivery" && (
+              <div className="flex items-center justify-between text-xs text-ink/50">
+                <span>Taxa de entrega</span>
+                <span>{formatBRL(DELIVERY_FEE)}</span>
+              </div>
+            )}
             <div className="mt-2 flex items-center justify-between border-t border-dashed border-blush-deep/60 pt-2">
               <span className="font-display font-semibold text-ink">Total</span>
               <span className="font-display text-lg font-semibold text-terracotta-deep">
-                {formatBRL(total)}
+                {formatBRL(orderDetails.type === "delivery" ? total + DELIVERY_FEE : total)}
               </span>
             </div>
 
