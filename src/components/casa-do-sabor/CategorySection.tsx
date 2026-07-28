@@ -18,7 +18,7 @@ export function CategorySection({ category }: { category: MenuCategory }) {
           {category.title}
         </h2>
       </div>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-1 md:grid-cols-2 md:gap-x-12">
         {category.items.map((item, i) => (
           <ProductCard key={item.slug} item={item} index={i} />
         ))}

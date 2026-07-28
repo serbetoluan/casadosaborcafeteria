@@ -4,7 +4,7 @@ import type { MenuItem } from "./menuData";
 import { cn } from "@/lib/utils";
 
 export function ProductCard({ item, index }: { item: MenuItem; index: number }) {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
