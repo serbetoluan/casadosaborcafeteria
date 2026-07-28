@@ -115,143 +115,145 @@ export function CartDrawer() {
               </button>
             </div>
           ) : (
-            <ul className="flex flex-col gap-3">
-              {lines.map((line) => (
-                <li
-                  key={line.id}
-                  className="rounded-2xl bg-white p-4 ring-1 ring-blush-deep/40 shadow-sm"
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="min-w-0 flex-1">
-                      <p className="font-display text-sm font-semibold leading-snug text-ink">
-                        {line.item.name}
-                      </p>
-                      {Object.entries(line.selections).map(([label, values]) =>
-                        values.length ? (
-                          <p key={label} className="mt-1 text-[11px] text-ink/60">
-                            <span className="text-ink/40">{label}:</span> {values.join(", ")}
-                          </p>
-                        ) : null,
-                      )}
-                      {line.note && (
-                        <p className="mt-1 text-[11px] italic text-ink/50">✎ {line.note}</p>
-                      )}
-                    </div>
-                    <button
-                      onClick={() => removeLine(line.id)}
-                      aria-label="Remover item"
-                      className="text-ink/30 hover:text-terracotta"
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </button>
-                  </div>
-
-                  <div className="mt-3 flex items-center justify-between">
-                    <div className="flex items-center gap-1 rounded-full bg-blush/60 p-0.5">
+            <>
+              <ul className="flex flex-col gap-3">
+                {lines.map((line) => (
+                  <li
+                    key={line.id}
+                    className="rounded-2xl bg-white p-4 ring-1 ring-blush-deep/40 shadow-sm"
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0 flex-1">
+                        <p className="font-display text-sm font-semibold leading-snug text-ink">
+                          {line.item.name}
+                        </p>
+                        {Object.entries(line.selections).map(([label, values]) =>
+                          values.length ? (
+                            <p key={label} className="mt-1 text-[11px] text-ink/60">
+                              <span className="text-ink/40">{label}:</span> {values.join(", ")}
+                            </p>
+                          ) : null,
+                        )}
+                        {line.note && (
+                          <p className="mt-1 text-[11px] italic text-ink/50">✎ {line.note}</p>
+                        )}
+                      </div>
                       <button
-                        onClick={() => updateQty(line.id, -1)}
-                        className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-ink shadow-sm hover:bg-cream"
-                        aria-label="Diminuir"
+                        onClick={() => removeLine(line.id)}
+                        aria-label="Remover item"
+                        className="text-ink/30 hover:text-terracotta"
                       >
-                        <Minus className="h-3.5 w-3.5" />
+                        <Trash2 className="h-4 w-4" />
                       </button>
-                      <span className="w-6 text-center text-sm font-semibold text-ink">
-                        {line.quantity}
+                    </div>
+
+                    <div className="mt-3 flex items-center justify-between">
+                      <div className="flex items-center gap-1 rounded-full bg-blush/60 p-0.5">
+                        <button
+                          onClick={() => updateQty(line.id, -1)}
+                          className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-ink shadow-sm hover:bg-cream"
+                          aria-label="Diminuir"
+                        >
+                          <Minus className="h-3.5 w-3.5" />
+                        </button>
+                        <span className="w-6 text-center text-sm font-semibold text-ink">
+                          {line.quantity}
+                        </span>
+                        <button
+                          onClick={() => updateQty(line.id, 1)}
+                          className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-ink shadow-sm hover:bg-cream"
+                          aria-label="Aumentar"
+                        >
+                          <Plus className="h-3.5 w-3.5" />
+                        </button>
+                      </div>
+                      <span className="font-sans text-sm font-semibold text-terracotta-deep">
+                        {formatBRL(line.unitPrice * line.quantity)}
                       </span>
-                      <button
-                        onClick={() => updateQty(line.id, 1)}
-                        className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-ink shadow-sm hover:bg-cream"
-                        aria-label="Aumentar"
-                      >
-                        <Plus className="h-3.5 w-3.5" />
-                      </button>
                     </div>
-                    <span className="font-sans text-sm font-semibold text-terracotta-deep">
-                      {formatBRL(line.unitPrice * line.quantity)}
-                    </span>
-                  </div>
-                </li>
-              ))}
-            </ul>
+                  </li>
+                ))}
+              </ul>
 
-            <div className="mt-8 space-y-6">
-              <div className="space-y-3">
-                <h4 className="flex items-center gap-2 font-display text-sm font-semibold text-ink">
-                  <User className="h-4 w-4 text-terracotta" />
-                  Seus dados
-                </h4>
-                <input
-                  type="text"
-                  placeholder="Seu nome"
-                  value={orderDetails.name}
-                  onChange={(e) => updateOrderDetails({ name: e.target.value })}
-                  className="w-full rounded-xl border border-blush-deep/60 bg-white px-4 py-2.5 text-sm text-ink placeholder:text-ink/30 focus:border-terracotta focus:outline-none focus:ring-2 focus:ring-terracotta/20"
-                />
-              </div>
-
-              <div className="space-y-3">
-                <h4 className="flex items-center gap-2 font-display text-sm font-semibold text-ink">
-                  <MapPin className="h-4 w-4 text-terracotta" />
-                  Como deseja receber?
-                </h4>
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => updateOrderDetails({ type: "local" })}
-                    className={cn(
-                      "flex-1 rounded-xl border py-2.5 text-xs font-medium transition-all",
-                      orderDetails.type === "local"
-                        ? "border-terracotta bg-terracotta/5 text-terracotta shadow-sm"
-                        : "border-blush-deep/60 bg-white text-ink/60",
-                    )}
-                  >
-                    Retirada no local
-                  </button>
-                  <button
-                    onClick={() => updateOrderDetails({ type: "delivery" })}
-                    className={cn(
-                      "flex-1 rounded-xl border py-2.5 text-xs font-medium transition-all",
-                      orderDetails.type === "delivery"
-                        ? "border-terracotta bg-terracotta/5 text-terracotta shadow-sm"
-                        : "border-blush-deep/60 bg-white text-ink/60",
-                    )}
-                  >
-                    Entrega (Delivery)
-                  </button>
-                </div>
-                {orderDetails.type === "delivery" && (
-                  <textarea
-                    placeholder="Endereço completo (Rua, número, bairro, apto...)"
-                    value={orderDetails.address}
-                    onChange={(e) => updateOrderDetails({ address: e.target.value })}
-                    rows={2}
-                    className="w-full resize-none rounded-xl border border-blush-deep/60 bg-white px-4 py-2.5 text-sm text-ink placeholder:text-ink/30 focus:border-terracotta focus:outline-none focus:ring-2 focus:ring-terracotta/20 animate-in slide-in-from-top-2 duration-200"
+              <div className="mt-8 space-y-6">
+                <div className="space-y-3">
+                  <h4 className="flex items-center gap-2 font-display text-sm font-semibold text-ink">
+                    <User className="h-4 w-4 text-terracotta" />
+                    Seus dados
+                  </h4>
+                  <input
+                    type="text"
+                    placeholder="Seu nome"
+                    value={orderDetails.name}
+                    onChange={(e) => updateOrderDetails({ name: e.target.value })}
+                    className="w-full rounded-xl border border-blush-deep/60 bg-white px-4 py-2.5 text-sm text-ink placeholder:text-ink/30 focus:border-terracotta focus:outline-none focus:ring-2 focus:ring-terracotta/20"
                   />
-                )}
-              </div>
+                </div>
 
-              <div className="space-y-3 pb-4">
-                <h4 className="flex items-center gap-2 font-display text-sm font-semibold text-ink">
-                  <CreditCard className="h-4 w-4 text-terracotta" />
-                  Forma de pagamento
-                </h4>
-                <div className="grid grid-cols-2 gap-2">
-                  {["Pix", "Cartão", "Dinheiro"].map((method) => (
+                <div className="space-y-3">
+                  <h4 className="flex items-center gap-2 font-display text-sm font-semibold text-ink">
+                    <MapPin className="h-4 w-4 text-terracotta" />
+                    Como deseja receber?
+                  </h4>
+                  <div className="flex gap-2">
                     <button
-                      key={method}
-                      onClick={() => updateOrderDetails({ paymentMethod: method })}
+                      onClick={() => updateOrderDetails({ type: "local" })}
                       className={cn(
-                        "rounded-xl border py-2.5 text-xs font-medium transition-all",
-                        orderDetails.paymentMethod === method
+                        "flex-1 rounded-xl border py-2.5 text-xs font-medium transition-all",
+                        orderDetails.type === "local"
                           ? "border-terracotta bg-terracotta/5 text-terracotta shadow-sm"
                           : "border-blush-deep/60 bg-white text-ink/60",
                       )}
                     >
-                      {method}
+                      Retirada no local
                     </button>
-                  ))}
+                    <button
+                      onClick={() => updateOrderDetails({ type: "delivery" })}
+                      className={cn(
+                        "flex-1 rounded-xl border py-2.5 text-xs font-medium transition-all",
+                        orderDetails.type === "delivery"
+                          ? "border-terracotta bg-terracotta/5 text-terracotta shadow-sm"
+                          : "border-blush-deep/60 bg-white text-ink/60",
+                      )}
+                    >
+                      Entrega (Delivery)
+                    </button>
+                  </div>
+                  {orderDetails.type === "delivery" && (
+                    <textarea
+                      placeholder="Endereço completo (Rua, número, bairro, apto...)"
+                      value={orderDetails.address}
+                      onChange={(e) => updateOrderDetails({ address: e.target.value })}
+                      rows={2}
+                      className="w-full resize-none rounded-xl border border-blush-deep/60 bg-white px-4 py-2.5 text-sm text-ink placeholder:text-ink/30 focus:border-terracotta focus:outline-none focus:ring-2 focus:ring-terracotta/20 animate-in slide-in-from-top-2 duration-200"
+                    />
+                  )}
+                </div>
+
+                <div className="space-y-3 pb-4">
+                  <h4 className="flex items-center gap-2 font-display text-sm font-semibold text-ink">
+                    <CreditCard className="h-4 w-4 text-terracotta" />
+                    Forma de pagamento
+                  </h4>
+                  <div className="grid grid-cols-2 gap-2">
+                    {["Pix", "Cartão", "Dinheiro"].map((method) => (
+                      <button
+                        key={method}
+                        onClick={() => updateOrderDetails({ paymentMethod: method })}
+                        className={cn(
+                          "rounded-xl border py-2.5 text-xs font-medium transition-all",
+                          orderDetails.paymentMethod === method
+                            ? "border-terracotta bg-terracotta/5 text-terracotta shadow-sm"
+                            : "border-blush-deep/60 bg-white text-ink/60",
+                        )}
+                      >
+                        {method}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
+            </>
           )}
         </div>
 
