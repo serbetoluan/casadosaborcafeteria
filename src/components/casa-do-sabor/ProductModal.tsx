@@ -182,49 +182,56 @@ export function ProductModal() {
           ))}
 
           <div className="mt-6">
-            <label className="mb-2 block font-display text-sm font-semibold text-ink">
-              Observação <span className="text-ink/40 font-normal">(opcional)</span>
-            </label>
-            <textarea
-              value={note}
-              onChange={(e) => setNote(e.target.value)}
-              placeholder="Ex: sem açúcar, embalar pra viagem..."
-              rows={2}
-              className="w-full resize-none rounded-xl border border-blush-deep/60 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/30 focus:border-terracotta focus:outline-none focus:ring-2 focus:ring-terracotta/20"
-            />
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center justify-between">
+                <label className="block font-display text-sm font-semibold text-ink">
+                  Observação <span className="text-ink/40 font-normal">(opcional)</span>
+                </label>
+                
+                {/* Quantity selector moved above observation field for mobile context as requested */}
+                <div className="flex shrink-0 items-center gap-0.5 rounded-full bg-blush/60 p-1">
+                  <button
+                    onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                    className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-ink shadow-sm hover:bg-cream active:scale-95 sm:h-8 sm:w-8"
+                    aria-label="Diminuir quantidade"
+                  >
+                    <Minus className="h-3.5 w-3.5" />
+                  </button>
+                  <span className="w-6 text-center font-display text-xs font-semibold text-ink">{quantity}</span>
+                  <button
+                    onClick={() => setQuantity((q) => q + 1)}
+                    className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-ink shadow-sm hover:bg-cream active:scale-95 sm:h-8 sm:w-8"
+                    aria-label="Aumentar quantidade"
+                  >
+                    <Plus className="h-3.5 w-3.5" />
+                  </button>
+                </div>
+              </div>
+
+              <textarea
+                value={note}
+                onChange={(e) => setNote(e.target.value)}
+                placeholder="Ex: sem açúcar, embalar pra viagem..."
+                rows={2}
+                className="w-full resize-none rounded-xl border border-blush-deep/60 bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/30 focus:border-terracotta focus:outline-none focus:ring-2 focus:ring-terracotta/20"
+              />
+            </div>
           </div>
         </div>
 
         <div className="flex shrink-0 flex-row items-center gap-2 border-t border-blush-deep/40 bg-white px-3 py-3 sm:gap-3 sm:px-4">
-          <div className="flex shrink-0 items-center gap-0.5 rounded-full bg-blush/60 p-1">
-            <button
-              onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-ink shadow-sm hover:bg-cream active:scale-95 sm:h-9 sm:w-9"
-              aria-label="Diminuir quantidade"
-            >
-              <Minus className="h-4 w-4" />
-            </button>
-            <span className="w-6 text-center font-display text-sm font-semibold text-ink">{quantity}</span>
-            <button
-              onClick={() => setQuantity((q) => q + 1)}
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-ink shadow-sm hover:bg-cream active:scale-95 sm:h-9 sm:w-9"
-              aria-label="Aumentar quantidade"
-            >
-              <Plus className="h-4 w-4" />
-            </button>
-          </div>
-
           <button
             onClick={handleAddAndGoToCart}
             className="flex min-w-0 flex-1 items-center justify-center gap-1.5 rounded-full bg-terracotta px-3 py-2.5 font-display text-[13px] font-semibold text-white shadow-lg shadow-terracotta/30 transition-all hover:bg-terracotta-dark active:scale-[0.98] sm:gap-2 sm:px-4 sm:py-3 sm:text-sm"
           >
             <ShoppingBag className="h-4 w-4 shrink-0" />
-            <span className="truncate">Finalizar</span>
+            <span className="truncate text-center">Finalizar</span>
             <span className="shrink-0">{formatBRL(lineTotal)}</span>
           </button>
+          
           <button
             onClick={handleAdd}
-            className="flex shrink-0 items-center justify-center rounded-full border-2 border-terracotta/20 bg-white px-3 py-2.5 font-display text-[13px] font-semibold text-terracotta transition-all hover:bg-terracotta/5 active:scale-[0.98] sm:px-5 sm:py-3 sm:text-sm"
+            className="flex min-w-0 flex-1 items-center justify-center rounded-full border-2 border-terracotta/20 bg-white px-3 py-2.5 font-display text-[13px] font-semibold text-terracotta transition-all hover:bg-terracotta/5 active:scale-[0.98] sm:px-5 sm:py-3 sm:text-sm"
           >
             Continuar
           </button>
