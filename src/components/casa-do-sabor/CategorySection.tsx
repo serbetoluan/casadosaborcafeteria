@@ -19,9 +19,15 @@ export function CategorySection({ category }: { category: MenuCategory }) {
         </h2>
       </div>
       <div className="flex flex-col gap-1 md:grid md:grid-cols-2 md:gap-x-12">
-        {category.items.map((item, i) => (
-          <ProductCard key={item.slug} item={item} index={i} />
-        ))}
+        {[...category.items]
+          .sort((a, b) => {
+            if (a.image && !b.image) return -1;
+            if (!a.image && b.image) return 1;
+            return 0;
+          })
+          .map((item, i) => (
+            <ProductCard key={item.slug} item={item} index={i} />
+          ))}
       </div>
     </section>
   );
