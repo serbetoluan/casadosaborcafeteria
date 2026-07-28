@@ -267,7 +267,7 @@ export function CartDrawer() {
             <div className="mt-2 flex items-center justify-between border-t border-dashed border-blush-deep/60 pt-2">
               <span className="font-display font-semibold text-ink">Total</span>
               <span className="font-display text-lg font-semibold text-terracotta-deep">
-                {formatBRL(total)}
+                {formatBRL(total + (orderType === "delivery" ? DELIVERY_FEE : 0))}
               </span>
             </div>
 
