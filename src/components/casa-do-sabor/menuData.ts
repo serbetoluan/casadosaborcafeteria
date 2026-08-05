@@ -35,6 +35,11 @@ import omeleteV2Asset from "@/assets/omelete_v2.jpg.asset.json";
 import ovosMexidosV2Asset from "@/assets/ovos_mexidos_v2.jpg.asset.json";
 import paoQueijoMultigraosAsset from "@/assets/pao_queijo_multigraos.jpg.asset.json";
 import biscoitoParmesaoAsset from "@/assets/biscoito_parmesao.jpg.asset.json";
+import sucoCaixinhaAsset from "@/assets/suco_caixinha.jpg.asset.json";
+import refrigeranteMiniAsset from "@/assets/refrigerante_mini.jpg.asset.json";
+import sanduicheNaturalV2Asset from "@/assets/sanduiche_natural_v2.jpg.asset.json";
+import sodaItalianaV2Asset from "@/assets/soda_italiana_v2.jpg.asset.json";
+import sucoDaCasaV2Asset from "@/assets/suco_da_casa_v2.jpg.asset.json";
 
 export type MenuOptionGroup = {
   label: string;
