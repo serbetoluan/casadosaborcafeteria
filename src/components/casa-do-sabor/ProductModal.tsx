@@ -102,7 +102,7 @@ export function ProductModal() {
             <img
               src={activeItem.image}
               alt={activeItem.name}
-              className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+              className="h-full w-full object-cover"
             />
             {activeItem.fit && (
               <span className="absolute left-4 top-4 inline-flex items-center gap-1 rounded-full bg-white/90 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-terracotta ring-1 ring-terracotta/40 backdrop-blur-sm">
@@ -110,6 +110,7 @@ export function ProductModal() {
                 Fit
               </span>
             )}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
           </div>
         ) : activeItem.fit ? (
           <div className="flex h-12 shrink-0 items-center px-5 pt-4">
