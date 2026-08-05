@@ -40,6 +40,11 @@ import refrigeranteMiniAsset from "@/assets/refrigerante_mini.jpg.asset.json";
 import sanduicheNaturalV2Asset from "@/assets/sanduiche_natural_v2.jpg.asset.json";
 import sodaItalianaV2Asset from "@/assets/soda_italiana_v2.jpg.asset.json";
 import sucoDaCasaV2Asset from "@/assets/suco_da_casa_v2.jpg.asset.json";
+import vienenseAsset from "@/assets/vienense.jpg.asset.json";
+import sucoDetoxAsset from "@/assets/suco_detox.jpg.asset.json";
+import toastCapreseAsset from "@/assets/toast_caprese.jpg.asset.json";
+import toddynhoAsset from "@/assets/toddynho.jpg.asset.json";
+import tortaFrangoV2Asset from "@/assets/torta_frango_v2.jpg.asset.json";
 
 export type MenuOptionGroup = {
   label: string;
