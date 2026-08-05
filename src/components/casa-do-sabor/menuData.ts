@@ -211,15 +211,15 @@ export const categories: MenuCategory[] = [
     title: "Bebidas Quentinhas",
     tagline: "Do café curtinho ao chocolate cremoso",
     items: [
-      { slug: "espresso-curto", name: "Espresso", description: "50ml", price: "R$ 7,00", priceValue: 7 },
-      { slug: "espresso-duplo", name: "Espresso duplo", description: "100ml", price: "R$ 10,00", priceValue: 10 },
+      { slug: "espresso-curto", name: "Espresso", description: "50ml", price: "R$ 7,00", priceValue: 7, image: cafeEspressoAsset.url },
+      { slug: "espresso-duplo", name: "Espresso duplo", description: "100ml", price: "R$ 10,00", priceValue: 10, image: cafeEspressoAsset.url },
       { 
         slug: "cappuccino-italiano", 
         name: "Cappuccino italiano", 
         description: "240ml — Café, leite semi desnatado, calda de chocolate, crema e canela.", 
         price: "R$ 16,00", 
         priceValue: 16,
-        image: "" // A ser atualizado com a foto correta
+        image: cappuccinoItalianoV2Asset.url
       },
       { 
         slug: "cappuccino-br", 
