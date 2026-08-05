@@ -175,6 +175,7 @@ export const categories: MenuCategory[] = [
         description: "200ml",
         price: "R$ 4,00",
         priceValue: 4,
+        image: sucoCaixinhaAsset.url,
         options: [{ label: "Escolha o sabor", required: true, choices: ["Uva", "Caju"] }],
       },
       {
@@ -183,6 +184,7 @@ export const categories: MenuCategory[] = [
         description: "220ml",
         price: "R$ 5,00",
         priceValue: 5,
+        image: refrigeranteMiniAsset.url,
         options: [{ label: "Escolha o sabor", required: true, choices: ["Coca-cola Tradicional", "Coca-cola Zero", "Coca-cola Espresso", "Guaraná Antártica", "Fanta Laranja"] }],
       },
       { slug: "energetico", name: "Energético", description: "270ml", price: "R$ 8,50", priceValue: 8.5, image: energeticoExtraPowerAsset.url },
