@@ -196,9 +196,9 @@ export const categories: MenuCategory[] = [
         priceValue: 18,
         options: [{ label: "Escolha o sabor", required: true, choices: ["Morango", "Maçã verde"] }],
       },
-      { slug: "vienense", name: "Vienense", description: "400ml — Café expresso, sorvete de creme, calda de chocolate e chantilly.", price: "R$ 24,00", priceValue: 24 },
       { slug: "cappuccino-gelado", name: "Cappuccino Gelado", description: "400ml — Café expresso, cappuccino, sorvete de creme, calda de chocolate e chantilly.", price: "R$ 24,00", priceValue: 24, image: cappuccinoGeladoAsset.url },
-      { slug: "nutella-frozen", name: "Nutella® Frozen", description: "400ml — Taça de gelato de leite Ninho® batido com uma dose de espresso e muita Nutella®, acompanha chantilly.", price: "R$ 26,00", priceValue: 26 },
+      { slug: "cafe-nutella", name: "Café Nutella", description: "400ml — Taça de gelato de leite Ninho® batido com uma dose de espresso e muita Nutella®, acompanha chantilly.", price: "R$ 26,00", priceValue: 26 },
+      { slug: "vienense", name: "Vienense", description: "400ml — Café expresso, sorvete de creme, calda de chocolate e chantilly.", price: "R$ 24,00", priceValue: 24 },
     ],
   },
   {
