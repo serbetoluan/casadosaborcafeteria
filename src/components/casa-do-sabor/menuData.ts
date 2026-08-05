@@ -113,7 +113,7 @@ export const categories: MenuCategory[] = [
     title: "Salgados",
     tagline: "Pra matar aquela fominha",
     items: [
-      { slug: "americano-pq", name: "Americano de Presunto e Queijo", price: "R$ 10,00", priceValue: 10 },
+      { slug: "americano-pq", name: "Americano de Presunto e Queijo", price: "R$ 10,00", priceValue: 10, image: americanoAsset.url },
       { slug: "esfirra-carne", name: "Esfirra de Carne", price: "R$ 10,00", priceValue: 10, image: esfihaCarneAsset.url },
       { slug: "disco-carne", name: "Disco de carne", price: "R$ 10,00", priceValue: 10, image: disquinhoCarneAsset.url },
       { slug: "disco-frango-queijo", name: "Disco de Frango com Queijo", price: "R$ 12,50", priceValue: 12.5, image: disquinhoFrangoAsset.url },
