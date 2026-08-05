@@ -210,6 +210,7 @@ export const categories: MenuCategory[] = [
         description: "400ml — natural, sem açúcar adicionado.",
         price: "R$ 12,00",
         priceValue: 12,
+        image: sucoDaCasaV2Asset.url,
         options: [{ label: "Escolha o sabor", required: true, choices: ["Laranja", "Abacaxi"] }],
       },
       {
@@ -227,6 +228,7 @@ export const categories: MenuCategory[] = [
         description: "400ml — refrescância borbulhante.",
         price: "R$ 18,00",
         priceValue: 18,
+        image: sodaItalianaV2Asset.url,
         options: [{ label: "Escolha o sabor", required: true, choices: ["Morango", "Maçã verde"] }],
       },
       { slug: "cappuccino-gelado", name: "Cappuccino Gelado", description: "400ml — Café expresso, cappuccino, sorvete de creme, calda de chocolate e chantilly.", price: "R$ 24,00", priceValue: 24, image: cappuccinoGeladoAsset.url },
