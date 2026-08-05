@@ -45,6 +45,9 @@ import sucoDetoxAsset from "@/assets/suco_detox.jpg.asset.json";
 import toastCapreseAsset from "@/assets/toast_caprese.jpg.asset.json";
 import toddynhoAsset from "@/assets/toddynho.jpg.asset.json";
 import tortaFrangoV2Asset from "@/assets/torta_frango_v2.jpg.asset.json";
+import kombuchaDetalheAsset from "@/assets/kombucha_detalhe.jpg.asset.json";
+import kombuchasBaldeAsset from "@/assets/kombuchas_balde.jpg.asset.json";
+
 
 export type MenuOptionGroup = {
   label: string;
