@@ -12,12 +12,31 @@ export function CartDrawer() {
 
   useEffect(() => {
     if (!isOpen) return;
+
+    // Add history state when drawer opens to handle back button
+    window.history.pushState({ drawerOpen: true }, "");
+
+    const onPopState = () => {
+      // If user clicks back button, close the drawer
+      closeCart();
+    };
+
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && closeCart();
+
+    window.addEventListener("popstate", onPopState);
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
+
     return () => {
+      window.removeEventListener("popstate", onPopState);
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
+
+      // If we're closing the drawer manually (not via back button),
+      // we need to remove the state we pushed to keep history clean.
+      if (window.history.state?.drawerOpen) {
+        window.history.back();
+      }
     };
   }, [isOpen, closeCart]);
 
