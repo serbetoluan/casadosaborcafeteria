@@ -35,6 +35,11 @@ import omeleteV2Asset from "@/assets/omelete_v2.jpg.asset.json";
 import ovosMexidosV2Asset from "@/assets/ovos_mexidos_v2.jpg.asset.json";
 import paoQueijoMultigraosAsset from "@/assets/pao_queijo_multigraos.jpg.asset.json";
 import biscoitoParmesaoAsset from "@/assets/biscoito_parmesao.jpg.asset.json";
+import sucoCaixinhaAsset from "@/assets/suco_caixinha.jpg.asset.json";
+import refrigeranteMiniAsset from "@/assets/refrigerante_mini.jpg.asset.json";
+import sanduicheNaturalV2Asset from "@/assets/sanduiche_natural_v2.jpg.asset.json";
+import sodaItalianaV2Asset from "@/assets/soda_italiana_v2.jpg.asset.json";
+import sucoDaCasaV2Asset from "@/assets/suco_da_casa_v2.jpg.asset.json";
 
 export type MenuOptionGroup = {
   label: string;
@@ -88,7 +93,7 @@ export const categories: MenuCategory[] = [
     tagline: "Feitos na hora, feitos com amor",
     items: [
       { slug: "saladinha-frutas", name: "Saladinha de frutas", description: "Mix fresquinho de frutas da estação.", price: "R$ 14,00", priceValue: 14, fit: true, image: saladaFrutasAsset.url },
-      { slug: "sanduiche-natural", name: "Sanduíche Natural de frango", description: "Sanduíche leve, prático e saboroso.", price: "R$ 18,00", priceValue: 18, fit: true, image: sanduicheNaturalAsset.url },
+      { slug: "sanduiche-natural", name: "Sanduíche Natural de frango", description: "Sanduíche leve, prático e saboroso.", price: "R$ 18,00", priceValue: 18, fit: true, image: sanduicheNaturalV2Asset.url },
       {
         slug: "waffle-cremo",
         name: "Waffle de Cremo Queijo",
@@ -170,6 +175,7 @@ export const categories: MenuCategory[] = [
         description: "200ml",
         price: "R$ 4,00",
         priceValue: 4,
+        image: sucoCaixinhaAsset.url,
         options: [{ label: "Escolha o sabor", required: true, choices: ["Uva", "Caju"] }],
       },
       {
@@ -178,6 +184,7 @@ export const categories: MenuCategory[] = [
         description: "220ml",
         price: "R$ 5,00",
         priceValue: 5,
+        image: refrigeranteMiniAsset.url,
         options: [{ label: "Escolha o sabor", required: true, choices: ["Coca-cola Tradicional", "Coca-cola Zero", "Coca-cola Espresso", "Guaraná Antártica", "Fanta Laranja"] }],
       },
       { slug: "energetico", name: "Energético", description: "270ml", price: "R$ 8,50", priceValue: 8.5, image: energeticoExtraPowerAsset.url },
@@ -203,6 +210,7 @@ export const categories: MenuCategory[] = [
         description: "400ml — natural, sem açúcar adicionado.",
         price: "R$ 12,00",
         priceValue: 12,
+        image: sucoDaCasaV2Asset.url,
         options: [{ label: "Escolha o sabor", required: true, choices: ["Laranja", "Abacaxi"] }],
       },
       {
@@ -220,6 +228,7 @@ export const categories: MenuCategory[] = [
         description: "400ml — refrescância borbulhante.",
         price: "R$ 18,00",
         priceValue: 18,
+        image: sodaItalianaV2Asset.url,
         options: [{ label: "Escolha o sabor", required: true, choices: ["Morango", "Maçã verde"] }],
       },
       { slug: "cappuccino-gelado", name: "Cappuccino Gelado", description: "400ml — Café expresso, cappuccino, sorvete de creme, calda de chocolate e chantilly.", price: "R$ 24,00", priceValue: 24, image: cappuccinoGeladoAsset.url },
