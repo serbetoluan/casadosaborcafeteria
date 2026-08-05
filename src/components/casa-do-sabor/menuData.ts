@@ -20,6 +20,11 @@ import chipaAsset from "@/assets/chipa.jpg.asset.json";
 import chocolateQuenteAsset from "@/assets/chocolate_quente.jpg.asset.json";
 import crepiocaAsset from "@/assets/crepioca.jpg.asset.json";
 import crepiocaFrangoAsset from "@/assets/crepioca_frango.jpg.asset.json";
+import croissantPeruAsset from "@/assets/croissant_peru.jpg.asset.json";
+import croissantFrangoQueijoAsset from "@/assets/croissant_frango_queijo.jpg.asset.json";
+import croissantProvencalAsset from "@/assets/croissant_provencal.jpg.asset.json";
+import croissantDuetoDoceAsset from "@/assets/croissant_dueto_doce.jpg.asset.json";
+import energeticoZeroAsset from "@/assets/energetico_zero.jpg.asset.json";
 
 export type MenuOptionGroup = {
   label: string;
@@ -133,11 +138,11 @@ export const categories: MenuCategory[] = [
     tagline: "Linha premium, massa amanteigada",
     items: [
       { slug: "croissant-amanteigado", name: "Croissant Amanteigado", description: "Croissant linha premium. Acompanha manteiga de leite.", price: "R$ 18,00", priceValue: 18, image: croissantAmanteigadoAsset.url },
-      { slug: "croissant-peru", name: "Croissant cremoso de Peito de Peru", description: "Linha premium, recheado com peito de peru, cream cheese e um toque de geleia de pimenta (120g).", price: "R$ 24,50", priceValue: 24.5 },
-      { slug: "croissant-frango-queijo", name: "Croissant frango com queijo", description: "Linha premium, recheado com filé de peito de frango desfiado e mussarela.", price: "R$ 24,50", priceValue: 24.5 },
-      { slug: "croissant-provencal", name: "Croissant Provençal", description: "Linha premium, recheado com queijo brie, damasco, mel e amêndoas laminadas.", price: "R$ 27,50", priceValue: 27.5 },
+      { slug: "croissant-peru", name: "Croissant cremoso de Peito de Peru", description: "Linha premium, recheado com peito de peru, cream cheese e um toque de geleia de pimenta (120g).", price: "R$ 24,50", priceValue: 24.5, image: croissantPeruAsset.url },
+      { slug: "croissant-frango-queijo", name: "Croissant frango com queijo", description: "Linha premium, recheado com filé de peito de frango desfiado e mussarela.", price: "R$ 24,50", priceValue: 24.5, image: croissantFrangoQueijoAsset.url },
+      { slug: "croissant-provencal", name: "Croissant Provençal", description: "Linha premium, recheado com queijo brie, damasco, mel e amêndoas laminadas.", price: "R$ 27,50", priceValue: 27.5, image: croissantProvencalAsset.url },
       { slug: "croissant-lagarto", name: "Croissant Lagarto a Gorgonzola", description: "Linha premium, recheado com lagarto desfiado e creme de gorgonzola.", price: "R$ 27,50", priceValue: 27.5 },
-      { slug: "dueto-black", name: "Dueto doce Black", description: "Croissant linha premium recheado com Nutella e morangos.", price: "R$ 24,50", priceValue: 24.5 },
+      { slug: "dueto-black", name: "Dueto doce Black", description: "Croissant linha premium recheado com Nutella e morangos.", price: "R$ 24,50", priceValue: 24.5, image: croissantDuetoDoceAsset.url },
     ],
   },
   {
@@ -165,7 +170,7 @@ export const categories: MenuCategory[] = [
         options: [{ label: "Escolha o sabor", required: true, choices: ["Coca-cola Tradicional", "Coca-cola Zero", "Coca-cola Espresso", "Guaraná Antártica", "Fanta Laranja"] }],
       },
       { slug: "energetico", name: "Energético", description: "270ml", price: "R$ 8,50", priceValue: 8.5 },
-      { slug: "energetico-zero", name: "Energético zero", description: "473ml", price: "R$ 11,90", priceValue: 11.9 },
+      { slug: "energetico-zero", name: "Energético zero", description: "473ml", price: "R$ 11,90", priceValue: 11.9, image: energeticoZeroAsset.url },
       {
         slug: "kombuchas",
         name: "Kombuchas",
