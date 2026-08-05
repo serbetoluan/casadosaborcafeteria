@@ -15,6 +15,11 @@ import aguaComGasAsset from "@/assets/agua_com_gas.jpg.asset.json";
 import aguaSemGasAsset from "@/assets/agua_sem_gas.jpg.asset.json";
 import americanoAsset from "@/assets/americano.jpg.asset.json";
 import cafeEspressoAsset from "@/assets/cafe_espresso.jpg.asset.json";
+import croissantAmanteigadoAsset from "@/assets/croissant_amanteigado.jpg.asset.json";
+import chipaAsset from "@/assets/chipa.jpg.asset.json";
+import chocolateQuenteAsset from "@/assets/chocolate_quente.jpg.asset.json";
+import crepiocaAsset from "@/assets/crepioca.jpg.asset.json";
+import crepiocaFrangoAsset from "@/assets/crepioca_frango.jpg.asset.json";
 
 export type MenuOptionGroup = {
   label: string;
@@ -50,7 +55,7 @@ export const categories: MenuCategory[] = [
       { slug: "pao-queijo", name: "Pão de queijo", description: "1 uni", price: "R$ 1,50", priceValue: 1.5, image: paoQueijoAsset.url },
       { slug: "pao-queijo-multi", name: "Pão de queijo multigrãos", description: "1 uni", price: "R$ 2,50", priceValue: 2.5 },
       { slug: "biscoito-parmesao", name: "Biscoito Parmesão", description: "1 uni", price: "R$ 3,00", priceValue: 3 },
-      { slug: "chipa-mussarela", name: "Chipa", description: "1 uni", price: "R$ 3,00", priceValue: 3 },
+      { slug: "chipa-mussarela", name: "Chipa", description: "1 uni", price: "R$ 3,00", priceValue: 3, image: chipaAsset.url },
       { slug: "enroladao-queijo", name: "Enroladão de queijo", description: "100g · 1 uni", price: "R$ 9,00", priceValue: 9, image: enroladinhoAsset.url },
       {
         slug: "croissant-folhado",
@@ -93,9 +98,9 @@ export const categories: MenuCategory[] = [
       { slug: "ovos-torrada-bacon", name: "Ovos mexidos com Torradas e Bacon", description: "Ovos mexidos, uma pitada de creme de leite, torradas e bacon.", price: "R$ 18,00", priceValue: 18 },
       { slug: "omelete-simples", name: "Omelete Simples", description: "Ovos preparados para omelete.", price: "R$ 18,00", priceValue: 18, image: omeleteAsset.url },
       { slug: "omelete-pq", name: "Omelete de Presunto e Queijo", description: "Ovos preparados para omelete, recheado com presunto e mussarela.", price: "R$ 20,00", priceValue: 20 },
-      { slug: "crepioca", name: "Crepioca", description: "Ovos preparados com tapioca.", price: "R$ 20,00", priceValue: 20 },
-      { slug: "crepioca-pq", name: "Crepioca de Presunto e Queijo", description: "Ovos e tapioca, recheado com presunto e mussarela.", price: "R$ 22,00", priceValue: 22 },
-      { slug: "crepioca-frango", name: "Crepioca de Frango com Queijo", description: "Ovos e tapioca, recheado com filé de peito de frango desfiado e mussarela.", price: "R$ 25,00", priceValue: 25 },
+      { slug: "crepioca", name: "Crepioca", description: "Ovos preparados com tapioca.", price: "R$ 20,00", priceValue: 20, image: crepiocaAsset.url },
+      { slug: "crepioca-pq", name: "Crepioca de Presunto e Queijo", description: "Ovos e tapioca, recheado com presunto e mussarela.", price: "R$ 22,00", priceValue: 22, image: crepiocaAsset.url },
+      { slug: "crepioca-frango", name: "Crepioca de Frango com Queijo", description: "Ovos e tapioca, recheado com filé de peito de frango desfiado e mussarela.", price: "R$ 25,00", priceValue: 25, image: crepiocaFrangoAsset.url },
       {
         slug: "panqueca-banana",
         name: "Panqueca de banana com aveia",
@@ -127,7 +132,7 @@ export const categories: MenuCategory[] = [
     title: "Folhados",
     tagline: "Linha premium, massa amanteigada",
     items: [
-      { slug: "croissant-amanteigado", name: "Croissant Amanteigado", description: "Croissant linha premium. Acompanha manteiga de leite.", price: "R$ 18,00", priceValue: 18 },
+      { slug: "croissant-amanteigado", name: "Croissant Amanteigado", description: "Croissant linha premium. Acompanha manteiga de leite.", price: "R$ 18,00", priceValue: 18, image: croissantAmanteigadoAsset.url },
       { slug: "croissant-peru", name: "Croissant cremoso de Peito de Peru", description: "Linha premium, recheado com peito de peru, cream cheese e um toque de geleia de pimenta (120g).", price: "R$ 24,50", priceValue: 24.5 },
       { slug: "croissant-frango-queijo", name: "Croissant frango com queijo", description: "Linha premium, recheado com filé de peito de frango desfiado e mussarela.", price: "R$ 24,50", priceValue: 24.5 },
       { slug: "croissant-provencal", name: "Croissant Provençal", description: "Linha premium, recheado com queijo brie, damasco, mel e amêndoas laminadas.", price: "R$ 27,50", priceValue: 27.5 },
@@ -231,7 +236,7 @@ export const categories: MenuCategory[] = [
       },
       { slug: "cappuccino-br-light", name: "Cappuccino brasileiro light", description: "240ml — versão mais leve, sem abrir mão do sabor.", price: "R$ 18,00", priceValue: 18, fit: true },
       { slug: "maltine", name: "Maltine quentinho", description: "240ml — Caneca com leite quentinho, ovomaltine crocante e nuvem de leite vaporizado.", price: "R$ 16,00", priceValue: 16 },
-      { slug: "chocolate-quente", name: "Chocolate quente", description: "240ml — cremoso e aconchegante.", price: "R$ 20,00", priceValue: 20 },
+      { slug: "chocolate-quente", name: "Chocolate quente", description: "240ml — cremoso e aconchegante.", price: "R$ 20,00", priceValue: 20, image: chocolateQuenteAsset.url },
       {
         slug: "adicionais-list",
         name: "Adicionais",
