@@ -30,6 +30,11 @@ import energeticoExtraPowerAsset from "@/assets/energetico_extra_power.jpg.asset
 import enroladaoQueijoV2Asset from "@/assets/enroladao_queijo_v2.jpg.asset.json";
 import esfirraCarneV2Asset from "@/assets/esfirra_carne_v2.jpg.asset.json";
 import mistoQuenteAsset from "@/assets/misto_quente.jpg.asset.json";
+import quicheAlhoPoroAsset from "@/assets/quiche_alho_poro.jpg.asset.json";
+import omeleteV2Asset from "@/assets/omelete_v2.jpg.asset.json";
+import ovosMexidosV2Asset from "@/assets/ovos_mexidos_v2.jpg.asset.json";
+import paoQueijoMultigraosAsset from "@/assets/pao_queijo_multigraos.jpg.asset.json";
+import biscoitoParmesaoAsset from "@/assets/biscoito_parmesao.jpg.asset.json";
 
 export type MenuOptionGroup = {
   label: string;
