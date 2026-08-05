@@ -170,7 +170,7 @@ export const categories: MenuCategory[] = [
         options: [{ label: "Escolha o sabor", required: true, choices: ["Coca-cola Tradicional", "Coca-cola Zero", "Coca-cola Espresso", "Guaraná Antártica", "Fanta Laranja"] }],
       },
       { slug: "energetico", name: "Energético", description: "270ml", price: "R$ 8,50", priceValue: 8.5 },
-      { slug: "energetico-zero", name: "Energético zero", description: "473ml", price: "R$ 11,90", priceValue: 11.9 },
+      { slug: "energetico-zero", name: "Energético zero", description: "473ml", price: "R$ 11,90", priceValue: 11.9, image: energeticoZeroAsset.url },
       {
         slug: "kombuchas",
         name: "Kombuchas",
