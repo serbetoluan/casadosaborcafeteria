@@ -20,6 +20,11 @@ import chipaAsset from "@/assets/chipa.jpg.asset.json";
 import chocolateQuenteAsset from "@/assets/chocolate_quente.jpg.asset.json";
 import crepiocaAsset from "@/assets/crepioca.jpg.asset.json";
 import crepiocaFrangoAsset from "@/assets/crepioca_frango.jpg.asset.json";
+import croissantPeruAsset from "@/assets/croissant_peru.jpg.asset.json";
+import croissantFrangoQueijoAsset from "@/assets/croissant_frango_queijo.jpg.asset.json";
+import croissantProvencalAsset from "@/assets/croissant_provencal.jpg.asset.json";
+import croissantDuetoDoceAsset from "@/assets/croissant_dueto_doce.jpg.asset.json";
+import energeticoZeroAsset from "@/assets/energetico_zero.jpg.asset.json";
 
 export type MenuOptionGroup = {
   label: string;
