@@ -40,6 +40,11 @@ import refrigeranteMiniAsset from "@/assets/refrigerante_mini.jpg.asset.json";
 import sanduicheNaturalV2Asset from "@/assets/sanduiche_natural_v2.jpg.asset.json";
 import sodaItalianaV2Asset from "@/assets/soda_italiana_v2.jpg.asset.json";
 import sucoDaCasaV2Asset from "@/assets/suco_da_casa_v2.jpg.asset.json";
+import vienenseAsset from "@/assets/vienense.jpg.asset.json";
+import sucoDetoxAsset from "@/assets/suco_detox.jpg.asset.json";
+import toastCapreseAsset from "@/assets/toast_caprese.jpg.asset.json";
+import toddynhoAsset from "@/assets/toddynho.jpg.asset.json";
+import tortaFrangoV2Asset from "@/assets/torta_frango_v2.jpg.asset.json";
 
 export type MenuOptionGroup = {
   label: string;
@@ -131,7 +136,7 @@ export const categories: MenuCategory[] = [
         fit: true,
         options: [{ label: "Escolha o acompanhamento", required: true, choices: ["Mel", "Requeijão", "Mussarela"] }],
       },
-      { slug: "toast-caprese", name: "Toast Caprese", description: "Pão baguete artesanal, creme de ricota, pesto de manjericão e tomate confit.", price: "R$ 25,00", priceValue: 25 },
+      { slug: "toast-caprese", name: "Toast Caprese", description: "Pão baguete artesanal, creme de ricota, pesto de manjericão e tomate confit.", price: "R$ 25,00", priceValue: 25, image: toastCapreseAsset.url },
     ],
   },
   {
@@ -145,7 +150,7 @@ export const categories: MenuCategory[] = [
       { slug: "disco-frango-queijo", name: "Disco de Frango com Queijo", price: "R$ 12,50", priceValue: 12.5, image: disquinhoFrangoAsset.url },
       { slug: "quiche-alho-poro", name: "Quiche de Alho Poró", price: "R$ 18,00", priceValue: 18, image: quicheAlhoPoroAsset.url },
       { slug: "quiche-lorraine", name: "Quiche Lorraine", description: "Bacon e creme de queijo.", price: "R$ 18,00", priceValue: 18, image: tortaFrangoAsset.url },
-      { slug: "torta-frango-catupiry", name: "Torta de Frango com Catupiry", price: "R$ 20,00", priceValue: 20 },
+      { slug: "torta-frango-catupiry", name: "Torta de Frango com Catupiry", price: "R$ 20,00", priceValue: 20, image: tortaFrangoV2Asset.url },
     ],
   },
   {
@@ -168,7 +173,7 @@ export const categories: MenuCategory[] = [
     items: [
       { slug: "agua-sem-gas", name: "Água Mineral sem Gás", description: "500ml", price: "R$ 3,50", priceValue: 3.5, image: aguaSemGasAsset.url },
       { slug: "agua-com-gas", name: "Água Mineral com Gás", description: "500ml", price: "R$ 5,50", priceValue: 5.5, image: aguaComGasAsset.url },
-      { slug: "toddynho", name: "Toddynho®", description: "200ml", price: "R$ 5,00", priceValue: 5 },
+      { slug: "toddynho", name: "Toddynho®", description: "200ml", price: "R$ 5,00", priceValue: 5, image: toddynhoAsset.url },
       {
         slug: "suco-caixinha",
         name: "Suco de caixinha",
@@ -220,6 +225,7 @@ export const categories: MenuCategory[] = [
         price: "R$ 16,00",
         priceValue: 16,
         fit: true,
+        image: sucoDetoxAsset.url,
         options: [{ label: "Escolha o sabor", required: true, choices: ["Morango", "Abacaxi com hortelã", "Detox (fit)"] }],
       },
       {
@@ -233,7 +239,7 @@ export const categories: MenuCategory[] = [
       },
       { slug: "cappuccino-gelado", name: "Cappuccino Gelado", description: "400ml — Café expresso, cappuccino, sorvete de creme, calda de chocolate e chantilly.", price: "R$ 24,00", priceValue: 24, image: cappuccinoGeladoAsset.url },
       { slug: "cafe-nutella", name: "Café Nutella", description: "400ml — Taça de gelato de leite Ninho® batido com uma dose de espresso e muita Nutella®, acompanha chantilly.", price: "R$ 26,00", priceValue: 26, image: nutellaFrozenAsset.url },
-      { slug: "vienense", name: "Vienense", description: "400ml — Café expresso, sorvete de creme, calda de chocolate e chantilly.", price: "R$ 24,00", priceValue: 24 },
+      { slug: "vienense", name: "Vienense", description: "400ml — Café expresso, sorvete de creme, calda de chocolate e chantilly.", price: "R$ 24,00", priceValue: 24, image: vienenseAsset.url },
     ],
   },
   {
