@@ -112,7 +112,7 @@ export const categories: MenuCategory[] = [
         image: waffleAsset.url,
         options: [
           { label: "Versão", required: true, choices: ["Tradicional", "Fit"] },
-          { label: "Escolha o acompanhamento", required: true, choices: ["Mel", "Nutella", "Requeijão", "Geleia de morango"] },
+          { label: "Escolha o acompanhamento", required: true, choices: ["Mel", "Nutella (+R$ 4)", "Requeijão (+R$ 4)", "Geleia de morango (+R$ 4)"] },
         ],
       },
       {
@@ -137,7 +137,7 @@ export const categories: MenuCategory[] = [
         price: "R$ 18,00",
         priceValue: 18,
         fit: true,
-        options: [{ label: "Escolha o acompanhamento", required: true, choices: ["Mel", "Requeijão", "Mussarela"] }],
+        options: [{ label: "Escolha o acompanhamento", required: true, choices: ["Mel", "Requeijão (+R$ 4)", "Mussarela"] }],
       },
       { slug: "toast-caprese", name: "Toast Caprese", description: "Pão baguete artesanal, creme de ricota, pesto de manjericão e tomate confit.", price: "R$ 25,00", priceValue: 25, image: toastCapreseAsset.url },
     ],
