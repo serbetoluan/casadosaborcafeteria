@@ -10,6 +10,11 @@ import disquinhoCarneAsset from "@/assets/disquinho_carne.png.asset.json";
 import sanduicheNaturalAsset from "@/assets/sanduiche_natural.png.asset.json";
 import cappuccinoGeladoAsset from "@/assets/cappuccino_gelado.png.asset.json";
 import cappuccinoItalianoAsset from "@/assets/cappuccino_italiano.png.asset.json";
+import cappuccinoItalianoV2Asset from "@/assets/cappuccino_italiano_v2.png.asset.json";
+import aguaComGasAsset from "@/assets/agua_com_gas.jpg.asset.json";
+import aguaSemGasAsset from "@/assets/agua_sem_gas.jpg.asset.json";
+import americanoAsset from "@/assets/americano.jpg.asset.json";
+import cafeEspressoAsset from "@/assets/cafe_espresso.jpg.asset.json";
 
 export type MenuOptionGroup = {
   label: string;
@@ -108,7 +113,7 @@ export const categories: MenuCategory[] = [
     title: "Salgados",
     tagline: "Pra matar aquela fominha",
     items: [
-      { slug: "americano-pq", name: "Americano de Presunto e Queijo", price: "R$ 10,00", priceValue: 10 },
+      { slug: "americano-pq", name: "Americano de Presunto e Queijo", price: "R$ 10,00", priceValue: 10, image: americanoAsset.url },
       { slug: "esfirra-carne", name: "Esfirra de Carne", price: "R$ 10,00", priceValue: 10, image: esfihaCarneAsset.url },
       { slug: "disco-carne", name: "Disco de carne", price: "R$ 10,00", priceValue: 10, image: disquinhoCarneAsset.url },
       { slug: "disco-frango-queijo", name: "Disco de Frango com Queijo", price: "R$ 12,50", priceValue: 12.5, image: disquinhoFrangoAsset.url },
@@ -135,8 +140,8 @@ export const categories: MenuCategory[] = [
     title: "Da Geladeira",
     tagline: "Sempre bem geladinhos",
     items: [
-      { slug: "agua-sem-gas", name: "Água Mineral sem Gás", description: "500ml", price: "R$ 3,50", priceValue: 3.5 },
-      { slug: "agua-com-gas", name: "Água Mineral com Gás", description: "500ml", price: "R$ 5,50", priceValue: 5.5 },
+      { slug: "agua-sem-gas", name: "Água Mineral sem Gás", description: "500ml", price: "R$ 3,50", priceValue: 3.5, image: aguaSemGasAsset.url },
+      { slug: "agua-com-gas", name: "Água Mineral com Gás", description: "500ml", price: "R$ 5,50", priceValue: 5.5, image: aguaComGasAsset.url },
       { slug: "toddynho", name: "Toddynho®", description: "200ml", price: "R$ 5,00", priceValue: 5 },
       {
         slug: "suco-caixinha",
@@ -206,15 +211,15 @@ export const categories: MenuCategory[] = [
     title: "Bebidas Quentinhas",
     tagline: "Do café curtinho ao chocolate cremoso",
     items: [
-      { slug: "espresso-curto", name: "Espresso", description: "50ml", price: "R$ 7,00", priceValue: 7 },
-      { slug: "espresso-duplo", name: "Espresso duplo", description: "100ml", price: "R$ 10,00", priceValue: 10 },
+      { slug: "espresso-curto", name: "Espresso", description: "50ml", price: "R$ 7,00", priceValue: 7, image: cafeEspressoAsset.url },
+      { slug: "espresso-duplo", name: "Espresso duplo", description: "100ml", price: "R$ 10,00", priceValue: 10, image: cafeEspressoAsset.url },
       { 
         slug: "cappuccino-italiano", 
         name: "Cappuccino italiano", 
         description: "240ml — Café, leite semi desnatado, calda de chocolate, crema e canela.", 
         price: "R$ 16,00", 
         priceValue: 16,
-        image: "" // A ser atualizado com a foto correta
+        image: cappuccinoItalianoV2Asset.url
       },
       { 
         slug: "cappuccino-br", 
