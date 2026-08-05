@@ -36,8 +36,16 @@ export function StickyNav({ items }: { items: NavItem[] }) {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     const el = document.getElementById(id);
-    if (!el) return;
-    const y = el.getBoundingClientRect().top + window.scrollY - 120;
+    if (!el) {
+      // For elements not in categories, like "Sobre a Casa"
+      const specialEl = document.getElementById(id === "sobre" ? "sobre-nos" : id);
+      if (specialEl) {
+        const y = specialEl.getBoundingClientRect().top + window.scrollY - 100;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
+      return;
+    }
+    const y = el.getBoundingClientRect().top + window.scrollY - 80;
     window.scrollTo({ top: y, behavior: "smooth" });
   };
 
