@@ -136,7 +136,7 @@ export const categories: MenuCategory[] = [
         fit: true,
         options: [{ label: "Escolha o acompanhamento", required: true, choices: ["Mel", "Requeijão", "Mussarela"] }],
       },
-      { slug: "toast-caprese", name: "Toast Caprese", description: "Pão baguete artesanal, creme de ricota, pesto de manjericão e tomate confit.", price: "R$ 25,00", priceValue: 25 },
+      { slug: "toast-caprese", name: "Toast Caprese", description: "Pão baguete artesanal, creme de ricota, pesto de manjericão e tomate confit.", price: "R$ 25,00", priceValue: 25, image: toastCapreseAsset.url },
     ],
   },
   {
