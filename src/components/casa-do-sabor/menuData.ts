@@ -225,6 +225,7 @@ export const categories: MenuCategory[] = [
         price: "R$ 16,00",
         priceValue: 16,
         fit: true,
+        image: sucoDetoxAsset.url,
         options: [{ label: "Escolha o sabor", required: true, choices: ["Morango", "Abacaxi com hortelã", "Detox (fit)"] }],
       },
       {
