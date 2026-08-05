@@ -6,6 +6,9 @@ import { cn } from "@/lib/utils";
 const ADDON_PRICES: Record<string, number> = {
   "Chantilly (+R$ 4)": 4,
   "Borda de Nutella (+R$ 4)": 4,
+  "Nutella (+R$ 4)": 4,
+  "Requeijão (+R$ 4)": 4,
+  "Geleia de morango (+R$ 4)": 4,
 };
 
 export function ProductModal() {
