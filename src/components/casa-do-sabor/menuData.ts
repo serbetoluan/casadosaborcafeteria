@@ -62,6 +62,8 @@ export const categories: MenuCategory[] = [
     title: "Lanchinhos",
     tagline: "Feitos na hora, feitos com amor",
     items: [
+      { slug: "saladinha-frutas", name: "Saladinha de frutas", description: "Mix fresquinho de frutas da estação.", price: "R$ 14,00", priceValue: 14, fit: true, image: saladaFrutasAsset.url },
+      { slug: "sanduiche-natural", name: "Sanduíche Natural de frango", description: "Sanduíche leve, prático e saboroso.", price: "R$ 18,00", priceValue: 18, fit: true, image: sanduicheNaturalAsset.url },
       {
         slug: "waffle-cremo",
         name: "Waffle de Cremo Queijo",
@@ -99,8 +101,6 @@ export const categories: MenuCategory[] = [
         options: [{ label: "Escolha o acompanhamento", required: true, choices: ["Mel", "Requeijão", "Mussarela"] }],
       },
       { slug: "toast-caprese", name: "Toast Caprese", description: "Pão baguete artesanal, creme de ricota, pesto de manjericão e tomate confit.", price: "R$ 25,00", priceValue: 25 },
-      { slug: "sanduiche-natural", name: "Sanduíche Natural de frango", description: "Sanduíche leve, prático e saboroso.", price: "R$ 18,00", priceValue: 18, fit: true, image: sanduicheNaturalAsset.url },
-      { slug: "saladinha-frutas", name: "Saladinha de frutas", description: "Mix fresquinho de frutas da estação.", price: "R$ 14,00", priceValue: 14, fit: true, image: saladaFrutasAsset.url },
     ],
   },
   {
