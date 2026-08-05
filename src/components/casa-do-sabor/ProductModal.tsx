@@ -121,15 +121,20 @@ export function ProductModal() {
         ) : null}
 
         <div className="flex-1 overflow-y-auto px-5 py-5">
-          <h3 className="font-display text-2xl font-semibold leading-tight text-ink">
-            {activeItem.name}
-          </h3>
-          {activeItem.description && (
-            <p className="mt-2 text-sm leading-relaxed text-ink/70">{activeItem.description}</p>
-          )}
-          <p className="mt-3 font-sans text-lg font-semibold text-terracotta-deep">
-            {formatBRL(activeItem.priceValue)}
-          </p>
+          <div className={cn(
+            "relative",
+            activeItem.image && "-mt-24 rounded-t-3xl bg-cream/95 backdrop-blur-md px-5 pt-6 pb-2 -mx-5 shadow-[0_-8px_30px_rgb(0,0,0,0.12)]"
+          )}>
+            <h3 className="font-display text-2xl font-semibold leading-tight text-ink">
+              {activeItem.name}
+            </h3>
+            {activeItem.description && (
+              <p className="mt-2 text-sm leading-relaxed text-ink/70">{activeItem.description}</p>
+            )}
+            <p className="mt-3 font-sans text-lg font-semibold text-terracotta-deep">
+              {formatBRL(activeItem.priceValue)}
+            </p>
+          </div>
 
           {(activeItem.options ?? []).map((group) => (
             <div key={group.label} className="mt-6">
