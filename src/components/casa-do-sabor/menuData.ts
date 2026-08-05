@@ -10,6 +10,11 @@ import disquinhoCarneAsset from "@/assets/disquinho_carne.png.asset.json";
 import sanduicheNaturalAsset from "@/assets/sanduiche_natural.png.asset.json";
 import cappuccinoGeladoAsset from "@/assets/cappuccino_gelado.png.asset.json";
 import cappuccinoItalianoAsset from "@/assets/cappuccino_italiano.png.asset.json";
+import cappuccinoItalianoV2Asset from "@/assets/cappuccino_italiano_v2.png.asset.json";
+import aguaComGasAsset from "@/assets/agua_com_gas.jpg.asset.json";
+import aguaSemGasAsset from "@/assets/agua_sem_gas.jpg.asset.json";
+import americanoAsset from "@/assets/americano.jpg.asset.json";
+import cafeEspressoAsset from "@/assets/cafe_espresso.jpg.asset.json";
 
 export type MenuOptionGroup = {
   label: string;
