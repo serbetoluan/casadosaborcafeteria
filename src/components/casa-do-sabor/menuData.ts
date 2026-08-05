@@ -30,6 +30,11 @@ import energeticoExtraPowerAsset from "@/assets/energetico_extra_power.jpg.asset
 import enroladaoQueijoV2Asset from "@/assets/enroladao_queijo_v2.jpg.asset.json";
 import esfirraCarneV2Asset from "@/assets/esfirra_carne_v2.jpg.asset.json";
 import mistoQuenteAsset from "@/assets/misto_quente.jpg.asset.json";
+import quicheAlhoPoroAsset from "@/assets/quiche_alho_poro.jpg.asset.json";
+import omeleteV2Asset from "@/assets/omelete_v2.jpg.asset.json";
+import ovosMexidosV2Asset from "@/assets/ovos_mexidos_v2.jpg.asset.json";
+import paoQueijoMultigraosAsset from "@/assets/pao_queijo_multigraos.jpg.asset.json";
+import biscoitoParmesaoAsset from "@/assets/biscoito_parmesao.jpg.asset.json";
 
 export type MenuOptionGroup = {
   label: string;
@@ -63,8 +68,8 @@ export const categories: MenuCategory[] = [
     tagline: "Do forno, quentinhos",
     items: [
       { slug: "pao-queijo", name: "Pão de queijo", description: "1 uni", price: "R$ 1,50", priceValue: 1.5, image: paoQueijoAsset.url },
-      { slug: "pao-queijo-multi", name: "Pão de queijo multigrãos", description: "1 uni", price: "R$ 2,50", priceValue: 2.5 },
-      { slug: "biscoito-parmesao", name: "Biscoito Parmesão", description: "1 uni", price: "R$ 3,00", priceValue: 3 },
+      { slug: "pao-queijo-multi", name: "Pão de queijo multigrãos", description: "1 uni", price: "R$ 2,50", priceValue: 2.5, image: paoQueijoMultigraosAsset.url },
+      { slug: "biscoito-parmesao", name: "Biscoito Parmesão", description: "1 uni", price: "R$ 3,00", priceValue: 3, image: biscoitoParmesaoAsset.url },
       { slug: "chipa-mussarela", name: "Chipa", description: "1 uni", price: "R$ 3,00", priceValue: 3, image: chipaAsset.url },
       { slug: "enroladao-queijo", name: "Enroladão de queijo", description: "100g · 1 uni", price: "R$ 9,00", priceValue: 9, image: enroladaoQueijoV2Asset.url },
       {
@@ -106,9 +111,9 @@ export const categories: MenuCategory[] = [
         image: mistoQuenteAsset.url,
         options: [{ label: "Um upzinho?", choices: ["Sem tomate", "Com rodela de tomate"] }],
       },
-      { slug: "ovos-torrada-bacon", name: "Ovos mexidos com Torradas e Bacon", description: "Ovos mexidos, uma pitada de creme de leite, torradas e bacon.", price: "R$ 18,00", priceValue: 18 },
-      { slug: "omelete-simples", name: "Omelete Simples", description: "Ovos preparados para omelete.", price: "R$ 18,00", priceValue: 18, image: omeleteAsset.url },
-      { slug: "omelete-pq", name: "Omelete de Presunto e Queijo", description: "Ovos preparados para omelete, recheado com presunto e mussarela.", price: "R$ 20,00", priceValue: 20 },
+      { slug: "ovos-torrada-bacon", name: "Ovos mexidos com Torradas e Bacon", description: "Ovos mexidos, uma pitada de creme de leite, torradas e bacon.", price: "R$ 18,00", priceValue: 18, image: ovosMexidosV2Asset.url },
+      { slug: "omelete-simples", name: "Omelete Simples", description: "Ovos preparados para omelete.", price: "R$ 18,00", priceValue: 18, image: omeleteV2Asset.url },
+      { slug: "omelete-pq", name: "Omelete de Presunto e Queijo", description: "Ovos preparados para omelete, recheado com presunto e mussarela.", price: "R$ 20,00", priceValue: 20, image: omeleteV2Asset.url },
       { slug: "crepioca", name: "Crepioca", description: "Ovos preparados com tapioca.", price: "R$ 20,00", priceValue: 20, image: crepiocaAsset.url },
       { slug: "crepioca-pq", name: "Crepioca de Presunto e Queijo", description: "Ovos e tapioca, recheado com presunto e mussarela.", price: "R$ 22,00", priceValue: 22, image: crepiocaAsset.url },
       { slug: "crepioca-frango", name: "Crepioca de Frango com Queijo", description: "Ovos e tapioca, recheado com filé de peito de frango desfiado e mussarela.", price: "R$ 25,00", priceValue: 25, image: crepiocaFrangoAsset.url },
@@ -133,7 +138,7 @@ export const categories: MenuCategory[] = [
       { slug: "esfirra-carne", name: "Esfirra de Carne", price: "R$ 10,00", priceValue: 10, image: esfirraCarneV2Asset.url },
       { slug: "disco-carne", name: "Disco de carne", price: "R$ 10,00", priceValue: 10, image: disquinhoCarneAsset.url },
       { slug: "disco-frango-queijo", name: "Disco de Frango com Queijo", price: "R$ 12,50", priceValue: 12.5, image: disquinhoFrangoAsset.url },
-      { slug: "quiche-alho-poro", name: "Quiche de Alho Poró", price: "R$ 18,00", priceValue: 18 },
+      { slug: "quiche-alho-poro", name: "Quiche de Alho Poró", price: "R$ 18,00", priceValue: 18, image: quicheAlhoPoroAsset.url },
       { slug: "quiche-lorraine", name: "Quiche Lorraine", description: "Bacon e creme de queijo.", price: "R$ 18,00", priceValue: 18, image: tortaFrangoAsset.url },
       { slug: "torta-frango-catupiry", name: "Torta de Frango com Catupiry", price: "R$ 20,00", priceValue: 20 },
     ],
