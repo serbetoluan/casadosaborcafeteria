@@ -132,7 +132,7 @@ export const categories: MenuCategory[] = [
     title: "Folhados",
     tagline: "Linha premium, massa amanteigada",
     items: [
-      { slug: "croissant-amanteigado", name: "Croissant Amanteigado", description: "Croissant linha premium. Acompanha manteiga de leite.", price: "R$ 18,00", priceValue: 18 },
+      { slug: "croissant-amanteigado", name: "Croissant Amanteigado", description: "Croissant linha premium. Acompanha manteiga de leite.", price: "R$ 18,00", priceValue: 18, image: croissantAmanteigadoAsset.url },
       { slug: "croissant-peru", name: "Croissant cremoso de Peito de Peru", description: "Linha premium, recheado com peito de peru, cream cheese e um toque de geleia de pimenta (120g).", price: "R$ 24,50", priceValue: 24.5 },
       { slug: "croissant-frango-queijo", name: "Croissant frango com queijo", description: "Linha premium, recheado com filé de peito de frango desfiado e mussarela.", price: "R$ 24,50", priceValue: 24.5 },
       { slug: "croissant-provencal", name: "Croissant Provençal", description: "Linha premium, recheado com queijo brie, damasco, mel e amêndoas laminadas.", price: "R$ 27,50", priceValue: 27.5 },
