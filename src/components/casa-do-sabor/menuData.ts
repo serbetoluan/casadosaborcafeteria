@@ -236,7 +236,7 @@ export const categories: MenuCategory[] = [
       },
       { slug: "cappuccino-br-light", name: "Cappuccino brasileiro light", description: "240ml — versão mais leve, sem abrir mão do sabor.", price: "R$ 18,00", priceValue: 18, fit: true },
       { slug: "maltine", name: "Maltine quentinho", description: "240ml — Caneca com leite quentinho, ovomaltine crocante e nuvem de leite vaporizado.", price: "R$ 16,00", priceValue: 16 },
-      { slug: "chocolate-quente", name: "Chocolate quente", description: "240ml — cremoso e aconchegante.", price: "R$ 20,00", priceValue: 20 },
+      { slug: "chocolate-quente", name: "Chocolate quente", description: "240ml — cremoso e aconchegante.", price: "R$ 20,00", priceValue: 20, image: chocolateQuenteAsset.url },
       {
         slug: "adicionais-list",
         name: "Adicionais",
