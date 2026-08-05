@@ -15,6 +15,11 @@ import aguaComGasAsset from "@/assets/agua_com_gas.jpg.asset.json";
 import aguaSemGasAsset from "@/assets/agua_sem_gas.jpg.asset.json";
 import americanoAsset from "@/assets/americano.jpg.asset.json";
 import cafeEspressoAsset from "@/assets/cafe_espresso.jpg.asset.json";
+import croissantAmanteigadoAsset from "@/assets/croissant_amanteigado.jpg.asset.json";
+import chipaAsset from "@/assets/chipa.jpg.asset.json";
+import chocolateQuenteAsset from "@/assets/chocolate_quente.jpg.asset.json";
+import crepiocaAsset from "@/assets/crepioca.jpg.asset.json";
+import crepiocaFrangoAsset from "@/assets/crepioca_frango.jpg.asset.json";
 
 export type MenuOptionGroup = {
   label: string;
