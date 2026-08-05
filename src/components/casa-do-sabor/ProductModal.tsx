@@ -98,7 +98,7 @@ export function ProductModal() {
         </button>
 
         {activeItem.image ? (
-          <div className="relative h-56 shrink-0 overflow-hidden bg-cream">
+          <div className="relative aspect-[3/4] shrink-0 overflow-hidden bg-cream">
             <img
               src={activeItem.image}
               alt={activeItem.name}
