@@ -112,7 +112,7 @@ export const categories: MenuCategory[] = [
         image: waffleAsset.url,
         options: [
           { label: "Versão", required: true, choices: ["Tradicional", "Fit"] },
-          { label: "Escolha o acompanhamento", required: true, choices: ["Mel", "Nutella", "Requeijão", "Geleia de morango"] },
+          { label: "Escolha o acompanhamento", required: true, choices: ["Mel", "Nutella (+R$ 4)", "Requeijão (+R$ 4)", "Geleia de morango (+R$ 4)"] },
         ],
       },
       {
@@ -124,12 +124,12 @@ export const categories: MenuCategory[] = [
         image: mistoQuenteAsset.url,
         options: [{ label: "Um upzinho?", choices: ["Sem tomate", "Com rodela de tomate"] }],
       },
-      { slug: "ovos-torrada-bacon", name: "Ovos mexidos com Torradas e Bacon", description: "Ovos mexidos, uma pitada de creme de leite, torradas e bacon.", price: "R$ 18,00", priceValue: 18, image: ovosMexidosV2Asset.url },
-      { slug: "omelete-simples", name: "Omelete Simples", description: "Ovos preparados para omelete.", price: "R$ 18,00", priceValue: 18, image: omeleteV2Asset.url },
-      { slug: "omelete-pq", name: "Omelete de Presunto e Queijo", description: "Ovos preparados para omelete, recheado com presunto e mussarela.", price: "R$ 20,00", priceValue: 20, image: omeleteV2Asset.url },
-      { slug: "crepioca", name: "Crepioca", description: "Ovos preparados com tapioca.", price: "R$ 20,00", priceValue: 20, image: crepiocaAsset.url },
-      { slug: "crepioca-pq", name: "Crepioca de Presunto e Queijo", description: "Ovos e tapioca, recheado com presunto e mussarela.", price: "R$ 22,00", priceValue: 22, image: crepiocaAsset.url },
-      { slug: "crepioca-frango", name: "Crepioca de Frango com Queijo", description: "Ovos e tapioca, recheado com filé de peito de frango desfiado e mussarela.", price: "R$ 25,00", priceValue: 25, image: crepiocaFrangoAsset.url },
+      { slug: "ovos-torrada-bacon", name: "Ovos mexidos com Torradas e Bacon", description: "Ovos mexidos, uma pitada de creme de leite, torradas e bacon.", price: "R$ 18,00", priceValue: 18, image: ovosMexidosV2Asset.url, options: [{ label: "Adicionais", multi: true, choices: ["Requeijão (+R$ 4)"] }] },
+      { slug: "omelete-simples", name: "Omelete Simples", description: "Ovos preparados para omelete.", price: "R$ 18,00", priceValue: 18, image: omeleteV2Asset.url, options: [{ label: "Adicionais", multi: true, choices: ["Requeijão (+R$ 4)"] }] },
+      { slug: "omelete-pq", name: "Omelete de Presunto e Queijo", description: "Ovos preparados para omelete, recheado com presunto e mussarela.", price: "R$ 20,00", priceValue: 20, image: omeleteV2Asset.url, options: [{ label: "Adicionais", multi: true, choices: ["Requeijão (+R$ 4)"] }] },
+      { slug: "crepioca", name: "Crepioca", description: "Ovos preparados com tapioca.", price: "R$ 20,00", priceValue: 20, image: crepiocaAsset.url, options: [{ label: "Adicionais", multi: true, choices: ["Requeijão (+R$ 4)"] }] },
+      { slug: "crepioca-pq", name: "Crepioca de Presunto e Queijo", description: "Ovos e tapioca, recheado com presunto e mussarela.", price: "R$ 22,00", priceValue: 22, image: crepiocaAsset.url, options: [{ label: "Adicionais", multi: true, choices: ["Requeijão (+R$ 4)"] }] },
+      { slug: "crepioca-frango", name: "Crepioca de Frango com Queijo", description: "Ovos e tapioca, recheado com filé de peito de frango desfiado e mussarela.", price: "R$ 25,00", priceValue: 25, image: crepiocaFrangoAsset.url, options: [{ label: "Adicionais", multi: true, choices: ["Requeijão (+R$ 4)"] }] },
       {
         slug: "panqueca-banana",
         name: "Panqueca de banana com aveia",
@@ -137,9 +137,9 @@ export const categories: MenuCategory[] = [
         price: "R$ 18,00",
         priceValue: 18,
         fit: true,
-        options: [{ label: "Escolha o acompanhamento", required: true, choices: ["Mel", "Requeijão", "Mussarela"] }],
+        options: [{ label: "Escolha o acompanhamento", required: true, choices: ["Mel", "Requeijão (+R$ 4)", "Mussarela"] }],
       },
-      { slug: "toast-caprese", name: "Toast Caprese", description: "Pão baguete artesanal, creme de ricota, pesto de manjericão e tomate confit.", price: "R$ 25,00", priceValue: 25, image: toastCapreseAsset.url },
+      { slug: "toast-caprese", name: "Toast Caprese", description: "Pão baguete artesanal, creme de ricota, pesto de manjericão e tomate confit.", price: "R$ 25,00", priceValue: 25, image: toastCapreseAsset.url, options: [{ label: "Adicionais", multi: true, choices: ["Requeijão (+R$ 4)"] }] },
     ],
   },
   {
@@ -161,7 +161,7 @@ export const categories: MenuCategory[] = [
     title: "Folhados",
     tagline: "Linha premium, massa amanteigada",
     items: [
-      { slug: "croissant-amanteigado", name: "Croissant Amanteigado", description: "Croissant linha premium. Acompanha manteiga de leite.", price: "R$ 18,00", priceValue: 18, image: croissantAmanteigadoAsset.url },
+      { slug: "croissant-amanteigado", name: "Croissant Amanteigado", description: "Croissant linha premium. Acompanha manteiga de leite.", price: "R$ 18,00", priceValue: 18, image: croissantAmanteigadoAsset.url, options: [{ label: "Adicionais", multi: true, choices: ["Nutella (+R$ 4)", "Requeijão (+R$ 4)", "Geleia de morango (+R$ 4)"] }] },
       { slug: "croissant-peru", name: "Croissant cremoso de Peito de Peru", description: "Linha premium, recheado com peito de peru, cream cheese e um toque de geleia de pimenta (120g).", price: "R$ 24,50", priceValue: 24.5, image: croissantPeruAsset.url },
       { slug: "croissant-frango-queijo", name: "Croissant frango com queijo", description: "Linha premium, recheado com filé de peito de frango desfiado e mussarela.", price: "R$ 24,50", priceValue: 24.5, image: croissantFrangoQueijoAsset.url },
       { slug: "croissant-provencal", name: "Croissant Provençal", description: "Linha premium, recheado com queijo brie, damasco, mel e amêndoas laminadas.", price: "R$ 27,50", priceValue: 27.5, image: croissantProvencalAsset.url },
