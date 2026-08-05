@@ -123,8 +123,8 @@ export function ProductModal() {
 
         <div className="flex-1 overflow-y-auto px-5 py-5">
           <div className={cn(
-            "relative",
-            activeItem.image && "-mt-24 rounded-t-3xl bg-cream/95 backdrop-blur-md px-5 pt-6 pb-2 -mx-5 shadow-[0_-8px_30px_rgb(0,0,0,0.12)]"
+            "relative z-10",
+            activeItem.image && "-mt-24 rounded-t-3xl bg-cream/98 backdrop-blur-xl px-5 pt-8 pb-3 -mx-5 shadow-[0_-12px_40px_rgba(0,0,0,0.15)] border-t border-white/20"
           )}>
             <h3 className="font-display text-2xl font-semibold leading-tight text-ink">
               {activeItem.name}
