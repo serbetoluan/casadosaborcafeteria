@@ -203,8 +203,10 @@ export const categories: MenuCategory[] = [
         description: "Fermentado natural, gaseificação leve.",
         price: "R$ 18,00",
         priceValue: 18,
+        image: kombuchasBaldeAsset.url,
         options: [{ label: "Escolha o sabor", required: true, choices: ["Pitaya e maracujá", "Morango e limão", "Tangerina e Hibisco", "Abacaxi com hortelã"] }],
       },
+
     ],
   },
   {
