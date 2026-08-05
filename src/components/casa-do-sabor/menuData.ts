@@ -150,7 +150,7 @@ export const categories: MenuCategory[] = [
       { slug: "disco-frango-queijo", name: "Disco de Frango com Queijo", price: "R$ 12,50", priceValue: 12.5, image: disquinhoFrangoAsset.url },
       { slug: "quiche-alho-poro", name: "Quiche de Alho Poró", price: "R$ 18,00", priceValue: 18, image: quicheAlhoPoroAsset.url },
       { slug: "quiche-lorraine", name: "Quiche Lorraine", description: "Bacon e creme de queijo.", price: "R$ 18,00", priceValue: 18, image: tortaFrangoAsset.url },
-      { slug: "torta-frango-catupiry", name: "Torta de Frango com Catupiry", price: "R$ 20,00", priceValue: 20 },
+      { slug: "torta-frango-catupiry", name: "Torta de Frango com Catupiry", price: "R$ 20,00", priceValue: 20, image: tortaFrangoV2Asset.url },
     ],
   },
   {
