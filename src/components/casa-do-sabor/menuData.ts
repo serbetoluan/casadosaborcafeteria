@@ -263,7 +263,7 @@ export const categories: MenuCategory[] = [
           { 
             label: "Adicionais", 
             multi: true, 
-            choices: ["Chantilly (+R$ 4)", "Borda de Nutella (+R$ 4)"] 
+            choices: ["Chantilly (+R$ 4)", "Borda de Nutella (+R$ 4)", "Nutella (+R$ 4)"] 
           }
         ]
       },
@@ -278,7 +278,7 @@ export const categories: MenuCategory[] = [
           { 
             label: "Adicionais", 
             multi: true, 
-            choices: ["Chantilly (+R$ 4)", "Borda de Nutella (+R$ 4)"] 
+            choices: ["Chantilly (+R$ 4)", "Borda de Nutella (+R$ 4)", "Nutella (+R$ 4)"] 
           }
         ]
       },
@@ -293,7 +293,7 @@ export const categories: MenuCategory[] = [
           { 
             label: "Adicionais", 
             multi: true, 
-            choices: ["Chantilly (+R$ 4)", "Borda de Nutella (+R$ 4)"] 
+            choices: ["Chantilly (+R$ 4)", "Borda de Nutella (+R$ 4)", "Nutella (+R$ 4)"] 
           }
         ]
       },
@@ -308,7 +308,7 @@ export const categories: MenuCategory[] = [
           { 
             label: "Adicionais", 
             multi: true, 
-            choices: ["Chantilly (+R$ 4)", "Borda de Nutella (+R$ 4)"] 
+            choices: ["Chantilly (+R$ 4)", "Borda de Nutella (+R$ 4)", "Nutella (+R$ 4)"] 
           }
         ]
       },
@@ -323,7 +323,7 @@ export const categories: MenuCategory[] = [
           { 
             label: "Adicionais", 
             multi: true, 
-            choices: ["Chantilly (+R$ 4)", "Borda de Nutella (+R$ 4)"] 
+            choices: ["Chantilly (+R$ 4)", "Borda de Nutella (+R$ 4)", "Nutella (+R$ 4)"] 
           }
         ]
       },
@@ -337,7 +337,7 @@ export const categories: MenuCategory[] = [
           { 
             label: "Adicionais", 
             multi: true, 
-            choices: ["Chantilly (+R$ 4)", "Borda de Nutella (+R$ 4)"] 
+            choices: ["Chantilly (+R$ 4)", "Borda de Nutella (+R$ 4)", "Nutella (+R$ 4)"] 
           }
         ]
       },
@@ -352,7 +352,7 @@ export const categories: MenuCategory[] = [
           { 
             label: "Adicionais", 
             multi: true, 
-            choices: ["Chantilly (+R$ 4)", "Borda de Nutella (+R$ 4)"] 
+            choices: ["Chantilly (+R$ 4)", "Borda de Nutella (+R$ 4)", "Nutella (+R$ 4)"] 
           }
         ]
       },
