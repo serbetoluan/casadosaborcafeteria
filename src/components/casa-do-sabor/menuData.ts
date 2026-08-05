@@ -252,15 +252,50 @@ export const categories: MenuCategory[] = [
     title: "Bebidas Quentinhas",
     tagline: "Do café curtinho ao chocolate cremoso",
     items: [
-      { slug: "espresso-curto", name: "Espresso", description: "50ml", price: "R$ 7,00", priceValue: 7, image: cafeEspressoAsset.url },
-      { slug: "espresso-duplo", name: "Espresso duplo", description: "100ml", price: "R$ 10,00", priceValue: 10, image: cafeEspressoAsset.url },
+      { 
+        slug: "espresso-curto", 
+        name: "Espresso", 
+        description: "50ml", 
+        price: "R$ 7,00", 
+        priceValue: 7, 
+        image: cafeEspressoAsset.url,
+        options: [
+          { 
+            label: "Adicionais", 
+            multi: true, 
+            choices: ["Chantilly (+R$ 4)", "Borda de Nutella (+R$ 4)", "Nutella (+R$ 4)"] 
+          }
+        ]
+      },
+      { 
+        slug: "espresso-duplo", 
+        name: "Espresso duplo", 
+        description: "100ml", 
+        price: "R$ 10,00", 
+        priceValue: 10, 
+        image: cafeEspressoAsset.url,
+        options: [
+          { 
+            label: "Adicionais", 
+            multi: true, 
+            choices: ["Chantilly (+R$ 4)", "Borda de Nutella (+R$ 4)", "Nutella (+R$ 4)"] 
+          }
+        ]
+      },
       { 
         slug: "cappuccino-italiano", 
         name: "Cappuccino italiano", 
         description: "240ml — Café, leite semi desnatado, calda de chocolate, crema e canela.", 
         price: "R$ 16,00", 
         priceValue: 16,
-        image: cappuccinoItalianoV2Asset.url
+        image: cappuccinoItalianoV2Asset.url,
+        options: [
+          { 
+            label: "Adicionais", 
+            multi: true, 
+            choices: ["Chantilly (+R$ 4)", "Borda de Nutella (+R$ 4)", "Nutella (+R$ 4)"] 
+          }
+        ]
       },
       { 
         slug: "cappuccino-br", 
@@ -268,24 +303,58 @@ export const categories: MenuCategory[] = [
         description: "240ml — Leite semi desnatado, pó de cappuccino e nuvem de leite vaporizado.", 
         price: "R$ 16,00", 
         priceValue: 16,
-        image: cappuccinoItalianoAsset.url // Usando a foto que estava no italiano
-      },
-      { slug: "cappuccino-br-light", name: "Cappuccino brasileiro light", description: "240ml — versão mais leve, sem abrir mão do sabor.", price: "R$ 18,00", priceValue: 18, fit: true },
-      { slug: "maltine", name: "Maltine quentinho", description: "240ml — Caneca com leite quentinho, ovomaltine crocante e nuvem de leite vaporizado.", price: "R$ 16,00", priceValue: 16 },
-      { slug: "chocolate-quente", name: "Chocolate quente", description: "240ml — cremoso e aconchegante.", price: "R$ 20,00", priceValue: 20, image: chocolateQuenteAsset.url },
-      {
-        slug: "adicionais-list",
-        name: "Adicionais",
-        description: "Personalize sua bebida.",
-        price: "A partir de R$ 4,00",
-        priceValue: 0,
+        image: cappuccinoItalianoAsset.url,
         options: [
           { 
-            label: "Escolha os adicionais", 
+            label: "Adicionais", 
             multi: true, 
-            choices: ["Chantilly", "Borda de Nutella", "Requeijão", "Geleia de morango", "Nutella"] 
+            choices: ["Chantilly (+R$ 4)", "Borda de Nutella (+R$ 4)", "Nutella (+R$ 4)"] 
           }
-        ],
+        ]
+      },
+      { 
+        slug: "cappuccino-br-light", 
+        name: "Cappuccino brasileiro light", 
+        description: "240ml — versão mais leve, sem abrir mão do sabor.", 
+        price: "R$ 18,00", 
+        priceValue: 18, 
+        fit: true,
+        options: [
+          { 
+            label: "Adicionais", 
+            multi: true, 
+            choices: ["Chantilly (+R$ 4)", "Borda de Nutella (+R$ 4)", "Nutella (+R$ 4)"] 
+          }
+        ]
+      },
+      { 
+        slug: "maltine", 
+        name: "Maltine quentinho", 
+        description: "240ml — Caneca com leite quentinho, ovomaltine crocante e nuvem de leite vaporizado.", 
+        price: "R$ 16,00", 
+        priceValue: 16,
+        options: [
+          { 
+            label: "Adicionais", 
+            multi: true, 
+            choices: ["Chantilly (+R$ 4)", "Borda de Nutella (+R$ 4)", "Nutella (+R$ 4)"] 
+          }
+        ]
+      },
+      { 
+        slug: "chocolate-quente", 
+        name: "Chocolate quente", 
+        description: "240ml — cremoso e aconchegante.", 
+        price: "R$ 20,00", 
+        priceValue: 20, 
+        image: chocolateQuenteAsset.url,
+        options: [
+          { 
+            label: "Adicionais", 
+            multi: true, 
+            choices: ["Chantilly (+R$ 4)", "Borda de Nutella (+R$ 4)", "Nutella (+R$ 4)"] 
+          }
+        ]
       },
     ],
   },

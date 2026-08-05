@@ -1,12 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { X, Minus, Plus, ImageIcon, Leaf, ShoppingBag } from "lucide-react";
-import { useCart, formatBRL } from "./CartContext";
+import { useCart, formatBRL, ADDON_PRICES } from "./CartContext";
 import { cn } from "@/lib/utils";
-
-const ADDON_PRICES: Record<string, number> = {
-  "Chantilly (+R$ 4)": 4,
-  "Borda de Nutella (+R$ 4)": 4,
-};
 
 export function ProductModal() {
   const { activeItem, closeProduct, addLine, openCart, closeCart } = useCart();

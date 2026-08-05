@@ -88,6 +88,14 @@ export function useCart() {
   return ctx;
 }
 
+export const ADDON_PRICES: Record<string, number> = {
+  "Chantilly (+R$ 4)": 4,
+  "Borda de Nutella (+R$ 4)": 4,
+  "Nutella (+R$ 4)": 4,
+  "Requeijão (+R$ 4)": 4,
+  "Geleia de morango (+R$ 4)": 4,
+};
+
 export function formatBRL(value: number) {
   return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }
