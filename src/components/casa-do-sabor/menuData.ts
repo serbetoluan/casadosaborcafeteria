@@ -25,6 +25,11 @@ import croissantFrangoQueijoAsset from "@/assets/croissant_frango_queijo.jpg.ass
 import croissantProvencalAsset from "@/assets/croissant_provencal.jpg.asset.json";
 import croissantDuetoDoceAsset from "@/assets/croissant_dueto_doce.jpg.asset.json";
 import energeticoZeroAsset from "@/assets/energetico_zero.jpg.asset.json";
+import nutellaFrozenAsset from "@/assets/nutella_frozen.jpg.asset.json";
+import energeticoExtraPowerAsset from "@/assets/energetico_extra_power.jpg.asset.json";
+import enroladaoQueijoV2Asset from "@/assets/enroladao_queijo_v2.jpg.asset.json";
+import esfirraCarneV2Asset from "@/assets/esfirra_carne_v2.jpg.asset.json";
+import mistoQuenteAsset from "@/assets/misto_quente.jpg.asset.json";
 
 export type MenuOptionGroup = {
   label: string;
@@ -61,7 +66,7 @@ export const categories: MenuCategory[] = [
       { slug: "pao-queijo-multi", name: "Pão de queijo multigrãos", description: "1 uni", price: "R$ 2,50", priceValue: 2.5 },
       { slug: "biscoito-parmesao", name: "Biscoito Parmesão", description: "1 uni", price: "R$ 3,00", priceValue: 3 },
       { slug: "chipa-mussarela", name: "Chipa", description: "1 uni", price: "R$ 3,00", priceValue: 3, image: chipaAsset.url },
-      { slug: "enroladao-queijo", name: "Enroladão de queijo", description: "100g · 1 uni", price: "R$ 9,00", priceValue: 9, image: enroladinhoAsset.url },
+      { slug: "enroladao-queijo", name: "Enroladão de queijo", description: "100g · 1 uni", price: "R$ 9,00", priceValue: 9, image: enroladaoQueijoV2Asset.url },
       {
         slug: "croissant-folhado",
         name: "Croissant (presunto e queijo | chocolate)",
@@ -98,6 +103,7 @@ export const categories: MenuCategory[] = [
         description: "Pão de forma, presunto e muita mussarela.",
         price: "R$ 18,00",
         priceValue: 18,
+        image: mistoQuenteAsset.url,
         options: [{ label: "Um upzinho?", choices: ["Sem tomate", "Com rodela de tomate"] }],
       },
       { slug: "ovos-torrada-bacon", name: "Ovos mexidos com Torradas e Bacon", description: "Ovos mexidos, uma pitada de creme de leite, torradas e bacon.", price: "R$ 18,00", priceValue: 18 },
@@ -124,7 +130,7 @@ export const categories: MenuCategory[] = [
     tagline: "Pra matar aquela fominha",
     items: [
       { slug: "americano-pq", name: "Americano de Presunto e Queijo", price: "R$ 10,00", priceValue: 10, image: americanoAsset.url },
-      { slug: "esfirra-carne", name: "Esfirra de Carne", price: "R$ 10,00", priceValue: 10, image: esfihaCarneAsset.url },
+      { slug: "esfirra-carne", name: "Esfirra de Carne", price: "R$ 10,00", priceValue: 10, image: esfirraCarneV2Asset.url },
       { slug: "disco-carne", name: "Disco de carne", price: "R$ 10,00", priceValue: 10, image: disquinhoCarneAsset.url },
       { slug: "disco-frango-queijo", name: "Disco de Frango com Queijo", price: "R$ 12,50", priceValue: 12.5, image: disquinhoFrangoAsset.url },
       { slug: "quiche-alho-poro", name: "Quiche de Alho Poró", price: "R$ 18,00", priceValue: 18 },
@@ -169,7 +175,7 @@ export const categories: MenuCategory[] = [
         priceValue: 5,
         options: [{ label: "Escolha o sabor", required: true, choices: ["Coca-cola Tradicional", "Coca-cola Zero", "Coca-cola Espresso", "Guaraná Antártica", "Fanta Laranja"] }],
       },
-      { slug: "energetico", name: "Energético", description: "270ml", price: "R$ 8,50", priceValue: 8.5 },
+      { slug: "energetico", name: "Energético", description: "270ml", price: "R$ 8,50", priceValue: 8.5, image: energeticoExtraPowerAsset.url },
       { slug: "energetico-zero", name: "Energético zero", description: "473ml", price: "R$ 11,90", priceValue: 11.9, image: energeticoZeroAsset.url },
       {
         slug: "kombuchas",
@@ -212,7 +218,7 @@ export const categories: MenuCategory[] = [
         options: [{ label: "Escolha o sabor", required: true, choices: ["Morango", "Maçã verde"] }],
       },
       { slug: "cappuccino-gelado", name: "Cappuccino Gelado", description: "400ml — Café expresso, cappuccino, sorvete de creme, calda de chocolate e chantilly.", price: "R$ 24,00", priceValue: 24, image: cappuccinoGeladoAsset.url },
-      { slug: "cafe-nutella", name: "Café Nutella", description: "400ml — Taça de gelato de leite Ninho® batido com uma dose de espresso e muita Nutella®, acompanha chantilly.", price: "R$ 26,00", priceValue: 26 },
+      { slug: "cafe-nutella", name: "Café Nutella", description: "400ml — Taça de gelato de leite Ninho® batido com uma dose de espresso e muita Nutella®, acompanha chantilly.", price: "R$ 26,00", priceValue: 26, image: nutellaFrozenAsset.url },
       { slug: "vienense", name: "Vienense", description: "400ml — Café expresso, sorvete de creme, calda de chocolate e chantilly.", price: "R$ 24,00", priceValue: 24 },
     ],
   },
