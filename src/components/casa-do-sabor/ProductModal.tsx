@@ -86,7 +86,7 @@ export function ProductModal() {
       onClick={closeProduct}
     >
       <div
-        className="relative flex max-h-[92vh] w-full max-w-lg flex-col overflow-hidden rounded-t-3xl bg-cream shadow-2xl sm:rounded-3xl animate-in slide-in-from-bottom-8 sm:zoom-in-95 duration-300"
+        className="relative flex max-h-[95vh] w-full max-w-lg flex-col overflow-y-auto overflow-x-hidden rounded-t-3xl bg-cream shadow-2xl sm:rounded-3xl animate-in slide-in-from-bottom-8 sm:zoom-in-95 duration-300"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -121,7 +121,7 @@ export function ProductModal() {
           </div>
         ) : null}
 
-        <div className="flex-1 overflow-y-auto px-5 py-5">
+        <div className="flex-1 px-5 py-5">
           <div className={cn(
             "relative z-10",
             activeItem.image && "-mt-24 rounded-t-3xl bg-cream/98 backdrop-blur-xl px-5 pt-8 pb-3 -mx-5 shadow-[0_-12px_40px_rgba(0,0,0,0.15)] border-t border-white/20"
@@ -220,7 +220,7 @@ export function ProductModal() {
           </div>
         </div>
 
-        <div className="flex shrink-0 flex-row items-center gap-2 border-t border-blush-deep/40 bg-white px-3 pb-8 pt-3 sm:gap-3 sm:px-4 sm:pb-4">
+        <div className="sticky bottom-0 z-20 flex shrink-0 flex-row items-center gap-2 border-t border-blush-deep/40 bg-white/95 backdrop-blur-md px-3 pb-8 pt-3 sm:gap-3 sm:px-4 sm:pb-4">
           <button
             onClick={handleAddAndGoToCart}
             className="flex min-w-0 flex-1 items-center justify-center gap-1.5 rounded-full bg-terracotta px-3 py-2.5 font-display text-[13px] font-semibold text-white shadow-lg shadow-terracotta/30 transition-all hover:bg-terracotta-dark active:scale-[0.98] sm:gap-2 sm:px-4 sm:py-3 sm:text-sm"
