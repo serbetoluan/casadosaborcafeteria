@@ -153,8 +153,11 @@ export function ProductModal() {
                 )}
               </div>
               {errors.includes(group.label) && (
-                <p className="mb-2 text-xs text-terracotta-deep">Escolha uma opção para continuar.</p>
+                <p data-option-error="true" className="mb-2 text-xs text-terracotta-deep">
+                  Escolha uma opção para continuar.
+                </p>
               )}
+
               <div className="flex flex-col gap-2">
                 {group.choices.map((choice) => {
                   const selected = (selections[group.label] ?? []).includes(choice);
