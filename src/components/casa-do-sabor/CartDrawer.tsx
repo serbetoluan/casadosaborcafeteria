@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useRef, useState } from "react";
 import { X, Minus, Plus, Trash2, ShoppingBag, MessageCircle, MapPin, CreditCard, User } from "lucide-react";
 import { useCart, formatBRL } from "./CartContext";
 import { WHATSAPP_NUMBER } from "./menuData";
@@ -7,40 +7,19 @@ import { cn } from "@/lib/utils";
 
 const DELIVERY_FEE = 12;
 
+type FormErrors = { name?: string; address?: string };
+
 export function CartDrawer() {
   const { isOpen, closeCart, lines, updateQty, removeLine, total, clear, orderDetails, updateOrderDetails } = useCart();
+  const [errors, setErrors] = useState<FormErrors>({});
+  const nameRef = useRef<HTMLInputElement>(null);
+  const addressRef = useRef<HTMLTextAreaElement>(null);
 
-  useEffect(() => {
-    if (!isOpen) return;
-
-    // Add history state when drawer opens to handle back button
-    window.history.pushState({ drawerOpen: true }, "");
-
-    const onPopState = () => {
-      // If user clicks back button, close the drawer
-      closeCart();
-    };
-
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && closeCart();
-
-    window.addEventListener("popstate", onPopState);
-    document.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      window.removeEventListener("popstate", onPopState);
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-
-      // If we're closing the drawer manually (not via back button),
-      // we need to remove the state we pushed to keep history clean.
-      if (window.history.state?.drawerOpen) {
-        window.history.back();
-      }
-    };
-  }, [isOpen, closeCart]);
+  // Histórico (voltar do celular), Esc e trava de scroll são controlados
+  // centralmente no CartProvider.
 
   if (!isOpen) return null;
+
 
   const buildMessage = () => {
     const lineTxt = lines
