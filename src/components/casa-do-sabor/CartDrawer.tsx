@@ -194,13 +194,27 @@ export function CartDrawer() {
                     Seus dados
                   </h4>
                   <input
+                    ref={nameRef}
                     type="text"
+                    inputMode="text"
+                    autoComplete="name"
+                    maxLength={80}
                     placeholder="Seu nome"
                     value={orderDetails.name}
-                    onChange={(e) => updateOrderDetails({ name: e.target.value })}
-                    className="w-full rounded-xl border border-blush-deep/60 bg-white px-4 py-2.5 text-sm text-ink placeholder:text-ink/30 focus:border-terracotta focus:outline-none focus:ring-2 focus:ring-terracotta/20"
+                    onChange={(e) => {
+                      updateOrderDetails({ name: e.target.value });
+                      if (errors.name) setErrors((prev) => ({ ...prev, name: undefined }));
+                    }}
+                    className={cn(
+                      "w-full rounded-xl border bg-white px-4 py-3 text-base text-ink placeholder:text-ink/30 focus:outline-none focus:ring-2 sm:text-sm",
+                      errors.name
+                        ? "border-terracotta-deep focus:border-terracotta-deep focus:ring-terracotta-deep/20"
+                        : "border-blush-deep/60 focus:border-terracotta focus:ring-terracotta/20",
+                    )}
                   />
+                  {errors.name && <p className="text-xs text-terracotta-deep">{errors.name}</p>}
                 </div>
+
 
                 <div className="space-y-3">
                   <h4 className="flex items-center gap-2 font-display text-sm font-semibold text-ink">
