@@ -43,7 +43,9 @@ export function ProductModal() {
   const lineTotal = unitPrice * quantity;
 
   const toggleChoice = (label: string, choice: string, multi?: boolean) => {
+    setErrors((prev) => prev.filter((l) => l !== label));
     setSelections((prev) => {
+
       const current = prev[label] ?? [];
       if (multi) {
         return {
