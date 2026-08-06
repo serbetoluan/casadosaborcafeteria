@@ -11,18 +11,24 @@ export function ProductModal() {
   const [note, setNote] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
 
+  const scrollRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (activeItem) {
       setQuantity(1);
       setSelections({});
       setNote("");
       setErrors([]);
+      // garante que cada produto abra sempre no topo (bug no mobile ao trocar de item)
+      scrollRef.current?.scrollTo({ top: 0 });
     }
   }, [activeItem]);
 
   // Histórico (botão voltar do celular), tecla Esc e trava de scroll do body
   // são controlados de forma centralizada no CartProvider para evitar
   // conflitos entre o modal de produto e o carrinho.
+
+
 
 
   const addonsTotal = useMemo(() => {
