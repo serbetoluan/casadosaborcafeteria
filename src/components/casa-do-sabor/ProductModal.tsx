@@ -19,36 +19,10 @@ export function ProductModal() {
     }
   }, [activeItem]);
 
-  useEffect(() => {
-    if (!activeItem) return;
-    
-    // Add history state when modal opens to handle back button
-    window.history.pushState({ modalOpen: true }, "");
+  // Histórico (botão voltar do celular), tecla Esc e trava de scroll do body
+  // são controlados de forma centralizada no CartProvider para evitar
+  // conflitos entre o modal de produto e o carrinho.
 
-    const onPopState = () => {
-      // If user clicks back button, close the modal
-      closeProduct();
-    };
-
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && closeProduct();
-    
-    window.addEventListener("popstate", onPopState);
-    document.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    
-    return () => {
-      window.removeEventListener("popstate", onPopState);
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-      
-      // If we're closing the modal manually (not via back button),
-      // we need to remove the state we pushed to keep history clean.
-      // We check if the current state still has our flag.
-      if (window.history.state?.modalOpen) {
-        window.history.back();
-      }
-    };
-  }, [activeItem, closeProduct]);
 
   const addonsTotal = useMemo(() => {
     return Object.values(selections)
