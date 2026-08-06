@@ -246,14 +246,29 @@ export function CartDrawer() {
                     </button>
                   </div>
                   {orderDetails.type === "delivery" && (
-                    <textarea
-                      placeholder="Endereço completo (Rua, número, bairro, apto...)"
-                      value={orderDetails.address}
-                      onChange={(e) => updateOrderDetails({ address: e.target.value })}
-                      rows={2}
-                      className="w-full resize-none rounded-xl border border-blush-deep/60 bg-white px-4 py-2.5 text-sm text-ink placeholder:text-ink/30 focus:border-terracotta focus:outline-none focus:ring-2 focus:ring-terracotta/20 animate-in slide-in-from-top-2 duration-200"
-                    />
+                    <>
+                      <textarea
+                        ref={addressRef}
+                        placeholder="Endereço completo (Rua, número, bairro, apto...)"
+                        value={orderDetails.address ?? ""}
+                        onChange={(e) => {
+                          updateOrderDetails({ address: e.target.value });
+                          if (errors.address) setErrors((prev) => ({ ...prev, address: undefined }));
+                        }}
+                        rows={2}
+                        maxLength={240}
+                        autoComplete="street-address"
+                        className={cn(
+                          "w-full resize-none rounded-xl border bg-white px-4 py-3 text-base text-ink placeholder:text-ink/30 focus:outline-none focus:ring-2 animate-in slide-in-from-top-2 duration-200 sm:text-sm",
+                          errors.address
+                            ? "border-terracotta-deep focus:border-terracotta-deep focus:ring-terracotta-deep/20"
+                            : "border-blush-deep/60 focus:border-terracotta focus:ring-terracotta/20",
+                        )}
+                      />
+                      {errors.address && <p className="text-xs text-terracotta-deep">{errors.address}</p>}
+                    </>
                   )}
+
                 </div>
 
                 <div className="space-y-3 pb-4">
