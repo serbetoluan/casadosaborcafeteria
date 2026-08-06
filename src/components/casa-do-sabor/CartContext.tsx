@@ -1,4 +1,13 @@
-import { createContext, useContext, useMemo, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
 import type { MenuItem } from "./menuData";
 
 export type OrderDetails = {
@@ -37,15 +46,114 @@ type CartCtx = {
 
 const Ctx = createContext<CartCtx | null>(null);
 
+const STORAGE_KEY = "cds-cart-v1";
+
+const DEFAULT_DETAILS: OrderDetails = {
+  name: "",
+  type: "local",
+  address: "",
+  paymentMethod: "Pix",
+};
+
+type PersistedState = { lines: CartLine[]; orderDetails: OrderDetails };
+
+function readStorage(): PersistedState | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as Partial<PersistedState>;
+    if (!parsed || !Array.isArray(parsed.lines)) return null;
+    return {
+      lines: parsed.lines.filter(
+        (l): l is CartLine => !!l && !!l.item && typeof l.unitPrice === "number" && typeof l.quantity === "number",
+      ),
+      orderDetails: { ...DEFAULT_DETAILS, ...(parsed.orderDetails ?? {}) },
+    };
+  } catch {
+    return null;
+  }
+}
+
 export function CartProvider({ children }: { children: ReactNode }) {
   const [lines, setLines] = useState<CartLine[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [activeItem, setActiveItem] = useState<MenuItem | null>(null);
-  const [orderDetails, setOrderDetails] = useState<OrderDetails>({
-    name: "",
-    type: "local",
-    paymentMethod: "Pix",
-  });
+  const [orderDetails, setOrderDetails] = useState<OrderDetails>(DEFAULT_DETAILS);
+  const [hydrated, setHydrated] = useState(false);
+
+  // ---- Persistência (localStorage) ----------------------------------------
+  // Hidrata somente no cliente para não quebrar o SSR.
+  useEffect(() => {
+    const stored = readStorage();
+    if (stored) {
+      setLines(stored.lines);
+      setOrderDetails(stored.orderDetails);
+    }
+    setHydrated(true);
+  }, []);
+
+  useEffect(() => {
+    if (!hydrated) return;
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ lines, orderDetails }));
+    } catch {
+      /* quota cheia / modo privado: ignora silenciosamente */
+    }
+  }, [lines, orderDetails, hydrated]);
+
+  // ---- Controle único de overlays (modal de produto + carrinho) -----------
+  // Um único "nível" de histórico é empilhado enquanto QUALQUER overlay está
+  // aberto. Isso evita a corrida entre modal fechando e carrinho abrindo.
+  const overlay: "product" | "cart" | null = activeItem ? "product" : isOpen ? "cart" : null;
+  const pushedRef = useRef(false);
+  const skipPopRef = useRef(false);
+
+  const closeAll = useCallback(() => {
+    setActiveItem(null);
+    setIsOpen(false);
+  }, []);
+
+  useEffect(() => {
+    const onPop = () => {
+      if (skipPopRef.current) {
+        skipPopRef.current = false;
+        return;
+      }
+      pushedRef.current = false;
+      closeAll();
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeAll();
+    };
+    window.addEventListener("popstate", onPop);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("popstate", onPop);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [closeAll]);
+
+  useEffect(() => {
+    if (overlay && !pushedRef.current) {
+      pushedRef.current = true;
+      window.history.pushState({ cdsOverlay: true }, "");
+    } else if (!overlay && pushedRef.current) {
+      pushedRef.current = false;
+      skipPopRef.current = true;
+      window.history.back();
+    }
+  }, [overlay]);
+
+  // ---- Trava de scroll do body -------------------------------------------
+  useEffect(() => {
+    if (!overlay) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [overlay]);
 
   const value = useMemo<CartCtx>(() => {
     const total = lines.reduce((acc, l) => acc + l.unitPrice * l.quantity, 0);
@@ -72,9 +180,15 @@ export function CartProvider({ children }: { children: ReactNode }) {
         ),
       removeLine: (id) => setLines((prev) => prev.filter((l) => l.id !== id)),
       clear: () => setLines([]),
-      openCart: () => setIsOpen(true),
+      openCart: () => {
+        setActiveItem(null);
+        setIsOpen(true);
+      },
       closeCart: () => setIsOpen(false),
-      openProduct: (item) => setActiveItem(item),
+      openProduct: (item) => {
+        setIsOpen(false);
+        setActiveItem(item);
+      },
       closeProduct: () => setActiveItem(null),
     };
   }, [lines, isOpen, activeItem, orderDetails]);

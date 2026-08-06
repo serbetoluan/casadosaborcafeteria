@@ -1,14 +1,17 @@
-import { useEffect, useMemo, useState } from "react";
-import { X, Minus, Plus, ImageIcon, Leaf, ShoppingBag } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { X, Minus, Plus, Leaf, ShoppingBag } from "lucide-react";
 import { useCart, formatBRL, ADDON_PRICES } from "./CartContext";
 import { cn } from "@/lib/utils";
 
 export function ProductModal() {
-  const { activeItem, closeProduct, addLine, openCart, closeCart } = useCart();
+  const { activeItem, closeProduct, addLine, openCart } = useCart();
+
   const [quantity, setQuantity] = useState(1);
   const [selections, setSelections] = useState<Record<string, string[]>>({});
   const [note, setNote] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
+
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (activeItem) {
@@ -16,39 +19,17 @@ export function ProductModal() {
       setSelections({});
       setNote("");
       setErrors([]);
+      // garante que cada produto abra sempre no topo (bug no mobile ao trocar de item)
+      scrollRef.current?.scrollTo({ top: 0 });
     }
   }, [activeItem]);
 
-  useEffect(() => {
-    if (!activeItem) return;
-    
-    // Add history state when modal opens to handle back button
-    window.history.pushState({ modalOpen: true }, "");
+  // Histórico (botão voltar do celular), tecla Esc e trava de scroll do body
+  // são controlados de forma centralizada no CartProvider para evitar
+  // conflitos entre o modal de produto e o carrinho.
 
-    const onPopState = () => {
-      // If user clicks back button, close the modal
-      closeProduct();
-    };
 
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && closeProduct();
-    
-    window.addEventListener("popstate", onPopState);
-    document.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    
-    return () => {
-      window.removeEventListener("popstate", onPopState);
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-      
-      // If we're closing the modal manually (not via back button),
-      // we need to remove the state we pushed to keep history clean.
-      // We check if the current state still has our flag.
-      if (window.history.state?.modalOpen) {
-        window.history.back();
-      }
-    };
-  }, [activeItem, closeProduct]);
+
 
   const addonsTotal = useMemo(() => {
     return Object.values(selections)
@@ -62,7 +43,9 @@ export function ProductModal() {
   const lineTotal = unitPrice * quantity;
 
   const toggleChoice = (label: string, choice: string, multi?: boolean) => {
+    setErrors((prev) => prev.filter((l) => l !== label));
     setSelections((prev) => {
+
       const current = prev[label] ?? [];
       if (multi) {
         return {
@@ -74,30 +57,31 @@ export function ProductModal() {
     });
   };
 
-  const handleAdd = () => {
+  /** Valida os grupos obrigatórios; retorna true quando o item pôde ser adicionado. */
+  const commit = (): boolean => {
     const missing = (activeItem.options ?? [])
-      .filter((g) => g.required && !(selections[g.label]?.length))
+      .filter((g) => g.required && !selections[g.label]?.length)
       .map((g) => g.label);
     if (missing.length) {
       setErrors(missing);
-      return;
+      // leva o usuário até a primeira pendência (essencial no mobile)
+      requestAnimationFrame(() => {
+        scrollRef.current
+          ?.querySelector("[data-option-error='true']")
+          ?.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+      return false;
     }
     addLine({ item: activeItem, quantity, selections, note: note.trim() || undefined, unitPrice });
-    closeProduct();
-    // Instead of automatically opening cart, we'll let the user choose
+    return true;
+  };
+
+  const handleAdd = () => {
+    if (commit()) closeProduct();
   };
 
   const handleAddAndGoToCart = () => {
-    const missing = (activeItem.options ?? [])
-      .filter((g) => g.required && !(selections[g.label]?.length))
-      .map((g) => g.label);
-    if (missing.length) {
-      setErrors(missing);
-      return;
-    }
-    addLine({ item: activeItem, quantity, selections, note: note.trim() || undefined, unitPrice });
-    closeProduct();
-    openCart();
+    if (commit()) openCart();
   };
 
   return (
@@ -106,9 +90,11 @@ export function ProductModal() {
       onClick={closeProduct}
     >
       <div
-        className="relative flex max-h-[95vh] w-full max-w-lg flex-col overflow-y-auto overflow-x-hidden rounded-t-3xl bg-cream shadow-2xl sm:rounded-3xl animate-in slide-in-from-bottom-8 sm:zoom-in-95 duration-300"
+        ref={scrollRef}
+        className="relative flex max-h-[95vh] w-full max-w-lg flex-col overflow-y-auto overflow-x-hidden overscroll-contain rounded-t-3xl bg-cream shadow-2xl sm:rounded-3xl animate-in slide-in-from-bottom-8 sm:zoom-in-95 duration-300"
         onClick={(e) => e.stopPropagation()}
       >
+
         <button
           onClick={closeProduct}
           aria-label="Fechar"
@@ -169,8 +155,11 @@ export function ProductModal() {
                 )}
               </div>
               {errors.includes(group.label) && (
-                <p className="mb-2 text-xs text-terracotta-deep">Escolha uma opção para continuar.</p>
+                <p data-option-error="true" className="mb-2 text-xs text-terracotta-deep">
+                  Escolha uma opção para continuar.
+                </p>
               )}
+
               <div className="flex flex-col gap-2">
                 {group.choices.map((choice) => {
                   const selected = (selections[group.label] ?? []).includes(choice);

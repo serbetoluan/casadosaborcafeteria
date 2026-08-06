@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useRef, useState } from "react";
 import { X, Minus, Plus, Trash2, ShoppingBag, MessageCircle, MapPin, CreditCard, User } from "lucide-react";
 import { useCart, formatBRL } from "./CartContext";
 import { WHATSAPP_NUMBER } from "./menuData";
@@ -7,40 +7,19 @@ import { cn } from "@/lib/utils";
 
 const DELIVERY_FEE = 12;
 
+type FormErrors = { name?: string; address?: string };
+
 export function CartDrawer() {
   const { isOpen, closeCart, lines, updateQty, removeLine, total, clear, orderDetails, updateOrderDetails } = useCart();
+  const [errors, setErrors] = useState<FormErrors>({});
+  const nameRef = useRef<HTMLInputElement>(null);
+  const addressRef = useRef<HTMLTextAreaElement>(null);
 
-  useEffect(() => {
-    if (!isOpen) return;
-
-    // Add history state when drawer opens to handle back button
-    window.history.pushState({ drawerOpen: true }, "");
-
-    const onPopState = () => {
-      // If user clicks back button, close the drawer
-      closeCart();
-    };
-
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && closeCart();
-
-    window.addEventListener("popstate", onPopState);
-    document.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      window.removeEventListener("popstate", onPopState);
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-
-      // If we're closing the drawer manually (not via back button),
-      // we need to remove the state we pushed to keep history clean.
-      if (window.history.state?.drawerOpen) {
-        window.history.back();
-      }
-    };
-  }, [isOpen, closeCart]);
+  // Histórico (voltar do celular), Esc e trava de scroll são controlados
+  // centralmente no CartProvider.
 
   if (!isOpen) return null;
+
 
   const buildMessage = () => {
     const lineTxt = lines
@@ -79,16 +58,30 @@ export function CartDrawer() {
 
   const handleCheckout = () => {
     if (!lines.length) return;
-    if (!orderDetails.name.trim()) {
-      alert("Por favor, preencha seu nome para continuar.");
-      return;
-    }
+
+    const nextErrors: FormErrors = {};
+    if (!orderDetails.name.trim()) nextErrors.name = "Informe seu nome para continuar.";
     if (orderDetails.type === "delivery" && !orderDetails.address?.trim()) {
-      alert("Por favor, preencha o endereço de entrega.");
+      nextErrors.address = "Informe o endereço completo da entrega.";
+    }
+    setErrors(nextErrors);
+
+    if (nextErrors.name) {
+      nameRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      nameRef.current?.focus();
       return;
     }
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${buildMessage()}`, "_blank");
+    if (nextErrors.address) {
+      addressRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      addressRef.current?.focus();
+      return;
+    }
+
+    // No mobile, window.open costuma ser bloqueado pelo navegador.
+    // Navegação direta é o caminho confiável para abrir o WhatsApp.
+    window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${buildMessage()}`;
   };
+
 
   return (
     <div
@@ -118,7 +111,7 @@ export function CartDrawer() {
           </button>
         </header>
 
-        <div className="flex-1 overflow-y-auto px-5 py-4">
+        <div className="flex-1 overflow-y-auto overscroll-contain px-5 py-4">
           {lines.length === 0 ? (
             <div className="flex h-full flex-col items-center justify-center text-center">
               <CupIcon className="h-20 w-20 text-terracotta/30" />
@@ -201,13 +194,27 @@ export function CartDrawer() {
                     Seus dados
                   </h4>
                   <input
+                    ref={nameRef}
                     type="text"
+                    inputMode="text"
+                    autoComplete="name"
+                    maxLength={80}
                     placeholder="Seu nome"
                     value={orderDetails.name}
-                    onChange={(e) => updateOrderDetails({ name: e.target.value })}
-                    className="w-full rounded-xl border border-blush-deep/60 bg-white px-4 py-2.5 text-sm text-ink placeholder:text-ink/30 focus:border-terracotta focus:outline-none focus:ring-2 focus:ring-terracotta/20"
+                    onChange={(e) => {
+                      updateOrderDetails({ name: e.target.value });
+                      if (errors.name) setErrors((prev) => ({ ...prev, name: undefined }));
+                    }}
+                    className={cn(
+                      "w-full rounded-xl border bg-white px-4 py-3 text-base text-ink placeholder:text-ink/30 focus:outline-none focus:ring-2 sm:text-sm",
+                      errors.name
+                        ? "border-terracotta-deep focus:border-terracotta-deep focus:ring-terracotta-deep/20"
+                        : "border-blush-deep/60 focus:border-terracotta focus:ring-terracotta/20",
+                    )}
                   />
+                  {errors.name && <p className="text-xs text-terracotta-deep">{errors.name}</p>}
                 </div>
+
 
                 <div className="space-y-3">
                   <h4 className="flex items-center gap-2 font-display text-sm font-semibold text-ink">
@@ -239,14 +246,29 @@ export function CartDrawer() {
                     </button>
                   </div>
                   {orderDetails.type === "delivery" && (
-                    <textarea
-                      placeholder="Endereço completo (Rua, número, bairro, apto...)"
-                      value={orderDetails.address}
-                      onChange={(e) => updateOrderDetails({ address: e.target.value })}
-                      rows={2}
-                      className="w-full resize-none rounded-xl border border-blush-deep/60 bg-white px-4 py-2.5 text-sm text-ink placeholder:text-ink/30 focus:border-terracotta focus:outline-none focus:ring-2 focus:ring-terracotta/20 animate-in slide-in-from-top-2 duration-200"
-                    />
+                    <>
+                      <textarea
+                        ref={addressRef}
+                        placeholder="Endereço completo (Rua, número, bairro, apto...)"
+                        value={orderDetails.address ?? ""}
+                        onChange={(e) => {
+                          updateOrderDetails({ address: e.target.value });
+                          if (errors.address) setErrors((prev) => ({ ...prev, address: undefined }));
+                        }}
+                        rows={2}
+                        maxLength={240}
+                        autoComplete="street-address"
+                        className={cn(
+                          "w-full resize-none rounded-xl border bg-white px-4 py-3 text-base text-ink placeholder:text-ink/30 focus:outline-none focus:ring-2 animate-in slide-in-from-top-2 duration-200 sm:text-sm",
+                          errors.address
+                            ? "border-terracotta-deep focus:border-terracotta-deep focus:ring-terracotta-deep/20"
+                            : "border-blush-deep/60 focus:border-terracotta focus:ring-terracotta/20",
+                        )}
+                      />
+                      {errors.address && <p className="text-xs text-terracotta-deep">{errors.address}</p>}
+                    </>
                   )}
+
                 </div>
 
                 <div className="space-y-3 pb-4">
@@ -277,7 +299,7 @@ export function CartDrawer() {
         </div>
 
         {lines.length > 0 && (
-          <div className="border-t border-blush-deep/40 bg-white px-5 py-4">
+          <div className="border-t border-blush-deep/40 bg-white px-5 pb-[calc(1rem+env(safe-area-inset-bottom))] pt-4">
             <div className="flex items-center justify-between text-sm text-ink/70">
               <span>Subtotal</span>
               <span className="font-medium text-ink">{formatBRL(total)}</span>
@@ -296,6 +318,7 @@ export function CartDrawer() {
             </div>
 
             <button
+              type="button"
               onClick={handleCheckout}
               className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3.5 font-display font-semibold text-white shadow-lg shadow-[#25D366]/25 transition-all hover:brightness-105 active:scale-[0.98]"
             >
@@ -303,11 +326,15 @@ export function CartDrawer() {
               Enviar pedido pelo WhatsApp
             </button>
             <button
-              onClick={clear}
-              className="mt-2 w-full text-xs text-ink/40 hover:text-terracotta"
+              type="button"
+              onClick={() => {
+                if (window.confirm("Deseja mesmo limpar todos os itens do pedido?")) clear();
+              }}
+              className="mt-2 w-full py-2 text-xs text-ink/40 hover:text-terracotta"
             >
               Limpar carrinho
             </button>
+
           </div>
         )}
       </aside>
