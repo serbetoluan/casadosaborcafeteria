@@ -111,7 +111,7 @@ export function CartDrawer() {
           </button>
         </header>
 
-        <div className="flex-1 overflow-y-auto px-5 py-4">
+        <div className="flex-1 overflow-y-auto overscroll-contain px-5 py-4">
           {lines.length === 0 ? (
             <div className="flex h-full flex-col items-center justify-center text-center">
               <CupIcon className="h-20 w-20 text-terracotta/30" />
