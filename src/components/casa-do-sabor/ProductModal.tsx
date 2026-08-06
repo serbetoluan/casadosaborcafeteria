@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
-import { X, Minus, Plus, ImageIcon, Leaf, ShoppingBag } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { X, Minus, Plus, Leaf, ShoppingBag } from "lucide-react";
 import { useCart, formatBRL, ADDON_PRICES } from "./CartContext";
 import { cn } from "@/lib/utils";
 
 export function ProductModal() {
-  const { activeItem, closeProduct, addLine, openCart, closeCart } = useCart();
+  const { activeItem, closeProduct, addLine, openCart } = useCart();
+
   const [quantity, setQuantity] = useState(1);
   const [selections, setSelections] = useState<Record<string, string[]>>({});
   const [note, setNote] = useState("");
