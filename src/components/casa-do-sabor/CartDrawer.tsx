@@ -299,7 +299,7 @@ export function CartDrawer() {
         </div>
 
         {lines.length > 0 && (
-          <div className="border-t border-blush-deep/40 bg-white px-5 py-4">
+          <div className="border-t border-blush-deep/40 bg-white px-5 pb-[calc(1rem+env(safe-area-inset-bottom))] pt-4">
             <div className="flex items-center justify-between text-sm text-ink/70">
               <span>Subtotal</span>
               <span className="font-medium text-ink">{formatBRL(total)}</span>
@@ -318,6 +318,7 @@ export function CartDrawer() {
             </div>
 
             <button
+              type="button"
               onClick={handleCheckout}
               className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3.5 font-display font-semibold text-white shadow-lg shadow-[#25D366]/25 transition-all hover:brightness-105 active:scale-[0.98]"
             >
@@ -325,11 +326,15 @@ export function CartDrawer() {
               Enviar pedido pelo WhatsApp
             </button>
             <button
-              onClick={clear}
-              className="mt-2 w-full text-xs text-ink/40 hover:text-terracotta"
+              type="button"
+              onClick={() => {
+                if (window.confirm("Deseja mesmo limpar todos os itens do pedido?")) clear();
+              }}
+              className="mt-2 w-full py-2 text-xs text-ink/40 hover:text-terracotta"
             >
               Limpar carrinho
             </button>
+
           </div>
         )}
       </aside>
