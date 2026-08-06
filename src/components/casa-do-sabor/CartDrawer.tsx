@@ -58,16 +58,30 @@ export function CartDrawer() {
 
   const handleCheckout = () => {
     if (!lines.length) return;
-    if (!orderDetails.name.trim()) {
-      alert("Por favor, preencha seu nome para continuar.");
-      return;
-    }
+
+    const nextErrors: FormErrors = {};
+    if (!orderDetails.name.trim()) nextErrors.name = "Informe seu nome para continuar.";
     if (orderDetails.type === "delivery" && !orderDetails.address?.trim()) {
-      alert("Por favor, preencha o endereço de entrega.");
+      nextErrors.address = "Informe o endereço completo da entrega.";
+    }
+    setErrors(nextErrors);
+
+    if (nextErrors.name) {
+      nameRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      nameRef.current?.focus();
       return;
     }
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${buildMessage()}`, "_blank");
+    if (nextErrors.address) {
+      addressRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      addressRef.current?.focus();
+      return;
+    }
+
+    // No mobile, window.open costuma ser bloqueado pelo navegador.
+    // Navegação direta é o caminho confiável para abrir o WhatsApp.
+    window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${buildMessage()}`;
   };
+
 
   return (
     <div
