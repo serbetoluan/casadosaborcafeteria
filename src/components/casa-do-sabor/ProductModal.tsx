@@ -55,30 +55,31 @@ export function ProductModal() {
     });
   };
 
-  const handleAdd = () => {
+  /** Valida os grupos obrigatórios; retorna true quando o item pôde ser adicionado. */
+  const commit = (): boolean => {
     const missing = (activeItem.options ?? [])
-      .filter((g) => g.required && !(selections[g.label]?.length))
+      .filter((g) => g.required && !selections[g.label]?.length)
       .map((g) => g.label);
     if (missing.length) {
       setErrors(missing);
-      return;
+      // leva o usuário até a primeira pendência (essencial no mobile)
+      requestAnimationFrame(() => {
+        scrollRef.current
+          ?.querySelector("[data-option-error='true']")
+          ?.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+      return false;
     }
     addLine({ item: activeItem, quantity, selections, note: note.trim() || undefined, unitPrice });
-    closeProduct();
-    // Instead of automatically opening cart, we'll let the user choose
+    return true;
+  };
+
+  const handleAdd = () => {
+    if (commit()) closeProduct();
   };
 
   const handleAddAndGoToCart = () => {
-    const missing = (activeItem.options ?? [])
-      .filter((g) => g.required && !(selections[g.label]?.length))
-      .map((g) => g.label);
-    if (missing.length) {
-      setErrors(missing);
-      return;
-    }
-    addLine({ item: activeItem, quantity, selections, note: note.trim() || undefined, unitPrice });
-    closeProduct();
-    openCart();
+    if (commit()) openCart();
   };
 
   return (
@@ -87,9 +88,11 @@ export function ProductModal() {
       onClick={closeProduct}
     >
       <div
-        className="relative flex max-h-[95vh] w-full max-w-lg flex-col overflow-y-auto overflow-x-hidden rounded-t-3xl bg-cream shadow-2xl sm:rounded-3xl animate-in slide-in-from-bottom-8 sm:zoom-in-95 duration-300"
+        ref={scrollRef}
+        className="relative flex max-h-[95vh] w-full max-w-lg flex-col overflow-y-auto overflow-x-hidden overscroll-contain rounded-t-3xl bg-cream shadow-2xl sm:rounded-3xl animate-in slide-in-from-bottom-8 sm:zoom-in-95 duration-300"
         onClick={(e) => e.stopPropagation()}
       >
+
         <button
           onClick={closeProduct}
           aria-label="Fechar"
