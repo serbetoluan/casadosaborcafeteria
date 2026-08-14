@@ -141,6 +141,7 @@ export const categories: MenuCategory[] = [
         price: "R$ 18,00",
         priceValue: 18,
         fit: true,
+        image: panquecaBananaAsset.url,
         options: [{ label: "Escolha o acompanhamento", required: true, choices: ["Mel", "Requeijão (+R$ 4)", "Mussarela"] }],
       },
       { slug: "toast-caprese", name: "Toast Caprese", description: "Pão baguete artesanal, creme de ricota, pesto de manjericão e tomate confit.", price: "R$ 25,00", priceValue: 25, image: toastCapreseAsset.url, options: [{ label: "Adicionais", multi: true, choices: ["Requeijão (+R$ 4)"] }] },
