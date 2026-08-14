@@ -11,6 +11,7 @@ import { CartProvider } from "@/components/casa-do-sabor/CartContext";
 import { ProductModal } from "@/components/casa-do-sabor/ProductModal";
 import { CartDrawer } from "@/components/casa-do-sabor/CartDrawer";
 import { CartFab } from "@/components/casa-do-sabor/CartFab";
+import { WelcomeSuggestion } from "@/components/casa-do-sabor/WelcomeSuggestion";
 import { categories, navSections } from "@/components/casa-do-sabor/menuData";
 
 export const Route = createFileRoute("/")({
