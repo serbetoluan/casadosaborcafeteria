@@ -1,3 +1,4 @@
+import { AnimatedMenuIcon } from "./AnimatedMenuIcon";
 import { CupIcon } from "./CupIcon";
 import logo from "@/assets/logo.png.asset.json";
 import banner from "@/assets/banner.png.asset.json";
