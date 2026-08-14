@@ -47,6 +47,10 @@ import toddynhoAsset from "@/assets/toddynho.jpg.asset.json";
 import tortaFrangoV2Asset from "@/assets/torta_frango_v2.jpg.asset.json";
 import kombuchaDetalheAsset from "@/assets/kombucha_detalhe.jpg.asset.json";
 import kombuchasBaldeAsset from "@/assets/kombuchas_balde.jpg.asset.json";
+import superCoffeeAsset from "@/assets/super_coffee.jpg.asset.json";
+import cappuccinoLightAsset from "@/assets/cappuccino_light.jpg.asset.json";
+import cappuccinoProteicoAsset from "@/assets/cappuccino_proteico.jpg.asset.json";
+import panquecaBananaAsset from "@/assets/panqueca_banana.png.asset.json";
 
 
 export type MenuOptionGroup = {
