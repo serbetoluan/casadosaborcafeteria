@@ -324,11 +324,44 @@ export const categories: MenuCategory[] = [
         price: "R$ 18,00", 
         priceValue: 18, 
         fit: true,
+        image: cappuccinoLightAsset.url,
         options: [
           { 
             label: "Adicionais", 
             multi: true, 
             choices: ["Chantilly (+R$ 4)", "Borda de Nutella (+R$ 4)", "Nutella (+R$ 4)"] 
+          }
+        ]
+      },
+      {
+        slug: "super-coffee",
+        name: "Super Coffee",
+        description: "Super Coffee quentinho com crema.",
+        price: "R$ 20,00",
+        priceValue: 20,
+        fit: true,
+        image: superCoffeeAsset.url,
+        options: [
+          {
+            label: "Adicionais",
+            multi: true,
+            choices: ["Chantilly (+R$ 4)", "Borda de Nutella (+R$ 4)", "Nutella (+R$ 4)"]
+          }
+        ]
+      },
+      {
+        slug: "cappuccino-proteico",
+        name: "Cappuccino proteico",
+        description: "Cappuccino light quentinho com uma dose de Whey.",
+        price: "R$ 20,00",
+        priceValue: 20,
+        fit: true,
+        image: cappuccinoProteicoAsset.url,
+        options: [
+          {
+            label: "Adicionais",
+            multi: true,
+            choices: ["Chantilly (+R$ 4)", "Borda de Nutella (+R$ 4)", "Nutella (+R$ 4)"]
           }
         ]
       },
