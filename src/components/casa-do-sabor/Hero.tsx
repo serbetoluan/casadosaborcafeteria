@@ -59,7 +59,7 @@ export function Hero() {
               className="inline-flex items-center gap-2 rounded-full bg-terracotta px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-terracotta/30 transition-all hover:shadow-xl hover:shadow-terracotta/40 active:scale-95"
             >
               Ver Cardápio
-              <CupIcon className="h-4 w-4" />
+              <AnimatedMenuIcon className="h-4 w-4" />
             </a>
           </div>
         </div>
