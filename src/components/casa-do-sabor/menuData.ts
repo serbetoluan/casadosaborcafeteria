@@ -47,6 +47,10 @@ import toddynhoAsset from "@/assets/toddynho.jpg.asset.json";
 import tortaFrangoV2Asset from "@/assets/torta_frango_v2.jpg.asset.json";
 import kombuchaDetalheAsset from "@/assets/kombucha_detalhe.jpg.asset.json";
 import kombuchasBaldeAsset from "@/assets/kombuchas_balde.jpg.asset.json";
+import superCoffeeAsset from "@/assets/super_coffee.jpg.asset.json";
+import cappuccinoLightAsset from "@/assets/cappuccino_light.jpg.asset.json";
+import cappuccinoProteicoAsset from "@/assets/cappuccino_proteico.jpg.asset.json";
+import panquecaBananaAsset from "@/assets/panqueca_banana.png.asset.json";
 
 
 export type MenuOptionGroup = {
@@ -137,6 +141,7 @@ export const categories: MenuCategory[] = [
         price: "R$ 18,00",
         priceValue: 18,
         fit: true,
+        image: panquecaBananaAsset.url,
         options: [{ label: "Escolha o acompanhamento", required: true, choices: ["Mel", "Requeijão (+R$ 4)", "Mussarela"] }],
       },
       { slug: "toast-caprese", name: "Toast Caprese", description: "Pão baguete artesanal, creme de ricota, pesto de manjericão e tomate confit.", price: "R$ 25,00", priceValue: 25, image: toastCapreseAsset.url, options: [{ label: "Adicionais", multi: true, choices: ["Requeijão (+R$ 4)"] }] },
@@ -319,11 +324,44 @@ export const categories: MenuCategory[] = [
         price: "R$ 18,00", 
         priceValue: 18, 
         fit: true,
+        image: cappuccinoLightAsset.url,
         options: [
           { 
             label: "Adicionais", 
             multi: true, 
             choices: ["Chantilly (+R$ 4)", "Borda de Nutella (+R$ 4)", "Nutella (+R$ 4)"] 
+          }
+        ]
+      },
+      {
+        slug: "super-coffee",
+        name: "Super Coffee",
+        description: "Super Coffee quentinho com crema.",
+        price: "R$ 20,00",
+        priceValue: 20,
+        fit: true,
+        image: superCoffeeAsset.url,
+        options: [
+          {
+            label: "Adicionais",
+            multi: true,
+            choices: ["Chantilly (+R$ 4)", "Borda de Nutella (+R$ 4)", "Nutella (+R$ 4)"]
+          }
+        ]
+      },
+      {
+        slug: "cappuccino-proteico",
+        name: "Cappuccino proteico",
+        description: "Cappuccino light quentinho com uma dose de Whey.",
+        price: "R$ 20,00",
+        priceValue: 20,
+        fit: true,
+        image: cappuccinoProteicoAsset.url,
+        options: [
+          {
+            label: "Adicionais",
+            multi: true,
+            choices: ["Chantilly (+R$ 4)", "Borda de Nutella (+R$ 4)", "Nutella (+R$ 4)"]
           }
         ]
       },
