@@ -126,16 +126,16 @@ export function WelcomeSuggestion() {
                 key={it.key}
                 type="button"
                 onClick={() => setIntent(it)}
-                className="flex items-center gap-3 rounded-2xl border border-blush-deep/70 bg-white/80 px-4 py-3.5 text-left transition-all hover:border-terracotta hover:shadow-md hover:shadow-terracotta/10 active:scale-[0.98]"
+                className="group flex items-center gap-3 rounded-2xl border border-terracotta/40 bg-terracotta/10 px-4 py-3.5 text-left transition-all hover:border-terracotta hover:bg-terracotta/15 hover:shadow-md hover:shadow-terracotta/10 active:scale-[0.98]"
               >
                 <span className="text-2xl">{it.emoji}</span>
                 <span className="min-w-0">
-                  <span className="block text-sm font-semibold text-ink">
+                  <span className="block text-sm font-semibold text-terracotta-deep">
                     {it.label}
                   </span>
-                  <span className="block text-xs text-ink/55">{it.hint}</span>
+                  <span className="block text-xs text-terracotta/75">{it.hint}</span>
                 </span>
-                <span className="ml-auto text-terracotta">→</span>
+                <span className="ml-auto text-terracotta transition-transform group-hover:translate-x-0.5">→</span>
               </button>
             ))}
 
@@ -145,22 +145,20 @@ export function WelcomeSuggestion() {
                 key={id}
                 type="button"
                 onClick={() => goTo(id)}
-                className="flex items-center gap-3 rounded-2xl border border-terracotta/30 bg-white/80 px-4 py-3.5 text-left text-sm font-semibold text-ink transition-all hover:border-terracotta hover:bg-blush/60 active:scale-[0.98]"
+                className="group flex items-center gap-3 rounded-2xl border border-terracotta/40 bg-terracotta/10 px-4 py-3.5 text-left text-sm font-semibold text-terracotta-deep transition-all hover:border-terracotta hover:bg-terracotta/15 active:scale-[0.98]"
               >
                 {titleOf(id)}
-                <span className="ml-auto text-terracotta">→</span>
+                <span className="ml-auto text-terracotta transition-transform group-hover:translate-x-0.5">→</span>
               </button>
             ))}
         </div>
 
-        <div className="mt-4 flex items-center justify-center gap-4">
+        <div className="mt-5 flex flex-col items-center gap-3">
           {intent && (
             <button
               type="button"
               onClick={() => setIntent(null)}
-              className={cn(
-                "text-xs font-medium text-ink/50 underline underline-offset-4 transition-colors hover:text-terracotta",
-              )}
+              className="text-sm font-semibold text-terracotta/80 underline underline-offset-4 transition-colors hover:text-terracotta"
             >
               Voltar
             </button>
@@ -168,7 +166,7 @@ export function WelcomeSuggestion() {
           <button
             type="button"
             onClick={close}
-            className="text-xs font-medium text-ink/50 underline underline-offset-4 transition-colors hover:text-terracotta"
+            className="rounded-full border border-terracotta/40 bg-white px-5 py-2.5 text-sm font-semibold text-terracotta-deep shadow-sm transition-all hover:bg-terracotta/10 hover:shadow-md active:scale-[0.98]"
           >
             Prefiro escolher
           </button>
