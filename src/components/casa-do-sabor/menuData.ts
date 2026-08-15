@@ -16,6 +16,8 @@ import aguaSemGasAsset from "@/assets/agua_sem_gas.jpg.asset.json";
 import americanoAsset from "@/assets/americano.jpg.asset.json";
 import cafeEspressoAsset from "@/assets/cafe_espresso.jpg.asset.json";
 import croissantAmanteigadoAsset from "@/assets/croissant_amanteigado.jpg.asset.json";
+import croissantFolhadoAsset from "@/assets/croissant_folhado.jpg.asset.json";
+import maltineQuentinhoAsset from "@/assets/maltine_quentinho.jpg.asset.json";
 import chipaAsset from "@/assets/chipa.jpg.asset.json";
 import chocolateQuenteAsset from "@/assets/chocolate_quente.jpg.asset.json";
 import crepiocaAsset from "@/assets/crepioca.jpg.asset.json";
@@ -95,6 +97,7 @@ export const categories: MenuCategory[] = [
         description: "Massa folhada leve, feita na hora · 1 uni",
         price: "R$ 9,00",
         priceValue: 9,
+        image: croissantFolhadoAsset.url,
         options: [{ label: "Escolha o recheio", required: true, choices: ["Presunto e queijo", "Chocolate"] }],
       },
     ],
@@ -371,6 +374,7 @@ export const categories: MenuCategory[] = [
         description: "240ml — Caneca com leite quentinho, ovomaltine crocante e nuvem de leite vaporizado.", 
         price: "R$ 16,00", 
         priceValue: 16,
+        image: maltineQuentinhoAsset.url,
         options: [
           { 
             label: "Adicionais", 
