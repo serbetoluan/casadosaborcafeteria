@@ -38,7 +38,9 @@ function Index() {
   return (
     <CartProvider>
       <div className="min-h-screen bg-cream">
+        <WelcomeSuggestion />
         <StickyNav items={navSections} />
+
         <main className="mx-auto max-w-6xl">
           <Hero />
           <InstaFeed />
