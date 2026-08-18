@@ -14,7 +14,7 @@ export function Hero() {
         <div className="relative w-full overflow-hidden rounded-3xl ring-1 ring-blush-deep/60 shadow-xl shadow-terracotta/10">
           <img
             src={banner.url}
-            alt="Ambiente da Casa do Sabor dentro da Summer Fit"
+            alt="Ambiente acolhedor da Casa do Sabor"
             className="aspect-[4/2] w-full object-cover object-center"
             loading="eager"
           />
