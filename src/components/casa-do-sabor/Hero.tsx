@@ -22,13 +22,24 @@ export function Hero() {
 
         {/* Logo overlapping the bottom of the banner */}
         <div className="relative -mt-14 flex flex-col items-center text-center">
-          <img
-            src={logo.url}
-            alt="Casa do Sabor"
-            className="mb-3 h-28 w-28 rounded-full bg-blush object-contain p-2 ring-4 ring-white shadow-lg shadow-terracotta/20"
-            loading="eager"
+          <div
+            className="relative mb-3 h-32 w-32"
             style={{ animation: "cds-rise 0.7s ease-out both" }}
-          />
+          >
+            {/* Soft themed glow behind the ring */}
+            <div className="story-ring-glow pointer-events-none absolute inset-0 rounded-full bg-terracotta/40 blur-lg" />
+            {/* Rotating gradient ring */}
+            <div className="story-ring-spin absolute inset-0 rounded-full" />
+            {/* Inner gap so the ring reads like Instagram's story border */}
+            <div className="absolute inset-[3px] rounded-full bg-cream" />
+            <img
+              src={logo.url}
+              alt="Casa do Sabor"
+              className="absolute inset-[6px] h-[calc(100%-12px)] w-[calc(100%-12px)] rounded-full bg-blush object-contain p-2 shadow-lg shadow-terracotta/20"
+              loading="eager"
+            />
+          </div>
+
 
           <span className="rounded-full bg-white/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta ring-1 ring-terracotta/30">
             Casa 1 &amp; Casa 2
