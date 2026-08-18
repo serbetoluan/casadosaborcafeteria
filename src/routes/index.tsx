@@ -12,23 +12,30 @@ import { ProductModal } from "@/components/casa-do-sabor/ProductModal";
 import { CartDrawer } from "@/components/casa-do-sabor/CartDrawer";
 import { CartFab } from "@/components/casa-do-sabor/CartFab";
 import { WelcomeSuggestion } from "@/components/casa-do-sabor/WelcomeSuggestion";
-import { categories, navSections } from "@/components/casa-do-sabor/menuData";
+import { DoceriaIntro } from "@/components/casa-do-sabor/DoceriaIntro";
+import {
+  categories,
+  navSections,
+  DOCERIA_FIRST_CATEGORY_ID,
+} from "@/components/casa-do-sabor/menuData";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Casa do Sabor · Summer Fit — Cardápio Digital" },
+      { title: "Casa do Sabor — Cardápio Digital | Casa 1 e Casa 2" },
       {
         name: "description",
         content:
-          "Cardápio digital da Casa do Sabor na Summer Fit: quitandinhas, lanchinhos, folhados, bebidas quentes e geladas — do café da manhã ao happy hour.",
+          "Cardápio digital da Casa do Sabor: quitandinhas, lanchinhos, salgados, folhados, gelatos, doceria artesanal e bebidas — do café da manhã ao happy hour.",
       },
-      { property: "og:title", content: "Casa do Sabor · Summer Fit" },
+      { property: "og:title", content: "Casa do Sabor — Cardápio Digital" },
       {
         property: "og:description",
         content:
-          "Cafés especiais, folhados premium e opções fit dentro da academia Summer Fit.",
+          "Cafés especiais, folhados premium, gelatos Crema e Gusto e a doceria artesanal Doçuras da Lê.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Index,
