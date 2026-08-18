@@ -257,12 +257,11 @@
   background-image: conic-gradient(
     from 0deg,
     var(--terracotta),
-    color-mix(in oklab, var(--terracotta) 55%, white),
-    var(--terracotta),
+    var(--blush-deep),
     var(--terracotta-deep),
+    var(--blush),
     var(--terracotta)
   );
-
   animation:
     cds-story-intro 1.6s cubic-bezier(0.22, 1, 0.36, 1) both,
     cds-story-spin 6s linear 1.6s infinite;
