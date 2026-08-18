@@ -77,18 +77,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Casa do Sabor · Summer Fit — Cardápio" },
+      { title: "Casa do Sabor — Cardápio Digital | Casa 1 e Casa 2" },
       {
         name: "description",
         content:
-          "Cardápio digital da Casa do Sabor na unidade Summer Fit. Cafés, lanches e opções fit feitas com amor dentro da academia.",
+          "Cardápio digital da Casa do Sabor: cafés especiais, salgados, folhados, gelatos e doceria artesanal nas unidades Casa 1 e Casa 2.",
       },
       { name: "author", content: "Casa do Sabor" },
-      { property: "og:title", content: "Casa do Sabor · Summer Fit" },
+      { property: "og:title", content: "Casa do Sabor — Cardápio Digital" },
       {
         property: "og:description",
         content:
-          "Cardápio digital da cafeteria Casa do Sabor dentro da Summer Fit.",
+          "Cafés especiais, folhados, gelatos Crema e Gusto e a doceria artesanal Doçuras da Lê.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
