@@ -70,7 +70,7 @@ export function StickyNav({ items }: { items: NavItem[] }) {
           <CupIcon className="ml-auto h-6 w-6 text-terracotta" />
         </div>
         <nav
-          ref={scrollerRef}
+          ref={desktopScrollerRef}
           className="scrollbar-none mx-auto flex max-w-6xl gap-2 overflow-x-auto px-4 pb-3"
         >
           {items.map((c) => (
@@ -111,7 +111,7 @@ export function StickyNav({ items }: { items: NavItem[] }) {
           <CupIcon className="ml-auto h-5 w-5 text-terracotta" />
         </div>
         <nav
-          ref={scrollerRef}
+          ref={mobileScrollerRef}
           className="scrollbar-none flex gap-2 overflow-x-auto px-4 pb-3"
         >
           {items.map((c) => (
