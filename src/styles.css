@@ -235,3 +235,34 @@
   animation: cds-icon-cycle-3 7.5s ease-in-out infinite;
 }
 
+
+/* Instagram-like animated story ring around the hero logo */
+@keyframes cds-story-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes cds-story-intro {
+  0% { transform: rotate(0deg) scale(0.9); opacity: 0; }
+  100% { transform: rotate(1080deg) scale(1); opacity: 1; }
+}
+@keyframes cds-story-glow {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.06); }
+}
+
+@utility story-ring-glow {
+  animation: cds-story-glow 3.6s ease-in-out infinite;
+}
+
+@utility story-ring-spin {
+  background-image: conic-gradient(
+    from 0deg,
+    var(--terracotta),
+    var(--blush-deep),
+    var(--terracotta-deep),
+    var(--blush),
+    var(--terracotta)
+  );
+  animation:
+    cds-story-intro 1.6s cubic-bezier(0.22, 1, 0.36, 1) both,
+    cds-story-spin 6s linear 1.6s infinite;
+}
