@@ -202,13 +202,22 @@ export function useCart() {
   return ctx;
 }
 
-export const ADDON_PRICES: Record<string, number> = {
-  "Chantilly (+R$ 4)": 4,
-  "Borda de Nutella (+R$ 4)": 4,
-  "Nutella (+R$ 4)": 4,
-  "Requeijão (+R$ 4)": 4,
-  "Geleia de morango (+R$ 4)": 4,
-};
+/**
+ * Preço de adicionais lido diretamente do rótulo da opção — ex.: "Chantilly (+R$ 4)"
+ * ou "Borda de doce de leite (+R$ 4,50)". Assim novos adicionais no menuData
+ * passam a ser cobrados sem precisar de uma tabela paralela (fonte única).
+ */
+function parseAddonPrice(label: string): number {
+  const match = label.match(/\+\s*R\$\s*([\d.]+(?:,\d{1,2})?)/i);
+  if (!match) return 0;
+  const value = Number(match[1].replace(/\./g, "").replace(",", "."));
+  return Number.isFinite(value) ? value : 0;
+}
+
+export const ADDON_PRICES: Record<string, number> = new Proxy({} as Record<string, number>, {
+  get: (_target, key) => (typeof key === "string" ? parseAddonPrice(key) : 0),
+  has: () => true,
+});
 
 export function formatBRL(value: number) {
   return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
