@@ -5,7 +5,7 @@ import { WHATSAPP_NUMBER } from "./menuData";
 import { CupIcon } from "./CupIcon";
 import { cn } from "@/lib/utils";
 
-const DELIVERY_FEE = 12;
+const DELIVERY_FEE = 10;
 
 type FormErrors = { name?: string; address?: string };
 
@@ -37,7 +37,7 @@ export function CartDrawer() {
       : "🏢 *Retirada no local*";
 
     const msg = [
-      "☕ *Casa do Sabor · Unidade Summer Fit*",
+      "☕ *Casa do Sabor*",
       "Olá! Vim pelo cardápio digital e gostaria de fazer o seguinte pedido:",
       "",
       `👤 *Cliente:* ${orderDetails.name || "Não informado"}`,

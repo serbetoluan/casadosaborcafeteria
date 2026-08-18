@@ -2,7 +2,7 @@ import { WHATSAPP_NUMBER } from "./menuData";
 
 const THEMED_MESSAGE = `☕ Olá, Casa do Sabor!
 
-Vim pelo cardápio digital da *Unidade Summer Fit* e queria bater um papo pra montar meu pedido — do café da manhã ao happy hour! 🧺💕
+Vim pelo cardápio digital e queria bater um papo pra montar meu pedido — do café da manhã ao happy hour! 🧺💕
 
 Podem me ajudar?`;
 

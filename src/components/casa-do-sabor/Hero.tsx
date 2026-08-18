@@ -14,7 +14,7 @@ export function Hero() {
         <div className="relative w-full overflow-hidden rounded-3xl ring-1 ring-blush-deep/60 shadow-xl shadow-terracotta/10">
           <img
             src={banner.url}
-            alt="Ambiente da Casa do Sabor dentro da Summer Fit"
+            alt="Ambiente acolhedor da Casa do Sabor"
             className="aspect-[4/2] w-full object-cover object-center"
             loading="eager"
           />
@@ -31,7 +31,7 @@ export function Hero() {
           />
 
           <span className="rounded-full bg-white/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta ring-1 ring-terracotta/30">
-            Unidade Summer Fit
+            Casa 1 &amp; Casa 2
           </span>
 
           <h1 className="mt-4 font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl">

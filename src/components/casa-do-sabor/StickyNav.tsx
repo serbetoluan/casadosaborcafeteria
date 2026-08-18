@@ -56,7 +56,7 @@ export function StickyNav({ items }: { items: NavItem[] }) {
               Casa do Sabor
             </p>
             <p className="truncate font-script text-xs text-terracotta">
-              unidade Summer Fit
+              Casa 1 & Casa 2
             </p>
           </div>
           <CupIcon className="ml-auto h-6 w-6 text-terracotta" />
@@ -97,7 +97,7 @@ export function StickyNav({ items }: { items: NavItem[] }) {
               Casa do Sabor
             </p>
             <p className="truncate font-script text-xs text-terracotta">
-              unidade Summer Fit
+              Casa 1 & Casa 2
             </p>
           </div>
           <CupIcon className="ml-auto h-5 w-5 text-terracotta" />

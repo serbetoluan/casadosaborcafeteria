@@ -1,14 +1,11 @@
 import { CupIcon } from "./CupIcon";
 
 const items = [
-  "Bolos caseirinhos médios (sob encomenda — consulte os sabores) — R$ 35,00",
-  "Biscoitinho tipo Peta (pacote) — R$ 14,00",
-  "Doces exclusivos (@docurass.da_le) a pronta entrega (solicite nosso cardápio)",
   "Lanches e bebidas prontos para consumir (linha cafeteria — solicite nosso cardápio)",
-  "Aceitamos encomendas para eventos corporativos e sociais (solicite um orçamento)",
+  "Aceitamos encomendas para eventos corporativos e sociais — solicite um orçamento",
   "Aceitamos encomendas de cestas presenteáveis para café da manhã e datas comemorativas",
-  "Aceitamos encomendas de doces, bolos e tortas para eventos — trabalhamos com doces finos",
-  "Atendemos panificadoras, supermercados, lanchonetes, cafeterias e hotéis como modalidade atacadista",
+  "Aceitamos encomendas de doces para eventos",
+  "Atendemos panificadoras, supermercados, lanchonetes, cafeterias, hotéis como modalidade atacadista",
 ];
 
 export function SobreNos() {
