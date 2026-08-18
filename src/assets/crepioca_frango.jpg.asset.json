@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "b5b4071c-81b3-4686-b7d7-4154a12ef242",
-  "project_id": "e8ce6a4c-6ca7-4766-9dc7-5280def77fd3",
-  "url": "/__l5e/assets-v1/b5b4071c-81b3-4686-b7d7-4154a12ef242/crepioca_frango.jpg",
-  "r2_key": "a/v1/e8ce6a4c-6ca7-4766-9dc7-5280def77fd3/b5b4071c-81b3-4686-b7d7-4154a12ef242/crepioca_frango.jpg",
-  "original_filename": "crepioca_frango.jpg",
-  "size": 167380,
   "content_type": "image/jpeg",
-  "created_at": "2026-08-05T23:05:52Z"
+  "created_at": "2026-08-05T23:05:52Z",
+  "original_filename": "crepioca_frango.jpg",
+  "project_id": "e88e1173-2050-4481-a819-c7319f91acd3",
+  "r2_key": "a/v1/e88e1173-2050-4481-a819-c7319f91acd3/b5b4071c-81b3-4686-b7d7-4154a12ef242/crepioca_frango.jpg",
+  "size": 167380,
+  "url": "/__l5e/assets-v1/b5b4071c-81b3-4686-b7d7-4154a12ef242/crepioca_frango.jpg",
+  "version": 1
 }

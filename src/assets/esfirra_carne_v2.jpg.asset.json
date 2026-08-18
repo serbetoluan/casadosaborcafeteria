@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "bea8364e-6d2f-443a-8c31-e0443b5cb88c",
-  "project_id": "e8ce6a4c-6ca7-4766-9dc7-5280def77fd3",
-  "url": "/__l5e/assets-v1/bea8364e-6d2f-443a-8c31-e0443b5cb88c/esfirra_carne_v2.jpg",
-  "r2_key": "a/v1/e8ce6a4c-6ca7-4766-9dc7-5280def77fd3/bea8364e-6d2f-443a-8c31-e0443b5cb88c/esfirra_carne_v2.jpg",
-  "original_filename": "esfirra_carne_v2.jpg",
-  "size": 168380,
   "content_type": "image/jpeg",
-  "created_at": "2026-08-05T23:10:36Z"
+  "created_at": "2026-08-05T23:10:36Z",
+  "original_filename": "esfirra_carne_v2.jpg",
+  "project_id": "e88e1173-2050-4481-a819-c7319f91acd3",
+  "r2_key": "a/v1/e88e1173-2050-4481-a819-c7319f91acd3/bea8364e-6d2f-443a-8c31-e0443b5cb88c/esfirra_carne_v2.jpg",
+  "size": 168380,
+  "url": "/__l5e/assets-v1/bea8364e-6d2f-443a-8c31-e0443b5cb88c/esfirra_carne_v2.jpg",
+  "version": 1
 }

@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "fbabfcdb-9c15-4c65-b938-22ab032c5938",
-  "project_id": "e8ce6a4c-6ca7-4766-9dc7-5280def77fd3",
-  "url": "/__l5e/assets-v1/fbabfcdb-9c15-4c65-b938-22ab032c5938/chocolate_quente.jpg",
-  "r2_key": "a/v1/e8ce6a4c-6ca7-4766-9dc7-5280def77fd3/fbabfcdb-9c15-4c65-b938-22ab032c5938/chocolate_quente.jpg",
-  "original_filename": "chocolate_quente.jpg",
-  "size": 119071,
   "content_type": "image/jpeg",
-  "created_at": "2026-08-05T23:05:46Z"
+  "created_at": "2026-08-05T23:05:46Z",
+  "original_filename": "chocolate_quente.jpg",
+  "project_id": "e88e1173-2050-4481-a819-c7319f91acd3",
+  "r2_key": "a/v1/e88e1173-2050-4481-a819-c7319f91acd3/fbabfcdb-9c15-4c65-b938-22ab032c5938/chocolate_quente.jpg",
+  "size": 119071,
+  "url": "/__l5e/assets-v1/fbabfcdb-9c15-4c65-b938-22ab032c5938/chocolate_quente.jpg",
+  "version": 1
 }

@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "9f5c720a-46a4-4863-bfd1-74a1da44e74a",
-  "project_id": "e8ce6a4c-6ca7-4766-9dc7-5280def77fd3",
-  "url": "/__l5e/assets-v1/9f5c720a-46a4-4863-bfd1-74a1da44e74a/americano.jpg",
-  "r2_key": "a/v1/e8ce6a4c-6ca7-4766-9dc7-5280def77fd3/9f5c720a-46a4-4863-bfd1-74a1da44e74a/americano.jpg",
-  "original_filename": "americano.jpg",
-  "size": 156385,
   "content_type": "image/jpeg",
-  "created_at": "2026-08-05T23:03:35Z"
+  "created_at": "2026-08-05T23:03:35Z",
+  "original_filename": "americano.jpg",
+  "project_id": "e88e1173-2050-4481-a819-c7319f91acd3",
+  "r2_key": "a/v1/e88e1173-2050-4481-a819-c7319f91acd3/9f5c720a-46a4-4863-bfd1-74a1da44e74a/americano.jpg",
+  "size": 156385,
+  "url": "/__l5e/assets-v1/9f5c720a-46a4-4863-bfd1-74a1da44e74a/americano.jpg",
+  "version": 1
 }

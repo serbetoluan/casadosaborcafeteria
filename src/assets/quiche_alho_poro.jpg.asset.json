@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "06793fdc-84ff-4c35-9aa3-52732bbc6534",
-  "project_id": "e8ce6a4c-6ca7-4766-9dc7-5280def77fd3",
-  "url": "/__l5e/assets-v1/06793fdc-84ff-4c35-9aa3-52732bbc6534/quiche_alho_poro.jpg",
-  "r2_key": "a/v1/e8ce6a4c-6ca7-4766-9dc7-5280def77fd3/06793fdc-84ff-4c35-9aa3-52732bbc6534/quiche_alho_poro.jpg",
-  "original_filename": "quiche_alho_poro.jpg",
-  "size": 92340,
   "content_type": "image/jpeg",
-  "created_at": "2026-08-05T23:11:56Z"
+  "created_at": "2026-08-05T23:11:56Z",
+  "original_filename": "quiche_alho_poro.jpg",
+  "project_id": "e88e1173-2050-4481-a819-c7319f91acd3",
+  "r2_key": "a/v1/e88e1173-2050-4481-a819-c7319f91acd3/06793fdc-84ff-4c35-9aa3-52732bbc6534/quiche_alho_poro.jpg",
+  "size": 92340,
+  "url": "/__l5e/assets-v1/06793fdc-84ff-4c35-9aa3-52732bbc6534/quiche_alho_poro.jpg",
+  "version": 1
 }

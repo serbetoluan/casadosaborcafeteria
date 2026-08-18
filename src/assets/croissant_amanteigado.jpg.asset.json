@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "8ac604a7-64e3-4a06-a1fa-b69b25758fa2",
-  "project_id": "e8ce6a4c-6ca7-4766-9dc7-5280def77fd3",
-  "url": "/__l5e/assets-v1/8ac604a7-64e3-4a06-a1fa-b69b25758fa2/croissant_amanteigado.jpg",
-  "r2_key": "a/v1/e8ce6a4c-6ca7-4766-9dc7-5280def77fd3/8ac604a7-64e3-4a06-a1fa-b69b25758fa2/croissant_amanteigado.jpg",
-  "original_filename": "croissant_amanteigado.jpg",
-  "size": 101107,
   "content_type": "image/jpeg",
-  "created_at": "2026-08-05T23:05:40Z"
+  "created_at": "2026-08-05T23:05:40Z",
+  "original_filename": "croissant_amanteigado.jpg",
+  "project_id": "e88e1173-2050-4481-a819-c7319f91acd3",
+  "r2_key": "a/v1/e88e1173-2050-4481-a819-c7319f91acd3/8ac604a7-64e3-4a06-a1fa-b69b25758fa2/croissant_amanteigado.jpg",
+  "size": 101107,
+  "url": "/__l5e/assets-v1/8ac604a7-64e3-4a06-a1fa-b69b25758fa2/croissant_amanteigado.jpg",
+  "version": 1
 }

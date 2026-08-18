@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "16fbb901-e471-4e49-9298-32507ba28222",
-  "project_id": "e8ce6a4c-6ca7-4766-9dc7-5280def77fd3",
-  "url": "/__l5e/assets-v1/16fbb901-e471-4e49-9298-32507ba28222/cappuccino_proteico.jpg",
-  "r2_key": "a/v1/e8ce6a4c-6ca7-4766-9dc7-5280def77fd3/16fbb901-e471-4e49-9298-32507ba28222/cappuccino_proteico.jpg",
-  "original_filename": "cappuccino_proteico.jpg",
-  "size": 99178,
   "content_type": "image/jpeg",
-  "created_at": "2026-08-14T03:31:23Z"
+  "created_at": "2026-08-14T03:31:23Z",
+  "original_filename": "cappuccino_proteico.jpg",
+  "project_id": "e88e1173-2050-4481-a819-c7319f91acd3",
+  "r2_key": "a/v1/e88e1173-2050-4481-a819-c7319f91acd3/16fbb901-e471-4e49-9298-32507ba28222/cappuccino_proteico.jpg",
+  "size": 99178,
+  "url": "/__l5e/assets-v1/16fbb901-e471-4e49-9298-32507ba28222/cappuccino_proteico.jpg",
+  "version": 1
 }

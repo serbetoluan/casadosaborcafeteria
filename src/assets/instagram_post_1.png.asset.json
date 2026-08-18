@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "92f72b29-aa14-4e4a-90ba-88a8bd27c618",
-  "project_id": "e8ce6a4c-6ca7-4766-9dc7-5280def77fd3",
-  "url": "/__l5e/assets-v1/92f72b29-aa14-4e4a-90ba-88a8bd27c618/instagram_post_1.png",
-  "r2_key": "a/v1/e8ce6a4c-6ca7-4766-9dc7-5280def77fd3/92f72b29-aa14-4e4a-90ba-88a8bd27c618/instagram_post_1.png",
-  "original_filename": "instagram_post_1.png",
-  "size": 65669,
   "content_type": "image/jpeg",
-  "created_at": "2026-07-28T20:06:33Z"
+  "created_at": "2026-07-28T20:06:33Z",
+  "original_filename": "instagram_post_1.png",
+  "project_id": "e88e1173-2050-4481-a819-c7319f91acd3",
+  "r2_key": "a/v1/e88e1173-2050-4481-a819-c7319f91acd3/92f72b29-aa14-4e4a-90ba-88a8bd27c618/instagram_post_1.png",
+  "size": 65669,
+  "url": "/__l5e/assets-v1/92f72b29-aa14-4e4a-90ba-88a8bd27c618/instagram_post_1.png",
+  "version": 1
 }

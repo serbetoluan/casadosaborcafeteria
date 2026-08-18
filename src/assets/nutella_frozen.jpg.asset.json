@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "962dda6c-6954-4a92-975e-8d9d8668068f",
-  "project_id": "e8ce6a4c-6ca7-4766-9dc7-5280def77fd3",
-  "url": "/__l5e/assets-v1/962dda6c-6954-4a92-975e-8d9d8668068f/nutella_frozen.jpg",
-  "r2_key": "a/v1/e8ce6a4c-6ca7-4766-9dc7-5280def77fd3/962dda6c-6954-4a92-975e-8d9d8668068f/nutella_frozen.jpg",
-  "original_filename": "nutella_frozen.jpg",
-  "size": 267046,
   "content_type": "image/jpeg",
-  "created_at": "2026-08-05T23:10:27Z"
+  "created_at": "2026-08-05T23:10:27Z",
+  "original_filename": "nutella_frozen.jpg",
+  "project_id": "e88e1173-2050-4481-a819-c7319f91acd3",
+  "r2_key": "a/v1/e88e1173-2050-4481-a819-c7319f91acd3/962dda6c-6954-4a92-975e-8d9d8668068f/nutella_frozen.jpg",
+  "size": 267046,
+  "url": "/__l5e/assets-v1/962dda6c-6954-4a92-975e-8d9d8668068f/nutella_frozen.jpg",
+  "version": 1
 }

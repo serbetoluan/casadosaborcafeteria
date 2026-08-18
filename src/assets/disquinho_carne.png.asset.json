@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "6bc25140-6d2b-4fff-bff5-9b4ef705c5cc",
-  "project_id": "e8ce6a4c-6ca7-4766-9dc7-5280def77fd3",
-  "url": "/__l5e/assets-v1/6bc25140-6d2b-4fff-bff5-9b4ef705c5cc/disquinho_carne.png",
-  "r2_key": "a/v1/e8ce6a4c-6ca7-4766-9dc7-5280def77fd3/6bc25140-6d2b-4fff-bff5-9b4ef705c5cc/disquinho_carne.png",
-  "original_filename": "disquinho_carne.png",
-  "size": 27237,
   "content_type": "image/jpeg",
-  "created_at": "2026-07-28T18:50:10Z"
+  "created_at": "2026-07-28T18:50:10Z",
+  "original_filename": "disquinho_carne.png",
+  "project_id": "e88e1173-2050-4481-a819-c7319f91acd3",
+  "r2_key": "a/v1/e88e1173-2050-4481-a819-c7319f91acd3/6bc25140-6d2b-4fff-bff5-9b4ef705c5cc/disquinho_carne.png",
+  "size": 27237,
+  "url": "/__l5e/assets-v1/6bc25140-6d2b-4fff-bff5-9b4ef705c5cc/disquinho_carne.png",
+  "version": 1
 }

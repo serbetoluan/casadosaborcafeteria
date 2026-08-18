@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "ff0838cb-8766-42f5-b75a-653e0bed3e27",
-  "project_id": "e8ce6a4c-6ca7-4766-9dc7-5280def77fd3",
-  "url": "/__l5e/assets-v1/ff0838cb-8766-42f5-b75a-653e0bed3e27/salada_de_frutas.png",
-  "r2_key": "a/v1/e8ce6a4c-6ca7-4766-9dc7-5280def77fd3/ff0838cb-8766-42f5-b75a-653e0bed3e27/salada_de_frutas.png",
-  "original_filename": "salada_de_frutas.png",
-  "size": 17278,
   "content_type": "image/jpeg",
-  "created_at": "2026-07-28T18:44:39Z"
+  "created_at": "2026-07-28T18:44:39Z",
+  "original_filename": "salada_de_frutas.png",
+  "project_id": "e88e1173-2050-4481-a819-c7319f91acd3",
+  "r2_key": "a/v1/e88e1173-2050-4481-a819-c7319f91acd3/ff0838cb-8766-42f5-b75a-653e0bed3e27/salada_de_frutas.png",
+  "size": 17278,
+  "url": "/__l5e/assets-v1/ff0838cb-8766-42f5-b75a-653e0bed3e27/salada_de_frutas.png",
+  "version": 1
 }

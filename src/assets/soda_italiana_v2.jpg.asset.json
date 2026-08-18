@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "92333112-62fe-4a2b-bbd3-963780b66bc7",
-  "project_id": "e8ce6a4c-6ca7-4766-9dc7-5280def77fd3",
-  "url": "/__l5e/assets-v1/92333112-62fe-4a2b-bbd3-963780b66bc7/soda_italiana_v2.jpg",
-  "r2_key": "a/v1/e8ce6a4c-6ca7-4766-9dc7-5280def77fd3/92333112-62fe-4a2b-bbd3-963780b66bc7/soda_italiana_v2.jpg",
-  "original_filename": "soda_italiana_v2.jpg",
-  "size": 163644,
   "content_type": "image/jpeg",
-  "created_at": "2026-08-05T23:13:37Z"
+  "created_at": "2026-08-05T23:13:37Z",
+  "original_filename": "soda_italiana_v2.jpg",
+  "project_id": "e88e1173-2050-4481-a819-c7319f91acd3",
+  "r2_key": "a/v1/e88e1173-2050-4481-a819-c7319f91acd3/92333112-62fe-4a2b-bbd3-963780b66bc7/soda_italiana_v2.jpg",
+  "size": 163644,
+  "url": "/__l5e/assets-v1/92333112-62fe-4a2b-bbd3-963780b66bc7/soda_italiana_v2.jpg",
+  "version": 1
 }
