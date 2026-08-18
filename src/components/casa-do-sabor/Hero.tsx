@@ -31,7 +31,7 @@ export function Hero() {
           />
 
           <span className="rounded-full bg-white/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta ring-1 ring-terracotta/30">
-            Unidade Summer Fit
+            Casa 1 &amp; Casa 2
           </span>
 
           <h1 className="mt-4 font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl">
