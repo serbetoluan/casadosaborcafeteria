@@ -52,7 +52,10 @@ function Index() {
           <Hero />
           <InstaFeed />
           {categories.map((c) => (
-            <CategorySection key={c.id} category={c} />
+            <div key={c.id}>
+              {c.id === DOCERIA_FIRST_CATEGORY_ID && <DoceriaIntro />}
+              <CategorySection category={c} />
+            </div>
           ))}
           <SobreNos />
           <Contato />
