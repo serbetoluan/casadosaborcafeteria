@@ -7,7 +7,11 @@ type NavItem = { id: string; title: string };
 
 export function StickyNav({ items }: { items: NavItem[] }) {
   const [active, setActive] = useState(items[0]?.id ?? "");
-  const scrollerRef = useRef<HTMLDivElement>(null);
+  // Duas barras (desktop e mobile) precisam de refs próprias — compartilhar um
+  // único ref fazia a última montada sobrescrever a outra e o auto-scroll do
+  // chip ativo parava de funcionar no desktop.
+  const desktopScrollerRef = useRef<HTMLElement>(null);
+  const mobileScrollerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -27,10 +31,14 @@ export function StickyNav({ items }: { items: NavItem[] }) {
   }, [items]);
 
   useEffect(() => {
-    const chip = scrollerRef.current?.querySelector<HTMLAnchorElement>(
-      `[data-chip="${active}"]`,
-    );
-    chip?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    if (!active) return;
+    for (const scroller of [desktopScrollerRef.current, mobileScrollerRef.current]) {
+      const chip = scroller?.querySelector<HTMLAnchorElement>(`[data-chip="${active}"]`);
+      if (!chip || !scroller) continue;
+      // scrollLeft manual evita que o scrollIntoView arraste a página inteira.
+      const target = chip.offsetLeft - scroller.clientWidth / 2 + chip.clientWidth / 2;
+      scroller.scrollTo({ left: Math.max(0, target), behavior: "smooth" });
+    }
   }, [active]);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
