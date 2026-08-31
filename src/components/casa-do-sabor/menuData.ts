@@ -56,6 +56,16 @@ import aperolSpritzAsset from "@/assets/aperol_spritz.jpg.asset.json";
 import boloGeladoFrutasVermelhasAsset from "@/assets/bolo_gelado_de_frutas_vermelhas.jpg.asset.json";
 import cremesAsset from "@/assets/cremes.jpg.asset.json";
 import bananaSplitAsset from "@/assets/banana_split.jpg.asset.json";
+import macaronsAsset from "@/assets/macarons.jpg.asset.json";
+import fatiaCenouraAsset from "@/assets/fatia_de_cenoura.jpg.asset.json";
+import fatiaNinhoBrigadeiroAsset from "@/assets/fatia_de_ninho_com_brigadeiro.jpg.asset.json";
+import brigadeiroBelgaAsset from "@/assets/brigadeiro_belga.jpg.asset.json";
+import miniPudimAsset from "@/assets/mini_pudim.jpg.asset.json";
+import balaBaianaAsset from "@/assets/bala_baiana.jpeg.asset.json";
+import pedacinhoInfanciaAsset from "@/assets/pedacinho_de_infancia.jpg.asset.json";
+import cookiesAsset from "@/assets/cookies.jpg.asset.json";
+import waffleBananaMelAsset from "@/assets/waffle_com_banana_e_mel.jpg.asset.json";
+import grandGateauAsset from "@/assets/grand_gateau.jpg.asset.json";
 
 export type MenuOptionGroup = {
   label: string;
@@ -132,6 +142,7 @@ export const categories: MenuCategory[] = [
         price: "R$ 14,00",
         priceValue: 14,
         options: [{ label: "Escolha o sabor", required: true, choices: ["Cenoura", "Chocolate", "Limão"] }],
+        image: pedacinhoInfanciaAsset.url,
       },
       {
         slug: "waffle-cremo",
@@ -417,9 +428,9 @@ export const categories: MenuCategory[] = [
       { slug: "gelato-m", name: "Gelato M", description: "Escolha até dois sabores", price: "R$ 19,00", priceValue: 19 , image: copinhoGelatoAsset.url },
       { slug: "gelato-g", name: "Gelato G", description: "Escolha até três sabores", price: "R$ 22,00", priceValue: 22 , image: copinhoGelatoAsset.url },
       { slug: "petit-gateau", name: "Petit Gateau", description: "Bolinho de chocolate, calda de chocolate e uma bola de gelato (escolha seu sabor preferido)", price: "R$ 27,00", priceValue: 27 },
-      { slug: "grand-gateau", name: "Grand Gateau", description: "Clássico Grand Gateau acompanhado de: waffle com Nutella, morangos, amêndoas laminadas e uma bola de gelato (escolha seu sabor preferido)", price: "R$ 44,00", priceValue: 44 },
+      { slug: "grand-gateau", name: "Grand Gateau", description: "Clássico Grand Gateau acompanhado de: waffle com Nutella, morangos, amêndoas laminadas e uma bola de gelato (escolha seu sabor preferido)", price: "R$ 44,00", priceValue: 44 , image: grandGateauAsset.url },
       { slug: "banana-split", name: "Banana Split", description: "O clássico da nossa infância. Três bolas de gelato (escolha seu sabor preferido), acompanha banana, morango, calda de chocolate, castanhas, chantilly, cerejas e biju", price: "R$ 37,00", priceValue: 37 , image: bananaSplitAsset.url },
-      { slug: "waffle-banana-canela", name: "Waffle Americano com banana, canela e mel ou açúcar", price: "R$ 23,00", priceValue: 23 },
+      { slug: "waffle-banana-canela", name: "Waffle Americano com banana, canela e mel ou açúcar", price: "R$ 23,00", priceValue: 23 , image: waffleBananaMelAsset.url },
       { slug: "waffle-doce-leite", name: "Waffle Americano com doce de leite", price: "R$ 23,00", priceValue: 23 },
       { slug: "waffle-nutella", name: "Waffle Americano com Nutella", price: "R$ 23,00", priceValue: 23 },
       { slug: "waffle-morango-nutella", name: "Waffle Americano com morango e Nutella", price: "R$ 27,00", priceValue: 27 },
@@ -434,9 +445,9 @@ export const categories: MenuCategory[] = [
     tagline: "Doçuras da Lê",
     partner: { name: "Doçuras da Lê" },
     items: [
-      { slug: "brigadeiro-belga", name: "Docinho de brigadeiro belga", description: "1 unidade", price: "R$ 5,00", priceValue: 5 },
+      { slug: "brigadeiro-belga", name: "Docinho de brigadeiro belga", description: "1 unidade", price: "R$ 5,00", priceValue: 5 , image: brigadeiroBelgaAsset.url },
       { slug: "docinho-ninho", name: "Docinho de leite Ninho®", description: "1 unidade", price: "R$ 5,00", priceValue: 5 },
-      { slug: "bala-baiana", name: "Bala Baiana", description: "1 unidade", price: "R$ 6,00", priceValue: 6 },
+      { slug: "bala-baiana", name: "Bala Baiana", description: "1 unidade", price: "R$ 6,00", priceValue: 6 , image: balaBaianaAsset.url },
       {
         slug: "macarons",
         name: "Macarons",
@@ -444,8 +455,9 @@ export const categories: MenuCategory[] = [
         price: "R$ 6,00",
         priceValue: 6,
         options: [{ label: "Escolha o sabor", required: true, choices: ["Maracujá", "Mocaccino", "Morango", "Pistache"] }],
+        image: macaronsAsset.url,
       },
-      { slug: "mini-pudim", name: "Mini Pudim de Leite Condensado", description: "1 unidade", price: "R$ 10,00", priceValue: 10 },
+      { slug: "mini-pudim", name: "Mini Pudim de Leite Condensado", description: "1 unidade", price: "R$ 10,00", priceValue: 10 , image: miniPudimAsset.url },
       { slug: "banowaffle", name: "Banowaffle", description: "Waffles de Cremoqueijo com doce de leite ou Nutella®, bananas fatiadas, chantilly e poeira de canela · 1 unidade", price: "R$ 25,00", priceValue: 25 },
       { slug: "bala-coco-tradicional", name: "Bala de coco gourmet Tradicional", description: "250g · 1 pote", price: "R$ 20,00", priceValue: 20 },
       { slug: "bala-coco-recheada", name: "Bala de coco gourmet Recheada", description: "Verificar sabores disponíveis (250g) · 1 pote", price: "R$ 22,00", priceValue: 22 },
@@ -493,6 +505,7 @@ export const categories: MenuCategory[] = [
         price: "R$ 16,00",
         priceValue: 16,
         options: [{ label: "Escolha o sabor", required: true, choices: ["Tradicional", "Red velvet", "Natas and Caramel", "Dark (chocolate ao leite e meio amargo)"] }],
+        image: cookiesAsset.url,
       },
       { slug: "torta-cookie", name: "Torta Cookie", description: "Massa de cookie tradicional recheada com Nutella® e flor de sal · 1 fatia", price: "R$ 22,00", priceValue: 22 },
     ],
@@ -559,12 +572,12 @@ export const categories: MenuCategory[] = [
     tagline: "Doçuras da Lê",
     partner: { name: "Doçuras da Lê" },
     items: [
-      { slug: "fatia-brigadeiro-ninho", name: "Brigadeiro Belga c/ Ninho®", description: "Bolo de chocolate com creme de Ninho® e cobertura de brigadeiro belga · 1 unidade", price: "R$ 22,00", priceValue: 22 },
+      { slug: "fatia-brigadeiro-ninho", name: "Brigadeiro Belga c/ Ninho®", description: "Bolo de chocolate com creme de Ninho® e cobertura de brigadeiro belga · 1 unidade", price: "R$ 22,00", priceValue: 22 , image: fatiaNinhoBrigadeiroAsset.url },
       { slug: "fatia-kinder", name: "Kinder Bueno®", description: "Bolo de chocolate com creme de Ninho®, Nutella®, brigadeiro belga e Kinder Bueno®, cobertura de Ninho® com Kinder Bueno® · 1 unidade", price: "R$ 25,00", priceValue: 25 },
       { slug: "fatia-abacaxi", name: "Abacaxi", description: "Bolo de baunilha com creme de Ninho® e abacaxi, finalizado com raspas de chocolate branco · 1 unidade", price: "R$ 22,00", priceValue: 22 },
       { slug: "fatia-chocolate", name: "Chocolate", description: "Bolo de chocolate recheado com brigadeiro, cobertura de brigadeiro e finalizado com raspas de chocolate meio amargo · 1 unidade", price: "R$ 22,00", priceValue: 22 },
       { slug: "fatia-pistache", name: "Pistache com brigadeiro", description: "Bolo de chocolate recheado com brigadeiro, cobertura de brigadeiro e finalizado com raspas de chocolate meio amargo · 1 unidade", price: "R$ 25,00", priceValue: 25 },
-      { slug: "fatia-cenoura", name: "Cenoura com chocolate", description: "Bolo de cenoura recheado com chocolate, com cobertura de chocolate, finalizado com raspas de chocolate meio amargo · 1 unidade", price: "R$ 22,00", priceValue: 22 },
+      { slug: "fatia-cenoura", name: "Cenoura com chocolate", description: "Bolo de cenoura recheado com chocolate, com cobertura de chocolate, finalizado com raspas de chocolate meio amargo · 1 unidade", price: "R$ 22,00", priceValue: 22 , image: fatiaCenouraAsset.url },
     ],
   },
 ];
