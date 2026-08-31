@@ -66,6 +66,9 @@ import pedacinhoInfanciaAsset from "@/assets/pedacinho_de_infancia.jpg.asset.jso
 import cookiesAsset from "@/assets/cookies.jpg.asset.json";
 import waffleBananaMelAsset from "@/assets/waffle_com_banana_e_mel.jpg.asset.json";
 import grandGateauAsset from "@/assets/grand_gateau.jpg.asset.json";
+import broaMilhoAsset from "@/assets/broa_milho.jpeg.asset.json";
+import espressoMartiniAsset from "@/assets/espresso_martini.jpg.asset.json";
+import banowaffleAsset from "@/assets/banowaffle.jpg.asset.json";
 
 export type MenuOptionGroup = {
   label: string;
@@ -112,7 +115,7 @@ export const categories: MenuCategory[] = [
     items: [
       { slug: "pao-queijo", name: "Pão de queijo", description: "1 unidade", price: "R$ 1,50", priceValue: 1.5, image: paoQueijoAsset.url },
       { slug: "pao-queijo-multi", name: "Pão de queijo multigrãos", description: "1 unidade", price: "R$ 2,50", priceValue: 2.5, image: paoQueijoMultigraosAsset.url },
-      { slug: "broa-milho", name: "Broa de milho doce", description: "1 unidade", price: "R$ 2,50", priceValue: 2.5 },
+      { slug: "broa-milho", name: "Broa de milho doce", description: "1 unidade", price: "R$ 2,50", priceValue: 2.5, image: broaMilhoAsset.url },
       { slug: "biscoitinho-queijo", name: "Biscoitinho de Queijo", description: "1 unidade", price: "R$ 1,50", priceValue: 1.5 },
       { slug: "biscoito-suico", name: "Biscoito Suíço", description: "1 unidade", price: "R$ 3,00", priceValue: 3 , image: biscoitoSuicoAsset.url },
       { slug: "biscoito-parmesao", name: "Biscoito Parmesão", description: "1 unidade", price: "R$ 3,00", priceValue: 3, image: biscoitoParmesaoAsset.url },
@@ -377,7 +380,7 @@ export const categories: MenuCategory[] = [
     tagline: "A hora dourada da Casa",
     notice: "Bebidas alcoólicas — venda proibida para menores de 18 anos.",
     items: [
-      { slug: "espresso-martini", name: "Espresso Martini", description: "Café espresso gelado, licor Baileys e gelo · 400ml", price: "R$ 24,00", priceValue: 24 },
+      { slug: "espresso-martini", name: "Espresso Martini", description: "Café espresso gelado, licor Baileys e gelo · 400ml", price: "R$ 24,00", priceValue: 24, image: espressoMartiniAsset.url },
       { slug: "cappuccino-alcoolico", name: "Cappuccino Alcóolico", description: "Cappuccino, licor de Amarula, creme de leite e gelo · 400ml", price: "R$ 24,00", priceValue: 24 },
       { slug: "afogatto-cookie-baileys", name: "Afogatto Cookie Baileys", description: "Sorvete de creme, calda de chocolate, licor Baileys, café espresso e mini cookie da Lê · 400ml", price: "R$ 28,00", priceValue: 28 , image: affogatoCookieBaileysAsset.url },
       { slug: "aperol-spritz", name: "Aperol Spritz", description: "Vinho frizante, Aperol, laranja e gelo · 400ml", price: "R$ 28,00", priceValue: 28 , image: aperolSpritzAsset.url },
@@ -458,7 +461,7 @@ export const categories: MenuCategory[] = [
         image: macaronsAsset.url,
       },
       { slug: "mini-pudim", name: "Mini Pudim de Leite Condensado", description: "1 unidade", price: "R$ 10,00", priceValue: 10 , image: miniPudimAsset.url },
-      { slug: "banowaffle", name: "Banowaffle", description: "Waffles de Cremoqueijo com doce de leite ou Nutella®, bananas fatiadas, chantilly e poeira de canela · 1 unidade", price: "R$ 25,00", priceValue: 25 },
+      { slug: "banowaffle", name: "Banowaffle", description: "Waffles de Cremoqueijo com doce de leite ou Nutella®, bananas fatiadas, chantilly e poeira de canela · 1 unidade", price: "R$ 25,00", priceValue: 25, image: banowaffleAsset.url },
       { slug: "bala-coco-tradicional", name: "Bala de coco gourmet Tradicional", description: "250g · 1 pote", price: "R$ 20,00", priceValue: 20 },
       { slug: "bala-coco-recheada", name: "Bala de coco gourmet Recheada", description: "Verificar sabores disponíveis (250g) · 1 pote", price: "R$ 22,00", priceValue: 22 },
       { slug: "bala-coco-saquinho", name: "Bala de coco gourmet saquinho", description: "Verificar sabores disponíveis (110g) · 1 unidade", price: "R$ 14,00", priceValue: 14 },
