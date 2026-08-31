@@ -46,6 +46,16 @@ import tortaFrangoV2Asset from "@/assets/torta_frango_v2.jpg.asset.json";
 import kombuchasBaldeAsset from "@/assets/kombuchas_balde.jpg.asset.json";
 import cappuccinoLightAsset from "@/assets/cappuccino_light.jpg.asset.json";
 import panquecaBananaAsset from "@/assets/panqueca_banana.png.asset.json";
+import affogatoCookieBaileysAsset from "@/assets/affogato_cookie_baileys.jpg.asset.json";
+import pipoquinhaGourmetAsset from "@/assets/pipoquinha_gourmet.jpg.asset.json";
+import copinhoGelatoAsset from "@/assets/copinho_gelato.jpg.asset.json";
+import waffleMorangoBananaNutellaAsset from "@/assets/waffle_de_morango_banana_e_nutella.jpg.asset.json";
+import brownieTradicionalAsset from "@/assets/brownie_tradicional.jpg.asset.json";
+import biscoitoSuicoAsset from "@/assets/biscoito_suico.jpg.asset.json";
+import aperolSpritzAsset from "@/assets/aperol_spritz.jpg.asset.json";
+import boloGeladoFrutasVermelhasAsset from "@/assets/bolo_gelado_de_frutas_vermelhas.jpg.asset.json";
+import cremesAsset from "@/assets/cremes.jpg.asset.json";
+import bananaSplitAsset from "@/assets/banana_split.jpg.asset.json";
 
 export type MenuOptionGroup = {
   label: string;
