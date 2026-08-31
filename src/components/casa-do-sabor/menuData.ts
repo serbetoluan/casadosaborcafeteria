@@ -66,6 +66,9 @@ import pedacinhoInfanciaAsset from "@/assets/pedacinho_de_infancia.jpg.asset.jso
 import cookiesAsset from "@/assets/cookies.jpg.asset.json";
 import waffleBananaMelAsset from "@/assets/waffle_com_banana_e_mel.jpg.asset.json";
 import grandGateauAsset from "@/assets/grand_gateau.jpg.asset.json";
+import broaMilhoAsset from "@/assets/broa_milho.jpeg.asset.json";
+import espressoMartiniAsset from "@/assets/espresso_martini.jpg.asset.json";
+import banowaffleAsset from "@/assets/banowaffle.jpg.asset.json";
 
 export type MenuOptionGroup = {
   label: string;
@@ -112,7 +115,7 @@ export const categories: MenuCategory[] = [
     items: [
       { slug: "pao-queijo", name: "Pão de queijo", description: "1 unidade", price: "R$ 1,50", priceValue: 1.5, image: paoQueijoAsset.url },
       { slug: "pao-queijo-multi", name: "Pão de queijo multigrãos", description: "1 unidade", price: "R$ 2,50", priceValue: 2.5, image: paoQueijoMultigraosAsset.url },
-      { slug: "broa-milho", name: "Broa de milho doce", description: "1 unidade", price: "R$ 2,50", priceValue: 2.5 },
+      { slug: "broa-milho", name: "Broa de milho doce", description: "1 unidade", price: "R$ 2,50", priceValue: 2.5, image: broaMilhoAsset.url },
       { slug: "biscoitinho-queijo", name: "Biscoitinho de Queijo", description: "1 unidade", price: "R$ 1,50", priceValue: 1.5 },
       { slug: "biscoito-suico", name: "Biscoito Suíço", description: "1 unidade", price: "R$ 3,00", priceValue: 3 , image: biscoitoSuicoAsset.url },
       { slug: "biscoito-parmesao", name: "Biscoito Parmesão", description: "1 unidade", price: "R$ 3,00", priceValue: 3, image: biscoitoParmesaoAsset.url },
@@ -184,8 +187,8 @@ export const categories: MenuCategory[] = [
       { slug: "quiche-lorraine", name: "Quiche Lorraine", description: "Bacon e creme de queijo · 1 unidade", price: "R$ 18,00", priceValue: 18, image: tortaFrangoAsset.url },
       { slug: "quiche-alho-poro", name: "Quiche de Alho Poró", description: "1 unidade", price: "R$ 18,00", priceValue: 18, image: quicheAlhoPoroAsset.url },
       { slug: "torta-frango-catupiry", name: "Torta de Frango com Catupiry", description: "1 unidade", price: "R$ 20,00", priceValue: 20, image: tortaFrangoV2Asset.url },
-      { slug: "panqueca-frango", name: "Panqueca de Frango", description: "1 unidade", price: "R$ 25,00", priceValue: 25 },
-      { slug: "panqueca-carne", name: "Panqueca de Carne", description: "1 unidade", price: "R$ 25,00", priceValue: 25 },
+      { slug: "panqueca-frango", name: "Panqueca de Frango", description: "1 unidade", price: "R$ 25,00", priceValue: 25, image: banowaffleAsset.url },
+      { slug: "panqueca-carne", name: "Panqueca de Carne", description: "1 unidade", price: "R$ 25,00", priceValue: 25, image: banowaffleAsset.url },
     ],
   },
   {
@@ -320,10 +323,10 @@ export const categories: MenuCategory[] = [
       },
       { slug: "vienense", name: "Vienense", description: "Café expresso, sorvete de creme, calda de chocolate e chantilly · 400ml", price: "R$ 24,00", priceValue: 24, image: vienenseAsset.url },
       { slug: "cappuccino-gelado", name: "Cappuccino Gelado", description: "Café expresso, cappuccino, sorvete de creme, calda de chocolate e chantilly · 400ml", price: "R$ 24,00", priceValue: 24, image: cappuccinoGeladoAsset.url },
-      { slug: "afogatto", name: "Afogatto", description: "Taça de gelato de leite ninho com castanhas e chantilly, acompanha um espresso quentinho · 400ml", price: "R$ 24,00", priceValue: 24 },
+      { slug: "afogatto", name: "Afogatto", description: "Taça de gelato de leite ninho com castanhas e chantilly, acompanha um espresso quentinho · 400ml", price: "R$ 24,00", priceValue: 24, image: espressoMartiniAsset.url },
       { slug: "nutella-frozen", name: "Nutella® Frozen", description: "Taça de gelato de leite Ninho® batido com uma dose de espresso e muita Nutella®, acompanha chantilly · 400ml", price: "R$ 25,00", priceValue: 25, image: nutellaFrozenAsset.url },
-      { slug: "milkshake-ovomaltine", name: "Milkshake de Ovomaltine®", description: "Shake cremoso de gelato de leite ninho e Ovomaltine® · 400ml", price: "R$ 25,00", priceValue: 25 },
-      { slug: "crocante-doce-leite", name: "Crocante de Doce de Leite", description: "Frappe cremoso de gelato de leite Ninho® e doce de leite, uma dose de espresso e castanhas. Acompanha chantilly · 400ml", price: "R$ 25,00", priceValue: 25 },
+      { slug: "milkshake-ovomaltine", name: "Milkshake de Ovomaltine®", description: "Shake cremoso de gelato de leite ninho e Ovomaltine® · 400ml", price: "R$ 25,00", priceValue: 25, image: banowaffleAsset.url },
+      { slug: "crocante-doce-leite", name: "Crocante de Doce de Leite", description: "Frappe cremoso de gelato de leite Ninho® e doce de leite, uma dose de espresso e castanhas. Acompanha chantilly · 400ml", price: "R$ 25,00", priceValue: 25, image: banowaffleAsset.url },
       {
         slug: "gelato-shake",
         name: "Gelato Shake",
@@ -458,7 +461,7 @@ export const categories: MenuCategory[] = [
         image: macaronsAsset.url,
       },
       { slug: "mini-pudim", name: "Mini Pudim de Leite Condensado", description: "1 unidade", price: "R$ 10,00", priceValue: 10 , image: miniPudimAsset.url },
-      { slug: "banowaffle", name: "Banowaffle", description: "Waffles de Cremoqueijo com doce de leite ou Nutella®, bananas fatiadas, chantilly e poeira de canela · 1 unidade", price: "R$ 25,00", priceValue: 25 },
+      { slug: "banowaffle", name: "Banowaffle", description: "Waffles de Cremoqueijo com doce de leite ou Nutella®, bananas fatiadas, chantilly e poeira de canela · 1 unidade", price: "R$ 25,00", priceValue: 25, image: banowaffleAsset.url },
       { slug: "bala-coco-tradicional", name: "Bala de coco gourmet Tradicional", description: "250g · 1 pote", price: "R$ 20,00", priceValue: 20 },
       { slug: "bala-coco-recheada", name: "Bala de coco gourmet Recheada", description: "Verificar sabores disponíveis (250g) · 1 pote", price: "R$ 22,00", priceValue: 22 },
       { slug: "bala-coco-saquinho", name: "Bala de coco gourmet saquinho", description: "Verificar sabores disponíveis (110g) · 1 unidade", price: "R$ 14,00", priceValue: 14 },
@@ -473,7 +476,7 @@ export const categories: MenuCategory[] = [
     items: [
       { slug: "brownie-tradicional", name: "Brownie Tradicional", description: "1 unidade", price: "R$ 12,00", priceValue: 12 , image: brownieTradicionalAsset.url },
       { slug: "brownie-supreme", name: "Brownie Supreme", description: "Com muita cobertura de chocolate meio amargo · 1 unidade", price: "R$ 17,00", priceValue: 17 },
-      { slug: "iced-brownie", name: "Iced Brownie", description: "Bola de gelato à escolha, farofinha de castanha, ganache de chocolate meio amargo ou doce de leite · 1 unidade", price: "R$ 25,00", priceValue: 25 },
+      { slug: "iced-brownie", name: "Iced Brownie", description: "Bola de gelato à escolha, farofinha de castanha, ganache de chocolate meio amargo ou doce de leite · 1 unidade", price: "R$ 25,00", priceValue: 25, image: banowaffleAsset.url },
     ],
   },
   {
@@ -573,10 +576,10 @@ export const categories: MenuCategory[] = [
     partner: { name: "Doçuras da Lê" },
     items: [
       { slug: "fatia-brigadeiro-ninho", name: "Brigadeiro Belga c/ Ninho®", description: "Bolo de chocolate com creme de Ninho® e cobertura de brigadeiro belga · 1 unidade", price: "R$ 22,00", priceValue: 22 , image: fatiaNinhoBrigadeiroAsset.url },
-      { slug: "fatia-kinder", name: "Kinder Bueno®", description: "Bolo de chocolate com creme de Ninho®, Nutella®, brigadeiro belga e Kinder Bueno®, cobertura de Ninho® com Kinder Bueno® · 1 unidade", price: "R$ 25,00", priceValue: 25 },
+      { slug: "fatia-kinder", name: "Kinder Bueno®", description: "Bolo de chocolate com creme de Ninho®, Nutella®, brigadeiro belga e Kinder Bueno®, cobertura de Ninho® com Kinder Bueno® · 1 unidade", price: "R$ 25,00", priceValue: 25, image: banowaffleAsset.url },
       { slug: "fatia-abacaxi", name: "Abacaxi", description: "Bolo de baunilha com creme de Ninho® e abacaxi, finalizado com raspas de chocolate branco · 1 unidade", price: "R$ 22,00", priceValue: 22 },
       { slug: "fatia-chocolate", name: "Chocolate", description: "Bolo de chocolate recheado com brigadeiro, cobertura de brigadeiro e finalizado com raspas de chocolate meio amargo · 1 unidade", price: "R$ 22,00", priceValue: 22 },
-      { slug: "fatia-pistache", name: "Pistache com brigadeiro", description: "Bolo de chocolate recheado com brigadeiro, cobertura de brigadeiro e finalizado com raspas de chocolate meio amargo · 1 unidade", price: "R$ 25,00", priceValue: 25 },
+      { slug: "fatia-pistache", name: "Pistache com brigadeiro", description: "Bolo de chocolate recheado com brigadeiro, cobertura de brigadeiro e finalizado com raspas de chocolate meio amargo · 1 unidade", price: "R$ 25,00", priceValue: 25, image: banowaffleAsset.url },
       { slug: "fatia-cenoura", name: "Cenoura com chocolate", description: "Bolo de cenoura recheado com chocolate, com cobertura de chocolate, finalizado com raspas de chocolate meio amargo · 1 unidade", price: "R$ 22,00", priceValue: 22 , image: fatiaCenouraAsset.url },
     ],
   },
