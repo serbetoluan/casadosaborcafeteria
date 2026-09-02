@@ -1,5 +1,13 @@
 {
   "version": "7",
   "dialect": "postgresql",
-  "entries": []
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1788372127126,
+      "tag": "0000_create_admin_panel_core",
+      "breakpoints": true
+    }
+  ]
 }
