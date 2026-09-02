@@ -11,7 +11,7 @@ export function Hero() {
 
       <div className="relative mx-auto flex max-w-3xl flex-col items-center animate-rise">
         {/* Banner as the base layer */}
-        <div className="relative w-full overflow-hidden rounded-3xl ring-1 ring-blush-deep/60 shadow-xl shadow-terracotta/10">
+        <div className="relative w-full overflow-hidden rounded-3xl ring-2 ring-terracotta/20 shadow-xl shadow-terracotta/10">
           <img
             src={banner.url}
             alt="Ambiente acolhedor da Casa do Sabor"
@@ -40,14 +40,12 @@ export function Hero() {
             />
           </div>
 
-
           <span className="rounded-full bg-white/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-terracotta ring-1 ring-terracotta/30">
             Casa 1 &amp; Casa 2
           </span>
 
           <h1 className="mt-4 font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl">
-            Bem-vindo(a) à{" "}
-            <span className="font-script text-terracotta">Casa do Sabor</span>
+            Bem-vindo(a) à <span className="font-script text-terracotta">Casa do Sabor</span>
           </h1>
 
           <p className="mt-3 max-w-md text-sm leading-relaxed text-ink/70 sm:text-base">
