@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { toast } from "sonner";
 
@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { CupIcon } from "@/components/casa-do-sabor/CupIcon";
 
 export const Route = createFileRoute("/auth")({
@@ -31,35 +32,131 @@ export const Route = createFileRoute("/auth")({
   component: AuthPage,
 });
 
+type Mode = "signin" | "signup" | "forgot";
+
+const RESEND_COOLDOWN_SECONDS = 60;
+
+/** Mensagens amigáveis, sem esconder o erro real do backend. */
+function describeError(error: unknown): { message: string; code?: string } {
+  if (typeof error === "object" && error !== null) {
+    const anyError = error as { code?: string; message?: string; status?: number };
+    const code = anyError.code;
+    const raw = anyError.message ?? "Erro inesperado";
+
+    if (code === "email_not_confirmed") {
+      return { message: "E-mail ainda não confirmado. Reenvie a confirmação abaixo.", code };
+    }
+    if (code === "invalid_credentials" || raw.toLowerCase().includes("invalid login")) {
+      return { message: "E-mail ou senha incorretos.", code };
+    }
+    if (code === "over_email_send_rate_limit") {
+      return { message: "Muitas tentativas de envio. Aguarde alguns minutos.", code };
+    }
+    if (code === "user_already_exists" || raw.toLowerCase().includes("already registered")) {
+      return { message: "Este e-mail já possui conta. Faça login ou recupere a senha.", code };
+    }
+    return { message: raw, ...(code ? { code } : {}) };
+  }
+  return { message: "Erro inesperado" };
+}
+
 function AuthPage() {
   const navigate = useNavigate();
-  const [mode, setMode] = useState<"signin" | "signup">("signin");
+  const [mode, setMode] = useState<Mode>("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<{ message: string; code?: string } | null>(null);
+  const [info, setInfo] = useState<string | null>(null);
+  const [cooldown, setCooldown] = useState(0);
+
+  useEffect(() => {
+    if (cooldown <= 0) return;
+    const timer = window.setTimeout(() => setCooldown((value) => value - 1), 1000);
+    return () => window.clearTimeout(timer);
+  }, [cooldown]);
+
+  // Se já existir sessão válida, segue direto para o painel.
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      if (data.session) navigate({ to: "/admin", replace: true });
+    });
+  }, [navigate]);
+
+  const callbackUrl = () =>
+    typeof window === "undefined" ? "" : `${window.location.origin}/auth/callback`;
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
     if (loading) return;
 
     setLoading(true);
+    setError(null);
+    setInfo(null);
+
     try {
       if (mode === "signin") {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) throw error;
-        navigate({ to: "/admin" });
+        const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
+        if (signInError) throw signInError;
+        navigate({ to: "/admin", replace: true });
         return;
       }
 
-      const { error } = await supabase.auth.signUp({
+      if (mode === "forgot") {
+        const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
+          redirectTo: `${window.location.origin}/reset-password`,
+        });
+        if (resetError) throw resetError;
+        setInfo("Enviamos um link de redefinição de senha para o seu e-mail.");
+        setCooldown(RESEND_COOLDOWN_SECONDS);
+        return;
+      }
+
+      const { data, error: signUpError } = await supabase.auth.signUp({
         email,
         password,
-        options: { emailRedirectTo: `${window.location.origin}/admin` },
+        options: { emailRedirectTo: callbackUrl() },
       });
-      if (error) throw error;
-      toast.success("Conta criada. Verifique seu e-mail para confirmar o acesso.");
-    } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Não foi possível continuar");
+      if (signUpError) throw signUpError;
+
+      if (data.session) {
+        navigate({ to: "/admin", replace: true });
+        return;
+      }
+
+      setInfo("Conta criada. Confirme pelo link enviado ao seu e-mail para acessar o painel.");
+      setCooldown(RESEND_COOLDOWN_SECONDS);
+    } catch (caught) {
+      const described = describeError(caught);
+      setError(described);
+      toast.error(described.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handleResend() {
+    if (!email) {
+      setError({ message: "Informe o e-mail para reenviar a confirmação." });
+      return;
+    }
+    if (cooldown > 0 || loading) return;
+
+    setLoading(true);
+    setError(null);
+    try {
+      const { error: resendError } = await supabase.auth.resend({
+        type: "signup",
+        email,
+        options: { emailRedirectTo: callbackUrl() },
+      });
+      if (resendError) throw resendError;
+      setInfo("Novo e-mail de confirmação enviado. Verifique também a caixa de spam.");
+      setCooldown(RESEND_COOLDOWN_SECONDS);
+    } catch (caught) {
+      const described = describeError(caught);
+      setError(described);
+      toast.error(described.message);
     } finally {
       setLoading(false);
     }
@@ -67,18 +164,21 @@ function AuthPage() {
 
   async function handleGoogle() {
     setLoading(true);
+    setError(null);
     const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin,
+      redirect_uri: callbackUrl(),
     });
 
     if (result.error) {
       setLoading(false);
-      toast.error("Não foi possível entrar com o Google");
+      setError({ message: "Não foi possível entrar com o Google" });
       return;
     }
     if (result.redirected) return;
-    navigate({ to: "/admin" });
+    navigate({ to: "/admin", replace: true });
   }
+
+  const title = mode === "signin" ? "Entrar" : mode === "signup" ? "Criar conta" : "Recuperar senha";
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-background px-4 py-16">
@@ -93,16 +193,44 @@ function AuthPage() {
 
         <Card className="border-border/70">
           <CardHeader>
-            <CardTitle className="text-xl">
-              {mode === "signin" ? "Entrar" : "Criar conta"}
-            </CardTitle>
+            <CardTitle className="text-xl">{title}</CardTitle>
             <CardDescription>
               {mode === "signin"
                 ? "Use seu e-mail e senha da equipe."
-                : "Cadastre-se para solicitar acesso ao painel."}
+                : mode === "signup"
+                  ? "Cadastre-se para solicitar acesso ao painel."
+                  : "Enviaremos um link para você definir uma nova senha."}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
+            {error && (
+              <Alert variant="destructive">
+                <AlertDescription className="space-y-2">
+                  <span className="block">{error.message}</span>
+                  {error.code && (
+                    <span className="block text-xs opacity-80">código: {error.code}</span>
+                  )}
+                  {error.code === "email_not_confirmed" && (
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant="outline"
+                      disabled={loading || cooldown > 0}
+                      onClick={handleResend}
+                    >
+                      {cooldown > 0 ? `Reenviar em ${cooldown}s` : "Reenviar confirmação"}
+                    </Button>
+                  )}
+                </AlertDescription>
+              </Alert>
+            )}
+
+            {info && (
+              <Alert>
+                <AlertDescription>{info}</AlertDescription>
+              </Alert>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="email">E-mail</Label>
@@ -117,48 +245,83 @@ function AuthPage() {
                   placeholder="equipe@casadosabor.com"
                 />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="password">Senha</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  autoComplete={mode === "signin" ? "current-password" : "new-password"}
-                  required
-                  minLength={6}
-                  maxLength={72}
-                  value={password}
-                  onChange={(event) => setPassword(event.target.value)}
-                  placeholder="••••••••"
-                />
-              </div>
+              {mode !== "forgot" && (
+                <div className="space-y-2">
+                  <Label htmlFor="password">Senha</Label>
+                  <Input
+                    id="password"
+                    type="password"
+                    autoComplete={mode === "signin" ? "current-password" : "new-password"}
+                    required
+                    minLength={6}
+                    maxLength={72}
+                    value={password}
+                    onChange={(event) => setPassword(event.target.value)}
+                    placeholder="••••••••"
+                  />
+                </div>
+              )}
               <Button type="submit" className="w-full" disabled={loading}>
-                {loading ? "Aguarde…" : mode === "signin" ? "Entrar" : "Criar conta"}
+                {loading ? "Aguarde…" : title}
               </Button>
             </form>
 
-            <div className="relative py-1 text-center">
-              <span className="bg-card px-2 text-xs uppercase tracking-widest text-muted-foreground">
-                ou
-              </span>
+            {mode !== "forgot" && (
+              <>
+                <div className="relative py-1 text-center">
+                  <span className="bg-card px-2 text-xs uppercase tracking-widest text-muted-foreground">
+                    ou
+                  </span>
+                </div>
+
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="w-full"
+                  onClick={handleGoogle}
+                  disabled={loading}
+                >
+                  Entrar com Google
+                </Button>
+
+                <Button
+                  type="button"
+                  variant="ghost"
+                  className="w-full"
+                  disabled={loading || cooldown > 0}
+                  onClick={handleResend}
+                >
+                  {cooldown > 0
+                    ? `Reenviar confirmação em ${cooldown}s`
+                    : "Reenviar e-mail de confirmação"}
+                </Button>
+              </>
+            )}
+
+            <div className="flex flex-col gap-1 pt-1 text-center text-sm">
+              <button
+                type="button"
+                className="text-muted-foreground underline-offset-4 hover:underline"
+                onClick={() => {
+                  setError(null);
+                  setInfo(null);
+                  setMode(mode === "signin" ? "signup" : "signin");
+                }}
+              >
+                {mode === "signin" ? "Não tenho conta ainda" : "Já tenho conta"}
+              </button>
+              <button
+                type="button"
+                className="text-muted-foreground underline-offset-4 hover:underline"
+                onClick={() => {
+                  setError(null);
+                  setInfo(null);
+                  setMode(mode === "forgot" ? "signin" : "forgot");
+                }}
+              >
+                {mode === "forgot" ? "Voltar ao login" : "Esqueci minha senha"}
+              </button>
             </div>
-
-            <Button
-              type="button"
-              variant="outline"
-              className="w-full"
-              onClick={handleGoogle}
-              disabled={loading}
-            >
-              Entrar com Google
-            </Button>
-
-            <button
-              type="button"
-              className="w-full text-center text-sm text-muted-foreground underline-offset-4 hover:underline"
-              onClick={() => setMode(mode === "signin" ? "signup" : "signin")}
-            >
-              {mode === "signin" ? "Não tenho conta ainda" : "Já tenho conta"}
-            </button>
           </CardContent>
         </Card>
 
