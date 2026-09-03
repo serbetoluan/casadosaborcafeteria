@@ -68,6 +68,30 @@ const emptyForm = (categoryId: string): ItemForm => ({
   sortOrder: 0,
 });
 
+function ItemThumbnail({ item }: { item: AdminItem }) {
+  const [hasError, setHasError] = useState(false);
+  const showImage = Boolean(item.imageUrl) && !hasError;
+
+  return (
+    <div
+      className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-border bg-muted/30 text-muted-foreground"
+      title={showImage ? `Foto de ${item.name}` : `Sem foto: ${item.name}`}
+    >
+      {showImage ? (
+        <img
+          src={item.imageUrl ?? undefined}
+          alt={`Foto de ${item.name}`}
+          loading="lazy"
+          className="h-full w-full object-cover"
+          onError={() => setHasError(true)}
+        />
+      ) : (
+        <ImageIcon className="h-6 w-6" aria-hidden="true" />
+      )}
+    </div>
+  );
+}
+
 function AdminMenuPage() {
   const fetchCategories = useServerFn(listCategories);
   const fetchItems = useServerFn(listItems);
@@ -173,12 +197,15 @@ function AdminMenuPage() {
           {(items.data ?? []).map((item) => (
             <Card key={item.id}>
               <CardContent className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between">
-                <div className="min-w-0">
-                  <p className="truncate font-medium text-foreground">{item.name}</p>
-                  <p className="truncate text-sm text-muted-foreground">
-                    {item.categoryTitle} · {item.priceLabel}
-                    {item.imageUrl ? "" : " · sem foto"}
-                  </p>
+                <div className="flex min-w-0 items-center gap-3">
+                  <ItemThumbnail item={item} />
+                  <div className="min-w-0">
+                    <p className="truncate font-medium text-foreground">{item.name}</p>
+                    <p className="truncate text-sm text-muted-foreground">
+                      {item.categoryTitle} · {item.priceLabel}
+                      {item.imageUrl ? "" : " · sem foto"}
+                    </p>
+                  </div>
                 </div>
                 <div className="flex shrink-0 items-center gap-2">
                   <Switch
