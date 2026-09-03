@@ -8,12 +8,15 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import type { MenuItem } from "./menuData";
+import type { MenuItem, StoreId } from "./menuData";
 
 export type OrderDetails = {
   name: string;
   type: "local" | "delivery";
-  address?: string;
+  addressStreet: string;
+  addressNumber: string;
+  addressNeighborhood: string;
+  store: StoreId;
   paymentMethod: string;
 };
 
@@ -51,7 +54,10 @@ const STORAGE_KEY = "cds-cart-v1";
 const DEFAULT_DETAILS: OrderDetails = {
   name: "",
   type: "local",
-  address: "",
+  addressStreet: "",
+  addressNumber: "",
+  addressNeighborhood: "",
+  store: "loja1",
   paymentMethod: "Pix",
 };
 
@@ -64,11 +70,19 @@ function readStorage(): PersistedState | null {
     if (!raw) return null;
     const parsed = JSON.parse(raw) as Partial<PersistedState>;
     if (!parsed || !Array.isArray(parsed.lines)) return null;
+    const savedDetails = (parsed.orderDetails ?? {}) as Partial<OrderDetails> & { address?: string };
     return {
       lines: parsed.lines.filter(
         (l): l is CartLine => !!l && !!l.item && typeof l.unitPrice === "number" && typeof l.quantity === "number",
       ),
-      orderDetails: { ...DEFAULT_DETAILS, ...(parsed.orderDetails ?? {}) },
+      orderDetails: {
+        ...DEFAULT_DETAILS,
+        ...savedDetails,
+        addressStreet: savedDetails.addressStreet ?? savedDetails.address ?? "",
+        addressNumber: savedDetails.addressNumber ?? "",
+        addressNeighborhood: savedDetails.addressNeighborhood ?? "",
+        store: savedDetails.store === "loja2" ? "loja2" : "loja1",
+      },
     };
   } catch {
     return null;

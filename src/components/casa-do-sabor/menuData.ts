@@ -605,4 +605,18 @@ export const navSections = [
   { id: "sobre", title: "Sobre a Casa" },
 ];
 
-export const WHATSAPP_NUMBER = "5564992236969";
+export const STORE_OPTIONS = {
+  loja1: {
+    label: "Loja 1",
+    whatsapp: "5564992236969",
+    address: "Rua José de Carvalho nº 486, Setor Antena",
+  },
+  loja2: {
+    label: "Loja 2",
+    whatsapp: "5564999766781",
+    address: "Rua 08 nº 66, Residencial Morada do Sol",
+  },
+} as const;
+
+export type StoreId = keyof typeof STORE_OPTIONS;
+export const WHATSAPP_NUMBER = STORE_OPTIONS.loja1.whatsapp;

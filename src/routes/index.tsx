@@ -13,6 +13,7 @@ import { CartDrawer } from "@/components/casa-do-sabor/CartDrawer";
 import { CartFab } from "@/components/casa-do-sabor/CartFab";
 import { WelcomeSuggestion } from "@/components/casa-do-sabor/WelcomeSuggestion";
 import { DoceriaIntro } from "@/components/casa-do-sabor/DoceriaIntro";
+import { MenuSearch } from "@/components/casa-do-sabor/MenuSearch";
 import { DOCERIA_FIRST_CATEGORY_ID } from "@/components/casa-do-sabor/menuData";
 import { getPublicMenu } from "@/lib/menu.functions";
 
@@ -52,6 +53,7 @@ function Index() {
         <main className="mx-auto max-w-6xl">
           <Hero />
           <InstaFeed />
+          <MenuSearch categories={categories} />
           {categories.map((category) => (
             <div key={category.id}>
               {category.id === DOCERIA_FIRST_CATEGORY_ID && <DoceriaIntro />}

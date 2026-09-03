@@ -1,19 +1,26 @@
 import { useRef, useState } from "react";
-import { X, Minus, Plus, Trash2, ShoppingBag, MessageCircle, MapPin, CreditCard, User } from "lucide-react";
+import { X, Minus, Plus, Trash2, ShoppingBag, MessageCircle, MapPin, CreditCard, User, Store } from "lucide-react";
 import { useCart, formatBRL } from "./CartContext";
-import { WHATSAPP_NUMBER } from "./menuData";
+import { STORE_OPTIONS, type StoreId } from "./menuData";
 import { CupIcon } from "./CupIcon";
 import { cn } from "@/lib/utils";
 
 const DELIVERY_FEE = 10;
 
-type FormErrors = { name?: string; address?: string };
+type FormErrors = {
+  name?: string;
+  addressStreet?: string;
+  addressNumber?: string;
+  addressNeighborhood?: string;
+};
 
 export function CartDrawer() {
   const { isOpen, closeCart, lines, updateQty, removeLine, total, clear, orderDetails, updateOrderDetails } = useCart();
   const [errors, setErrors] = useState<FormErrors>({});
   const nameRef = useRef<HTMLInputElement>(null);
-  const addressRef = useRef<HTMLTextAreaElement>(null);
+  const addressStreetRef = useRef<HTMLInputElement>(null);
+  const addressNumberRef = useRef<HTMLInputElement>(null);
+  const addressNeighborhoodRef = useRef<HTMLInputElement>(null);
 
   // Histórico (voltar do celular), Esc e trava de scroll são controlados
   // centralmente no CartProvider.
@@ -32,8 +39,9 @@ export function CartDrawer() {
       })
       .join("\n\n");
 
-    const deliveryTxt = orderDetails.type === "delivery" 
-      ? `🛵 *Entrega:*\n   Endereço: ${orderDetails.address || "Não informado"}\n   Taxa: ${formatBRL(DELIVERY_FEE)}` 
+    const store = STORE_OPTIONS[orderDetails.store];
+    const deliveryTxt = orderDetails.type === "delivery"
+      ? `🛵 *Entrega:*\n   Rua: ${orderDetails.addressStreet || "Não informado"}\n   Número: ${orderDetails.addressNumber || "Não informado"}\n   Bairro: ${orderDetails.addressNeighborhood || "Não informado"}\n   Taxa: ${formatBRL(DELIVERY_FEE)}`
       : "🏢 *Retirada no local*";
 
     const msg = [
@@ -41,6 +49,7 @@ export function CartDrawer() {
       "Olá! Vim pelo cardápio digital e gostaria de fazer o seguinte pedido:",
       "",
       `👤 *Cliente:* ${orderDetails.name || "Não informado"}`,
+      `🏪 *Loja escolhida:* ${store.label}`,
       deliveryTxt,
       `💳 *Forma de Pagamento:* ${orderDetails.paymentMethod}`,
       "",
@@ -61,8 +70,10 @@ export function CartDrawer() {
 
     const nextErrors: FormErrors = {};
     if (!orderDetails.name.trim()) nextErrors.name = "Informe seu nome para continuar.";
-    if (orderDetails.type === "delivery" && !orderDetails.address?.trim()) {
-      nextErrors.address = "Informe o endereço completo da entrega.";
+    if (orderDetails.type === "delivery") {
+      if (!orderDetails.addressStreet.trim()) nextErrors.addressStreet = "Informe a rua.";
+      if (!orderDetails.addressNumber.trim()) nextErrors.addressNumber = "Informe o número.";
+      if (!orderDetails.addressNeighborhood.trim()) nextErrors.addressNeighborhood = "Informe o bairro.";
     }
     setErrors(nextErrors);
 
@@ -71,15 +82,25 @@ export function CartDrawer() {
       nameRef.current?.focus();
       return;
     }
-    if (nextErrors.address) {
-      addressRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
-      addressRef.current?.focus();
+    if (nextErrors.addressStreet) {
+      addressStreetRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      addressStreetRef.current?.focus();
+      return;
+    }
+    if (nextErrors.addressNumber) {
+      addressNumberRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      addressNumberRef.current?.focus();
+      return;
+    }
+    if (nextErrors.addressNeighborhood) {
+      addressNeighborhoodRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      addressNeighborhoodRef.current?.focus();
       return;
     }
 
     // No mobile, window.open costuma ser bloqueado pelo navegador.
     // Navegação direta é o caminho confiável para abrir o WhatsApp.
-    window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${buildMessage()}`;
+    window.location.href = `https://wa.me/${STORE_OPTIONS[orderDetails.store].whatsapp}?text=${buildMessage()}`;
   };
 
 
@@ -246,40 +267,92 @@ export function CartDrawer() {
                     </button>
                   </div>
                   {orderDetails.type === "delivery" && (
-                    <>
-                      <textarea
-                        ref={addressRef}
-                        placeholder="Endereço completo (Rua, número, bairro, apto...)"
-                        value={orderDetails.address ?? ""}
-                        onChange={(e) => {
-                          updateOrderDetails({ address: e.target.value });
-                          if (errors.address) setErrors((prev) => ({ ...prev, address: undefined }));
-                        }}
-                        rows={2}
-                        maxLength={240}
-                        autoComplete="street-address"
-                        className={cn(
-                          "w-full resize-none rounded-xl border bg-white px-4 py-3 text-base text-ink placeholder:text-ink/30 focus:outline-none focus:ring-2 animate-in slide-in-from-top-2 duration-200 sm:text-sm",
-                          errors.address
-                            ? "border-terracotta-deep focus:border-terracotta-deep focus:ring-terracotta-deep/20"
-                            : "border-blush-deep/60 focus:border-terracotta focus:ring-terracotta/20",
-                        )}
-                      />
-                      {errors.address && <p className="text-xs text-terracotta-deep">{errors.address}</p>}
-                    </>
+                    <div className="grid animate-in slide-in-from-top-2 gap-2 duration-200 sm:grid-cols-[1fr_6rem]">
+                      <div className="space-y-1 sm:col-span-1">
+                        <label htmlFor="address-street" className="text-xs font-medium text-ink/60">Rua</label>
+                        <input
+                          id="address-street"
+                          ref={addressStreetRef}
+                          type="text"
+                          placeholder="Nome da rua"
+                          value={orderDetails.addressStreet}
+                          onChange={(e) => {
+                            updateOrderDetails({ addressStreet: e.target.value });
+                            if (errors.addressStreet) setErrors((prev) => ({ ...prev, addressStreet: undefined }));
+                          }}
+                          maxLength={120}
+                          autoComplete="street-address"
+                          className={cn(
+                            "w-full rounded-xl border bg-white px-4 py-3 text-base text-ink placeholder:text-ink/30 focus:outline-none focus:ring-2 sm:text-sm",
+                            errors.addressStreet
+                              ? "border-terracotta-deep focus:border-terracotta-deep focus:ring-terracotta-deep/20"
+                              : "border-blush-deep/60 focus:border-terracotta focus:ring-terracotta/20",
+                          )}
+                        />
+                        {errors.addressStreet && <p className="text-xs text-terracotta-deep">{errors.addressStreet}</p>}
+                      </div>
+                      <div className="space-y-1">
+                        <label htmlFor="address-number" className="text-xs font-medium text-ink/60">Número</label>
+                        <input
+                          id="address-number"
+                          ref={addressNumberRef}
+                          type="text"
+                          inputMode="numeric"
+                          placeholder="Nº"
+                          value={orderDetails.addressNumber}
+                          onChange={(e) => {
+                            updateOrderDetails({ addressNumber: e.target.value });
+                            if (errors.addressNumber) setErrors((prev) => ({ ...prev, addressNumber: undefined }));
+                          }}
+                          maxLength={12}
+                          autoComplete="address-line2"
+                          className={cn(
+                            "w-full rounded-xl border bg-white px-4 py-3 text-base text-ink placeholder:text-ink/30 focus:outline-none focus:ring-2 sm:text-sm",
+                            errors.addressNumber
+                              ? "border-terracotta-deep focus:border-terracotta-deep focus:ring-terracotta-deep/20"
+                              : "border-blush-deep/60 focus:border-terracotta focus:ring-terracotta/20",
+                          )}
+                        />
+                        {errors.addressNumber && <p className="text-xs text-terracotta-deep">{errors.addressNumber}</p>}
+                      </div>
+                      <div className="space-y-1 sm:col-span-2">
+                        <label htmlFor="address-neighborhood" className="text-xs font-medium text-ink/60">Bairro</label>
+                        <input
+                          id="address-neighborhood"
+                          ref={addressNeighborhoodRef}
+                          type="text"
+                          placeholder="Nome do bairro"
+                          value={orderDetails.addressNeighborhood}
+                          onChange={(e) => {
+                            updateOrderDetails({ addressNeighborhood: e.target.value });
+                            if (errors.addressNeighborhood) setErrors((prev) => ({ ...prev, addressNeighborhood: undefined }));
+                          }}
+                          maxLength={80}
+                          autoComplete="address-level2"
+                          className={cn(
+                            "w-full rounded-xl border bg-white px-4 py-3 text-base text-ink placeholder:text-ink/30 focus:outline-none focus:ring-2 sm:text-sm",
+                            errors.addressNeighborhood
+                              ? "border-terracotta-deep focus:border-terracotta-deep focus:ring-terracotta-deep/20"
+                              : "border-blush-deep/60 focus:border-terracotta focus:ring-terracotta/20",
+                          )}
+                        />
+                        {errors.addressNeighborhood && <p className="text-xs text-terracotta-deep">{errors.addressNeighborhood}</p>}
+                      </div>
+                    </div>
                   )}
 
                 </div>
 
-                <div className="space-y-3 pb-4">
+                <div className="space-y-3 pb-1">
                   <h4 className="flex items-center gap-2 font-display text-sm font-semibold text-ink">
                     <CreditCard className="h-4 w-4 text-terracotta" />
                     Forma de pagamento
                   </h4>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-3 gap-2">
                     {["Pix", "Cartão", "Dinheiro"].map((method) => (
                       <button
                         key={method}
+                        type="button"
                         onClick={() => updateOrderDetails({ paymentMethod: method })}
                         className={cn(
                           "rounded-xl border py-2.5 text-xs font-medium transition-all",
@@ -291,6 +364,38 @@ export function CartDrawer() {
                         {method}
                       </button>
                     ))}
+                  </div>
+                </div>
+
+                <div className="space-y-3 rounded-2xl border border-terracotta/25 bg-blush/25 p-4">
+                  <div>
+                    <h4 className="flex items-center gap-2 font-display text-sm font-semibold text-ink">
+                      <Store className="h-4 w-4 text-terracotta" />
+                      Último passo: escolha a loja
+                    </h4>
+                    <p className="mt-1 text-xs leading-relaxed text-ink/60">
+                      Selecione onde deseja retirar ou qual loja deve receber seu pedido.
+                    </p>
+                  </div>
+                  <div className="grid gap-2 sm:grid-cols-2">
+                    {(Object.entries(STORE_OPTIONS) as [StoreId, (typeof STORE_OPTIONS)[StoreId]][]).map(
+                      ([storeId, store]) => (
+                        <button
+                          key={storeId}
+                          type="button"
+                          onClick={() => updateOrderDetails({ store: storeId })}
+                          className={cn(
+                            "rounded-xl border p-3 text-left transition-all",
+                            orderDetails.store === storeId
+                              ? "border-terracotta bg-white text-terracotta shadow-sm ring-2 ring-terracotta/15"
+                              : "border-blush-deep/60 bg-white/70 text-ink/70 hover:border-terracotta/50",
+                          )}
+                        >
+                          <span className="block text-sm font-semibold">{store.label}</span>
+                          <span className="mt-1 block text-[11px] leading-relaxed text-ink/55">{store.address}</span>
+                        </button>
+                      ),
+                    )}
                   </div>
                 </div>
               </div>

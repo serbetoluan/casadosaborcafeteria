@@ -86,12 +86,12 @@ export function ProductModal() {
 
   return (
     <div
-      className="fixed inset-0 z-[60] flex items-end justify-center bg-ink/60 backdrop-blur-sm sm:items-center animate-in fade-in duration-200"
+      className="fixed inset-0 z-[60] flex items-center justify-center bg-ink/60 p-3 backdrop-blur-sm animate-in fade-in duration-200 sm:p-6"
       onClick={closeProduct}
     >
       <div
         ref={scrollRef}
-        className="relative flex max-h-[95vh] w-full max-w-lg flex-col overflow-y-auto overflow-x-hidden overscroll-contain rounded-t-3xl bg-cream shadow-2xl sm:rounded-3xl animate-in slide-in-from-bottom-8 sm:zoom-in-95 duration-300"
+        className="relative flex max-h-[92vh] w-full max-w-lg flex-col overflow-y-auto overflow-x-hidden overscroll-contain rounded-3xl bg-cream shadow-2xl animate-in slide-in-from-bottom-4 sm:zoom-in-95 duration-300"
         onClick={(e) => e.stopPropagation()}
       >
 
@@ -104,7 +104,7 @@ export function ProductModal() {
         </button>
 
         {activeItem.image ? (
-          <div className="relative aspect-[3/4] shrink-0 overflow-hidden bg-cream">
+            <div className="relative aspect-[4/3] shrink-0 overflow-hidden bg-cream sm:aspect-[3/4]">
             <img
               src={activeItem.image}
               alt={activeItem.name}
@@ -127,10 +127,10 @@ export function ProductModal() {
           </div>
         ) : null}
 
-        <div className="flex-1 px-5 py-5">
+        <div className="flex-1 px-4 py-4 sm:px-5 sm:py-5">
           <div className={cn(
             "relative z-10",
-            activeItem.image && "-mt-24 rounded-t-3xl bg-cream/98 backdrop-blur-xl px-5 pt-8 pb-3 -mx-5 shadow-[0_-12px_40px_rgba(0,0,0,0.15)] border-t border-white/20"
+            activeItem.image && "sm:-mt-24 sm:rounded-t-3xl sm:bg-cream/98 sm:px-5 sm:pt-8 sm:pb-3 sm:-mx-5 sm:shadow-[0_-12px_40px_rgba(0,0,0,0.15)] sm:border-t sm:border-white/20"
           )}>
             <h3 className="font-display text-2xl font-semibold leading-tight text-ink">
               {activeItem.name}
@@ -229,7 +229,7 @@ export function ProductModal() {
           </div>
         </div>
 
-        <div className="sticky bottom-0 z-20 flex shrink-0 flex-row items-center gap-2 border-t border-blush-deep/40 bg-white/95 backdrop-blur-md px-3 pb-8 pt-3 sm:gap-3 sm:px-4 sm:pb-4">
+        <div className="sticky bottom-0 z-20 flex shrink-0 flex-row items-center gap-2 border-t border-blush-deep/40 bg-white/95 px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-3 backdrop-blur-md sm:gap-3 sm:px-4 sm:pb-4">
           <button
             onClick={handleAddAndGoToCart}
             className="flex min-w-0 flex-1 items-center justify-center gap-1.5 rounded-full bg-terracotta px-3 py-2.5 font-display text-[13px] font-semibold text-white shadow-lg shadow-terracotta/30 transition-all hover:bg-terracotta-dark active:scale-[0.98] sm:gap-2 sm:px-4 sm:py-3 sm:text-sm"
