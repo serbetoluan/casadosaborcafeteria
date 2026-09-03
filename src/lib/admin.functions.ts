@@ -172,7 +172,13 @@ export const listCategories = createServerFn({ method: "GET" })
 export const listItems = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .inputValidator((data: unknown) =>
-    z.object({ categoryId: z.string().uuid().optional(), search: z.string().max(80).optional() }).parse(data ?? {}),
+    z
+      .object({
+        categoryId: z.string().uuid().optional(),
+        search: z.string().max(80).optional(),
+        withoutPhoto: z.boolean().optional(),
+      })
+      .parse(data ?? {}),
   )
   .handler(async ({ context, data }): Promise<AdminItem[]> => {
     await assertAdmin(context);
@@ -185,6 +191,7 @@ export const listItems = createServerFn({ method: "GET" })
 
     if (data.categoryId) query = query.eq("category_id", data.categoryId);
     if (data.search?.trim()) query = query.ilike("name", `%${data.search.trim()}%`);
+    if (data.withoutPhoto) query = query.is("image_url", null);
 
     const { data: rows, error } = await query;
     if (error) throw new Error(error.message);

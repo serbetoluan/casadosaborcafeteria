@@ -101,6 +101,7 @@ function AdminMenuPage() {
 
   const [categoryId, setCategoryId] = useState<string>("");
   const [search, setSearch] = useState("");
+  const [onlyWithoutPhoto, setOnlyWithoutPhoto] = useState(false);
   const [form, setForm] = useState<ItemForm | null>(null);
 
   const categories = useQuery({
@@ -109,12 +110,13 @@ function AdminMenuPage() {
   });
 
   const items = useQuery({
-    queryKey: ["admin", "items", categoryId, search],
+    queryKey: ["admin", "items", categoryId, search, onlyWithoutPhoto],
     queryFn: () =>
       fetchItems({
         data: {
           ...(categoryId ? { categoryId } : {}),
           ...(search.trim() ? { search: search.trim() } : {}),
+          ...(onlyWithoutPhoto ? { withoutPhoto: true } : {}),
         },
       }),
   });
@@ -177,6 +179,16 @@ function AdminMenuPage() {
           onChange={(event) => setSearch(event.target.value)}
           className="sm:max-w-xs"
         />
+        <Button
+          type="button"
+          variant={onlyWithoutPhoto ? "default" : "outline"}
+          aria-pressed={onlyWithoutPhoto}
+          onClick={() => setOnlyWithoutPhoto((active) => !active)}
+          className="shrink-0"
+        >
+          <ImageIcon className="mr-2 h-4 w-4" />
+          {onlyWithoutPhoto ? "Mostrando sem foto" : "Somente sem foto"}
+        </Button>
       </div>
 
       {items.isLoading ? (
@@ -188,8 +200,9 @@ function AdminMenuPage() {
       ) : (items.data ?? []).length === 0 ? (
         <Card>
           <CardContent className="p-6 text-sm text-muted-foreground">
-            Nenhum item encontrado. Importe o cardápio publicado na visão geral ou cadastre um novo
-            item.
+            {onlyWithoutPhoto
+              ? "Nenhum item sem foto encontrado com esses filtros."
+              : "Nenhum item encontrado. Importe o cardápio publicado na visão geral ou cadastre um novo item."}
           </CardContent>
         </Card>
       ) : (
