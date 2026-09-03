@@ -41,6 +41,31 @@ export type AdminItem = {
 
 const forbidden = () => new Response("Forbidden", { status: 403 });
 
+export const ITEM_IMAGE_BUCKET = "menu-item-images";
+const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
+export const ITEM_IMAGE_CONTENT_TYPES = ["image/jpeg", "image/png", "image/webp"] as const;
+
+async function ensureImageBucket(supabaseAdmin: any) {
+  const { data } = await supabaseAdmin.storage.getBucket(ITEM_IMAGE_BUCKET);
+  if (data) return;
+
+  const { error } = await supabaseAdmin.storage.createBucket(ITEM_IMAGE_BUCKET, {
+    public: true,
+    fileSizeLimit: "5MB",
+    allowedMimeTypes: [...ITEM_IMAGE_CONTENT_TYPES],
+  });
+
+  if (error && !/already exists/i.test(error.message)) throw new Error(error.message);
+}
+
+function storagePathFromPublicUrl(value: string) {
+  const marker = `/storage/v1/object/public/${ITEM_IMAGE_BUCKET}/`;
+  const markerIndex = value.indexOf(marker);
+  if (markerIndex >= 0) return decodeURIComponent(value.slice(markerIndex + marker.length));
+  if (value.startsWith(`${ITEM_IMAGE_BUCKET}/`)) return value.slice(ITEM_IMAGE_BUCKET.length + 1);
+  return null;
+}
+
 /** Retorna a sessão + papel do usuário autenticado. */
 export const getAdminSession = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
@@ -215,6 +240,59 @@ const itemInput = z.object({
 const brl = (value: number) =>
   `R$ ${value.toFixed(2).replace(".", ",")}`;
 
+const imageUploadInput = z.object({
+  itemId: z.string().uuid(),
+  fileName: z.string().trim().min(1).max(180),
+  contentType: z.enum(ITEM_IMAGE_CONTENT_TYPES),
+  fileSize: z.number().int().positive().max(MAX_IMAGE_SIZE),
+});
+
+export const prepareItemImageUpload = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((data: unknown) => imageUploadInput.parse(data))
+  .handler(async ({ context, data }) => {
+    await assertAdmin(context);
+
+    const { data: item, error: itemError } = await context.supabase
+      .from("menu_items")
+      .select("id")
+      .eq("id", data.itemId)
+      .maybeSingle();
+    if (itemError) throw new Error(itemError.message);
+    if (!item) throw new Error("Item não encontrado.");
+
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    await ensureImageBucket(supabaseAdmin);
+
+    const extensionByType: Record<(typeof ITEM_IMAGE_CONTENT_TYPES)[number], string> = {
+      "image/jpeg": "jpg",
+      "image/png": "png",
+      "image/webp": "webp",
+    };
+    const path = `menu-items/${data.itemId}/${crypto.randomUUID()}.${extensionByType[data.contentType]}`;
+    const { data: signed, error } = await supabaseAdmin.storage
+      .from(ITEM_IMAGE_BUCKET)
+      .createSignedUploadUrl(path);
+    if (error || !signed) throw new Error(error?.message ?? "Não foi possível preparar o upload.");
+
+    const publicUrl = supabaseAdmin.storage.from(ITEM_IMAGE_BUCKET).getPublicUrl(path).data.publicUrl;
+    return { bucket: ITEM_IMAGE_BUCKET, path, token: signed.token, publicUrl };
+  });
+
+export const deleteItemImage = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((data: unknown) => z.object({ imageUrl: z.string().trim().max(600) }).parse(data))
+  .handler(async ({ context, data }) => {
+    await assertAdmin(context);
+    const path = storagePathFromPublicUrl(data.imageUrl);
+    if (!path) return { ok: true as const };
+
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { error } = await supabaseAdmin.storage.from(ITEM_IMAGE_BUCKET).remove([path]);
+    if (error) throw new Error(error.message);
+    return { ok: true as const };
+  });
+
 export const saveItem = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((data: unknown) => itemInput.parse(data))
@@ -234,13 +312,19 @@ export const saveItem = createServerFn({ method: "POST" })
       sort_order: data.sortOrder,
     };
 
-    const query = data.id
-      ? context.supabase.from("menu_items").update(payload).eq("id", data.id)
-      : context.supabase.from("menu_items").insert(payload);
+    if (data.id) {
+      const { error } = await context.supabase.from("menu_items").update(payload).eq("id", data.id);
+      if (error) throw new Error(error.message);
+      return { ok: true as const, id: data.id };
+    }
 
-    const { error } = await query;
+    const { data: inserted, error } = await context.supabase
+      .from("menu_items")
+      .insert(payload)
+      .select("id")
+      .single();
     if (error) throw new Error(error.message);
-    return { ok: true as const };
+    return { ok: true as const, id: inserted.id };
   });
 
 export const setItemActive = createServerFn({ method: "POST" })
