@@ -13,13 +13,11 @@ import { CartDrawer } from "@/components/casa-do-sabor/CartDrawer";
 import { CartFab } from "@/components/casa-do-sabor/CartFab";
 import { WelcomeSuggestion } from "@/components/casa-do-sabor/WelcomeSuggestion";
 import { DoceriaIntro } from "@/components/casa-do-sabor/DoceriaIntro";
-import {
-  categories,
-  navSections,
-  DOCERIA_FIRST_CATEGORY_ID,
-} from "@/components/casa-do-sabor/menuData";
+import { DOCERIA_FIRST_CATEGORY_ID } from "@/components/casa-do-sabor/menuData";
+import { getPublicMenu } from "@/lib/menu.functions";
 
 export const Route = createFileRoute("/")({
+  loader: () => getPublicMenu(),
   head: () => ({
     meta: [
       { title: "Casa do Sabor — Cardápio Digital | Casa 1 e Casa 2" },
@@ -42,19 +40,22 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const categories = Route.useLoaderData();
+  const navSections = categories.map(({ id, title }) => ({ id, title }));
+
   return (
     <CartProvider>
       <div className="min-h-screen bg-cream">
-        <WelcomeSuggestion />
+        <WelcomeSuggestion navSections={navSections} />
         <StickyNav items={navSections} />
 
         <main className="mx-auto max-w-6xl">
           <Hero />
           <InstaFeed />
-          {categories.map((c) => (
-            <div key={c.id}>
-              {c.id === DOCERIA_FIRST_CATEGORY_ID && <DoceriaIntro />}
-              <CategorySection category={c} />
+          {categories.map((category) => (
+            <div key={category.id}>
+              {category.id === DOCERIA_FIRST_CATEGORY_ID && <DoceriaIntro />}
+              <CategorySection category={category} />
             </div>
           ))}
           <SobreNos />

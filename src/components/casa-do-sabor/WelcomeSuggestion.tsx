@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { CupIcon } from "./CupIcon";
 import { cn } from "@/lib/utils";
-import { navSections } from "./menuData";
-
 type Intent = {
   key: string;
   label: string;
@@ -38,11 +36,13 @@ const INTENTS: Intent[] = [
 const STORAGE_KEY = "cds-welcome-seen";
 const SCROLL_OFFSET = 110;
 
-function titleOf(id: string) {
+type NavSection = { id: string; title: string };
+
+function titleOf(id: string, navSections: NavSection[]) {
   return navSections.find((s) => s.id === id)?.title ?? id;
 }
 
-export function WelcomeSuggestion() {
+export function WelcomeSuggestion({ navSections }: { navSections: NavSection[] }) {
   const [open, setOpen] = useState(false);
   const [intent, setIntent] = useState<Intent | null>(null);
 
@@ -147,7 +147,7 @@ export function WelcomeSuggestion() {
                 onClick={() => goTo(id)}
                 className="group flex items-center gap-3 rounded-2xl border border-terracotta/40 bg-terracotta/10 px-4 py-3.5 text-left text-sm font-semibold text-terracotta-deep transition-all hover:border-terracotta hover:bg-terracotta/15 active:scale-[0.98]"
               >
-                {titleOf(id)}
+                {titleOf(id, navSections)}
                 <span className="ml-auto text-terracotta transition-transform group-hover:translate-x-0.5">→</span>
               </button>
             ))}
