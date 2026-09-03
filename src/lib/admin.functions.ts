@@ -193,7 +193,21 @@ const itemInput = z.object({
   description: z.string().trim().max(600).optional().or(z.literal("")),
   priceValue: z.number().min(0).max(9999),
   fit: z.boolean().default(false),
-  imageUrl: z.string().trim().url().max(600).optional().or(z.literal("")),
+  imageUrl: z
+    .string()
+    .trim()
+    .max(600)
+    .refine((value) => {
+      if (!value || value.startsWith("/")) return true;
+      try {
+        const url = new URL(value);
+        return url.protocol === "http:" || url.protocol === "https:";
+      } catch {
+        return false;
+      }
+    }, "Informe uma URL HTTPS ou um caminho relativo válido.")
+    .optional()
+    .or(z.literal("")),
   isActive: z.boolean().default(true),
   sortOrder: z.number().int().min(0).max(9999).default(0),
 });
