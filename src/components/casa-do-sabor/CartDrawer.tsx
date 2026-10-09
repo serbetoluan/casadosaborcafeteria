@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { X, Minus, Plus, Trash2, ShoppingBag, MessageCircle, MapPin, CreditCard, User, Store } from "lucide-react";
 import { useCart, formatBRL } from "./CartContext";
-import { STORE_OPTIONS, type StoreId } from "./menuData";
+import { STORE_OPTIONS } from "./menuData";
 import { CupIcon } from "./CupIcon";
 import { cn } from "@/lib/utils";
 
@@ -371,31 +371,13 @@ export function CartDrawer() {
                   <div>
                     <h4 className="flex items-center gap-2 font-display text-sm font-semibold text-ink">
                       <Store className="h-4 w-4 text-terracotta" />
-                      Último passo: escolha a loja
+                      Loja do pedido
                     </h4>
-                    <p className="mt-1 text-xs leading-relaxed text-ink/60">
-                      Selecione onde deseja retirar ou qual loja deve receber seu pedido.
-                    </p>
                   </div>
-                  <div className="grid gap-2 sm:grid-cols-2">
-                    {(Object.entries(STORE_OPTIONS) as [StoreId, (typeof STORE_OPTIONS)[StoreId]][]).map(
-                      ([storeId, store]) => (
-                        <button
-                          key={storeId}
-                          type="button"
-                          onClick={() => updateOrderDetails({ store: storeId })}
-                          className={cn(
-                            "rounded-xl border p-3 text-left transition-all",
-                            orderDetails.store === storeId
-                              ? "border-terracotta bg-white text-terracotta shadow-sm ring-2 ring-terracotta/15"
-                              : "border-blush-deep/60 bg-white/70 text-ink/70 hover:border-terracotta/50",
-                          )}
-                        >
-                          <span className="block text-sm font-semibold">{store.label}</span>
-                          <span className="mt-1 block text-[11px] leading-relaxed text-ink/55">{store.address}</span>
-                        </button>
-                      ),
-                    )}
+                  <div className="text-terracotta">
+                    <span className="block text-sm font-semibold">{STORE_OPTIONS.loja1.label}</span>
+                    <span className="mt-1 block text-[11px] leading-relaxed text-ink/55">{STORE_OPTIONS.loja1.address}</span>
+                    <span className="mt-1 block text-xs">(64) 99976-6781</span>
                   </div>
                 </div>
               </div>
