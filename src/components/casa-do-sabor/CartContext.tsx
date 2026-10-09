@@ -81,7 +81,8 @@ function readStorage(): PersistedState | null {
         addressStreet: savedDetails.addressStreet ?? savedDetails.address ?? "",
         addressNumber: savedDetails.addressNumber ?? "",
         addressNeighborhood: savedDetails.addressNeighborhood ?? "",
-        store: savedDetails.store === "loja2" ? "loja2" : "loja1",
+        // Pedidos antigos da unidade encerrada também passam para a Loja 1.
+        store: "loja1",
       },
     };
   } catch {
@@ -179,7 +180,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       isOpen,
       activeItem,
       orderDetails,
-      updateOrderDetails: (details) => setOrderDetails((prev) => ({ ...prev, ...details })),
+      updateOrderDetails: (details) => setOrderDetails((prev) => ({ ...prev, ...details, store: "loja1" })),
       addLine: (line) => {
         setLines((prev) => [
           ...prev,

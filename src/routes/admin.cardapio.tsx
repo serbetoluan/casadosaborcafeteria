@@ -34,6 +34,14 @@ import {
 } from "@/components/ui/dialog";
 
 export const Route = createFileRoute("/admin/cardapio")({
+  head: () => ({ meta: [
+    { title: "Itens do cardápio — Administração Casa do Sabor" },
+    { name: "description", content: "Administração dos itens e preços da Casa do Sabor." },
+    { property: "og:title", content: "Itens do cardápio — Administração Casa do Sabor" },
+    { property: "og:description", content: "Administração dos itens e preços da Casa do Sabor." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary" },
+  ] }),
   component: AdminMenuPage,
 });
 

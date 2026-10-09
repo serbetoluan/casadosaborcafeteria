@@ -20,6 +20,14 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 
 export const Route = createFileRoute("/admin/categorias")({
+  head: () => ({ meta: [
+    { title: "Categorias — Administração Casa do Sabor" },
+    { name: "description", content: "Administração das categorias do cardápio da Casa do Sabor." },
+    { property: "og:title", content: "Categorias — Administração Casa do Sabor" },
+    { property: "og:description", content: "Administração das categorias do cardápio da Casa do Sabor." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary" },
+  ] }),
   component: AdminCategoriesPage,
 });
 

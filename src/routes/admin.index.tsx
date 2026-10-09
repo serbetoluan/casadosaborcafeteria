@@ -9,6 +9,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Skeleton } from "@/components/ui/skeleton";
 
 export const Route = createFileRoute("/admin/")({
+  head: () => ({ meta: [
+    { title: "Visão geral — Administração Casa do Sabor" },
+    { name: "description", content: "Visão geral do cardápio da Casa do Sabor." },
+    { property: "og:title", content: "Visão geral — Administração Casa do Sabor" },
+    { property: "og:description", content: "Visão geral do cardápio da Casa do Sabor." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary" },
+  ] }),
   component: AdminDashboard,
 });
 
